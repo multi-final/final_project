@@ -1,0 +1,55 @@
+*{
+    margin: 0px;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.top{
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+}
+
+.logo, .gnb{
+    float: left;
+    height: 40px;
+}
+
+.logo{
+    width: 30%;
+    margin-left: 0.4%;
+    padding: 0 0.5%;
+}
+
+.logo>h2{
+    margin-left: 10px;
+    color: turquoise;
+}
+
+.gnb{
+    width: 67%;
+    margin-top: 5px;
+    margin-left: 0.4%;
+}
+
+.gnb ul{
+    text-align: left;
+    align-content: end;
+}
+
+.gnb ul li{
+    float: right;
+    margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 7px;
+}
+
+.gnb ul li a{
+    margin: 4px;
+}

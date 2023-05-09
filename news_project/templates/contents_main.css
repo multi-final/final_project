@@ -1,6 +1,8 @@
 #content{
     margin-top: 15px;
     height: 550px;
+    width: 95%;
+    position : relative;
 }
 
 .main{
@@ -14,10 +16,11 @@
 }
 
 .category{
-    width: 20%;
+    width: 140px;
     margin-left: 2%;
     border: 1px solid black ;
     border-radius: 10px;
+    position : absolute;
 }
 
 .category ul{
@@ -34,10 +37,11 @@
 }
 
 .summary{
-    width: 73%;
-    margin-left: 2%;
+    position: absolute;
+    width: 88%;
+    margin-left: 180px;
     margin-right: 2%;
-    border: 1px solid black ;
+    border: 1px solid black ;   
     border-radius: 10px;
 }
 

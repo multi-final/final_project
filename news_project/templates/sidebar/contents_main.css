@@ -1,0 +1,36 @@
+/* #content{
+    margin-top: 15px;
+    height: 550px;
+    width: 95%;
+    position : relative;
+}
+
+
+.main{
+    height: 100%;
+}
+
+
+.summary{
+    position: absolute;
+    width: 83%;
+    margin-left: 8%;
+    margin-right: 0%;
+    border: 1px solid black ;   
+    border-radius: 10px;
+    align-content: center;
+}
+
+.summary ul{
+    padding:0 5%;
+    margin-top: 3%;
+    height: 550px;
+}
+
+.field{
+    margin-top: 15px;
+}
+
+.summary ul li{
+    margin-top: 15px;
+} */
