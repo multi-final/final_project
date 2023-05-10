@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello, Django</h1>
+
+    <h3><a href="{% url 'register' %}">회원가입</a></h3>
+    {% if request.session.login_user %}
+    <h3><a href="{% url 'logout' %}">로그아웃</a></h3>
+    {% else %}
+    <h3><a href="{% url 'login' %}">로그인</a></h3>
+    {% endif %}
+
+    <table border="1">
+        <col width="50">
+        <col width="100">
+        <col width="500">
+        <col width="150">
+        <tr>
+            <th>번호</th>
+            <th>작성자</th>
+            <th>제목</th>
+            <th>작성일</th>
+        </tr>
+
+        {% if not list %}
+        <tr>
+            <th colspan="4">----------작성된 글이 없습니다----------</th>
+        </tr>
+        {% else %}
+        {% for data in list %}
+        <tr>
+            <td>{{data.id}}</td>
+            <td>{{data.myname}}</td>
+            <td><a href="detail/{{data.id}}">{{data.mytitle}}</a></td>
+            <td>{{data.mydate}}</td>
+            {% for data in list %}
+                {% if  data.today - data.mydate > 1 %}
+                {% elif data.today - data.mydate > 7 %}
+                    1주일 전
+                {% endif %}
+            {% endfor %}
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
+                1주일 전<hr>
+                </button>
+                <div class="collapse" id="dashboard-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+                    {% for data in list %}
+                    {% if data.today - data.mydate > 1 %}
+                    {% elif data.today - data.mydate > 7 %}
+                        1주일 전
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                </div>
+
+            {% elif 오늘 - data.mydate > 7 %}
+            1주 전
+            
+            {% elif 오늘 - data.mydate > 14 %}
+            2주 전
+        </tr>
+        {% endfor %}
+        {% endif %}
+        <tr>
+            <td colspan="4" text-align="right" align="right">
+                <input type="button" value="글작성" onclick="locationhref()">
+            </td>
+        </tr>
+    </table>
+
+    <!-- <a href="?page=1">처음 페이지</a>
+
+    {% if list.number == 1 %}
+    <a href="?page={{list.next_page_number}}">다음 페이지</a>
+
+    {% elif list.number == list.paginator.num_pages%}
+    <a href="?page={{list.previous_page_number}}">이전 페이지</a>
+
+    {% else %}
+    <a href="?page={{list.previous_page_number}}">이전 페이지</a>
+
+    <a href="?page={{list.next_page_number}}">다음 페이지</a>
+
+    {% endif %}
+    <a href="?page={{list.paginator.num_pages}}">마지막 페이지</a> -->
+    <a href="?page=1">처음 페이지</a>
+
+    {% if list.has_previous %}
+    <a href="?page={{list.previous_page_number}}">이전 페이지</a>
+    {% else %}
+    <a href="">이전 페이지</a>
+    {% endif %}
+
+    {% for i in list.paginator.page_range %}
+    {% if list.number == i %}
+    <a>{{i}}</a>
+    {% else %}
+    <a href="?page={{i}}">{{i}}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if list.has_next %}
+    <a href="?page={{list.next_page_number}}">다음 페이지</a>
+    {% else %}
+    <a href="">다음 페이지</a>
+    {% endif %}
+
+    <a href="?page={{list.paginator.num_pages}}">마지막 페이지</a>
+
+</body>
+
+</html>
+<script>
+    function locationhref() {
+        location.href = "/insert_form/"
+    }
+</script>
