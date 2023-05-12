@@ -5,5 +5,5 @@ from django.shortcuts import render, get_object_or_404, redirect
 # from django.core.files.base import ContentFile
 # from django.http import HttpResponse
 
-def main(request):
-    return render(request, 'news/main.html')
+def scrap(request):
+    return render(request, 'scrap/scrap.html')
