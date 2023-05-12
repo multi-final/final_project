@@ -282,4 +282,7 @@ pyrightconfig.json
 .history
 .ionide
 
+# FE 로컬에서 진행하던 html #
+news_project/templates
+
 # End of https://www.toptal.com/developers/gitignore/api/python,django,visualstudiocode
