@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'news_project',
+    'news',
+    'scrap',
     'django_bootstrap5',
 ]
 
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'news_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,6 +127,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-) 
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# ) 
+
+
+
+STATICFILES_DIRS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
