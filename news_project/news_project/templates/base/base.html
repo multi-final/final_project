@@ -18,12 +18,35 @@
     <script>
       function openNav() {
         document.getElementById("mySidepanel").style.width = "250px";
-        }
-        
-      /* Set the width of the sidebar to 0 (hide it) */
+        document.getElementById("mySidepanel").style.height = "548px";
+      }
+      
       function closeNav() {
         document.getElementById("mySidepanel").style.width = "0";
+        document.getElementById("mySidepanel").style.height = "0";
       }
+      document.addEventListener('mouseup', function(e) {
+        var layerPopup = document.querySelector('.sidepanel');
+        if (!layerPopup.contains(e.target)) {
+          document.getElementById("mySidepanel").style.width = "0";
+          document.getElementById("mySidepanel").style.height = "0";
+        }
+      });
+
+
+      function div2Resize() {
+            var ul1 = document.getElementById('ul1');
+            var div2 = document.getElementById('content');
+            div2.style.height = ul1.clientHeight + 'px';
+            console.log(ul1.clientHeight)
+        }
+        window.onload = function() {
+            div2Resize();
+ 
+            // 브라우저 크기가 변할 시 동적으로 사이즈를 조절해야 하는경우
+            window.addEventListener('resize', div2Resize);
+        }
+      
       </script>
     <style>
      
@@ -31,6 +54,7 @@
         vertical-align: -.125em;
         fill: currentColor;
       }
+
 
     </style>
 
@@ -75,7 +99,7 @@
             <li>
               <a href="#" class="nav-link text-dark">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
-                Products
+                Scrap
               </a>
             </li>
             <li>
@@ -91,6 +115,7 @@
   </header>
   
 </main>
+
 {% block content %}
 {% endblock %}
   </body>
