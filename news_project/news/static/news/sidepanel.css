@@ -1,23 +1,24 @@
   .sidepanel {
-    height: 548px; /* Specify a height */
+    /* height: 0; Specify a height */
     width: 0; /* 0 width - change this with JavaScript */
-    position: absolute; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0;
+    /* position: absolute;  */
+    z-index: 2;
+    top: 30px;
     left: 0;
-    margin-left: 13px;
-    background-color: #fffff2; /* Black*/
-    overflow-x: hidden; /*Disable horizontal scroll*/
-    /* overflow-y: scroll; */
-    padding-top: 60px; /* Place content 60px from the top */
+    /* margin-left: 13px; */
+    background-color: #fffffff0; /* Black*/
+    overflow-x: auto; /*Disable horizontal scroll*/
+    /* overflow-y: auto; */
+    /* padding-top: 60px; Place content 60px from the top */
     margin-top: 1px;
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    position: sticky;
   }
+ 
+  
   .category{
-    overflow-y: auto;
-    height: 350px;
+    /* overflow-y: auto; */
+    height: calc(100% - 30px);
   }
   
   /* The sidepanel links */
@@ -47,12 +48,16 @@
   /* Style the button that is used to open the sidepanel */
   .openbtn {
     font-size: 20px;
+    z-index: 1;
     cursor: pointer;
     background-color: #ffffff00;
     color: rgb(84, 84, 84);
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
     border: none;
     border-top-left-radius: 10px;
+    position: sticky;
+    top: 0;
+    transition: 0.5s;
   }
   
   .openbtn:hover {
@@ -69,6 +74,10 @@
     height: -webkit-fill-available;
   }
   
+  .list{
+    overflow-y: auto;
+  }
+
   main {
     height: 100vh;
     height: -webkit-fill-available;
@@ -141,6 +150,7 @@
     /* height: 550px; */
     width: 95%;
     position : relative;
+    height: auto;
     /* border: 1px solid #818181; */
 }
 
@@ -152,22 +162,31 @@
 
 .summary{
     position: absolute;
-    /* height: 550px; */
+    height: 1080px;   /* 본문 ul길이 */
     width: calc(100% - 24px);
     /* border: 1px solid black ;    */
     /* border-radius: 10px; */
     align-content: center;
+    /* overflow-y: auto; */
 }
 
 .summary ul{
-    overflow-y: auto;
+    /* overflow-y: auto; */
     overflow-x: hidden;
     padding:0 5%;
-    /* height: 450px; */
 }
 
 .summary ul li{
     margin-top: 15px;
     /* border-bottom: 1px solid gray; */
     font-size: 14px;
+}
+
+.buttons{
+  height: 40px;
+  align-self: center;
+}
+
+.news{
+  height: 1080px;
 }
