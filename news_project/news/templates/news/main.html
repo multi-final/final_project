@@ -1,3 +1,4 @@
+{% extends 'base/base.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
 <!doctype html>
@@ -23,46 +24,38 @@
 
     
 <!-- Custom styles for this template -->
-    <script>
-      function openNav() {
-        document.getElementById("mySidepanel").style.width = "250px";
-        }
-        
-      /* Set the width of the sidebar to 0 (hide it) */
-      function closeNav() {
-        document.getElementById("mySidepanel").style.width = "0";
-      }
-    </script>
+
     
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
   </head>
   <body>
 
+    <h1>header</h1>
     
     <header>
       <div class="top">
-          <div class="logo">
-              <h2>오간뉴</h2>
+        <div class="logo">
+          <h2>오간뉴</h2>
           </div>
           <div class="gnb">
-              <ul>
-                  <li><a href="#">Sign-in / Sign-up</a></li>
-                  <li><a href="#">Scrap</a></li>
-          
-              </ul>
+            <ul>
+              <li><a href="#">Sign-in / Sign-up</a></li>
+              <li><a href="#">Scrap</a></li>
+            </ul>
           </div>
-      </div>
-    </header>
+        </div>
+      </header>
+      
+  {% block content %}
+      <!-- <lord-icon
+      src="https://cdn.lordicon.com/wxnxiano.json"
+      trigger="hover"
+      state="hover"
+      colors="primary:#333333,secondary:#333333"
+      style="width:40px;height:40px">
+    </lord-icon> -->
     
-    <lord-icon
-    src="https://cdn.lordicon.com/wxnxiano.json"
-    trigger="hover"
-    state="hover"
-    colors="primary:#333333,secondary:#333333"
-    style="width:40px;height:40px">
-  </lord-icon>
-
-        <div id="content" class="container">
+    <div id="content" class="container">
 
           <div id="mySidepanel" class="sidepanel">
     
@@ -137,6 +130,7 @@
             </ul>
           </div>
         </div>
+  {% endblock %}
         
   </body>
 </html>

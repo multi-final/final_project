@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
     path('scrap/', include('scrap.urls')),
+    # path('base/', views.base, name='base')
 ]
