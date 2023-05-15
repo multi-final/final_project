@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # "django.contrib.staticfiles.finders.FileSystemFinder",
+    # "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     'news',
     'scrap',
     'django_bootstrap5',
@@ -126,14 +128,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# ) 
+# static파일 디렉토리 각 App아래의 static 사용하도록 지정
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'news', 'static'),
+    os.path.join(BASE_DIR, 'scrap', 'static'),
+) 
+
+ 
 
 
 
-STATICFILES_DIRS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-]
+### static 파일 한 곳에 모으는 명령어 -> $ python manage.py collectstatic
