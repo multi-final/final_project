@@ -1,173 +1,133 @@
-{% load django_bootstrap5 %}
-{% load static %}
-<!doctype html>
-<html lang="en" data-bs-theme="auto">
-  <head>
-    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.111.3">
-    <title>Scrap</title>
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'scrap/contents_main.css' %}"> -->
-    <link rel="stylesheet" type="text/css" href="{% static 'scrap/sidepanel.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'scrap/header.css' %}">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"> -->
-    <!-- <script src="{% static sidebars.js %}"></script> -->
-    <script src="https://kit.fontawesome.com/7156905f88.js" crossorigin="anonymous"></script>
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
+{% extends 'base/base.html' %}
 
-    
-
-    <!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-
-    <style>
-      .gnb a {
-        text-decoration: none;
-      }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <script>
-    function openNav() {
-        document.getElementById("mySidepanel").style.width = "250px";
-      }
-      
-      /* Set the width of the sidebar to 0 (hide it) */
-      function closeNav() {
-        document.getElementById("mySidepanel").style.width = "0";
-      }
-    </script>
-  </head>
-  <body>
-
-    
-
-    
-    <header>
-      <div class="top">
-          <div class="logo">
-              <h2>오간뉴</h2>
-          </div>
-          <div class="gnb">
-              <ul>
-                  <li><a href="" style="text-decoration: none;">로그인 / 회원가입</a></li>
-                  <li><a href="">스크랩 / 북마크</a></li>
+  {% block content %}
+  <div id="wrap">
+    <div id="content" class="container">
+      <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
+      <div class="summary">
+        <ul id="ul1" class="rot">
+          <li class="scrap">
+            <button id="test" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneday-collapse" aria-expanded="true" type="button">
+              1일 전
+            </button>
+            <div class="collapse show" id="oneday-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">    
+              <li>[세계일보]김남국 의원은 전세자금 6억 원을 뺀 종잣돈으로 주식을 샀고, 다시 주식을 팔아 코인에 투자했다며, 투자 과정에 불법은 없었다는 입장을 반복했다가 결국 사과했습니다. 불법은 없었다고 주장했지만, 여야 할 것 없이 비판이 이어지자 결국 고개를 숙인 겁니다.</li>
+              <hr>
+              <li>1일 전 summary2 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur error accusantium quisquam minima facere dolorem, ex cupiditate quas. Iste, nobis! Perferendis laboriosam porro possimus unde quod molestias culpa enim deserunt.</li>
+              <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
+                Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
+                accusamus minus enim sint.</li>  
               </ul>
-          </div>
-      </div>
-    </header>
-    
-
-
-        <div id="content" class="container">
-
-          <div id="mySidepanel" class="sidepanel">
-    
-            <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
-          <main class="d-flex flex-nowrap">
-            <!-- <div class="category"> -->
-              <div class="flex-shrink-0 p-3" style="width: 220px;">
-                <a href="#" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-                <span class="fs-5 fw-semibold">Category</span>
-                </a>
-        
-                <form action="#" method="post">
-                  <div class="category">
-                    <ul class="list-unstyled ps-0">
-                    <li class="mb-1">
-                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" type="button">
-                        언론사 선택
-                        </button>
-                        <div class="collapse show" id="home-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">    
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">경향신문</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">국민일보</a></li>
-                        </ul>
-                        </div>
-                    </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
-                        분야 선택<hr>
-                        </button>
-                        <div class="collapse" id="dashboard-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정치</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">경제</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">사회</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">생활/문화</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT/과학</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"><input type="checkbox" name="" id="" class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계</a></li>
-                        </ul>
-                        </div>
-                    </li>
-                    </ul>
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-sm" value="검색">
-                    <input type="submit" class="btn btn-danger btn-sm" value="초기화">
-                </form>
-              </div>
-            <!-- </div> -->
-          </main>
-        </div>
-
-        <div class="summary">
-          <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
-            <ul>
-              <li class="scrap">
-                <button id="test" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneday-collapse" aria-expanded="true" type="button">
-                  1일 전
-                </button>
-                <div class="collapse show" id="oneday-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">    
-                  <li>[세계일보]김남국 의원은 전세자금 6억 원을 뺀 종잣돈으로 주식을 샀고, 다시 주식을 팔아 코인에 투자했다며, 투자 과정에 불법은 없었다는 입장을 반복했다가 결국 사과했습니다. 불법은 없었다고 주장했지만, 여야 할 것 없이 비판이 이어지자 결국 고개를 숙인 겁니다.</li>
-                  <hr>
-                  <li>1일 전 summary2 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur error accusantium quisquam minima facere dolorem, ex cupiditate quas. Iste, nobis! Perferendis laboriosam porro possimus unde quod molestias culpa enim deserunt.</li>
-                  </ul>
-                </div>
-              </li>
-              <li class="mb-1">
-                <button class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneweek-collapse" aria-expanded="true" type="button">
-                  1주일 전<hr>
-                </button>
-                <div class="collapse show" id="oneweek-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-                  
-                    <li>{{해당요약문}} summary3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam illo, minus sequi iste nam exercitationem minima accusantium atque, voluptas facere saepe accusamus vel molestias dolor asperiores commodi nulla aut cumque?</li>
-                    <hr>
-                    <li>1주일 전 summary4 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus, quo! Mollitia, tempora error. Harum incidunt modi distinctio necessitatibus hic nobis non pariatur voluptatem, quisquam sunt numquam voluptatum vero quam repudiandae?</li>
-                    
-                </ul>
-                </div>
-              </li>
-              <li class="mb-1">
-                <button class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true" type="button">
-                  1달 전
-                </button>
-                <div class="collapse show" id="orders-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-                  <li>summary5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, eum, autem voluptate praesentium molestiae aliquam soluta officiis labore a explicabo maiores tenetur vitae pariatur mollitia libero facilis cupiditate repellat dolorum?</li>
-                  <hr>
-                  <li>summary6 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum ducimus reiciendis cumque laborum voluptate dolorum blanditiis praesentium illum exercitationem, similique fuga error aperiam ipsa voluptatem nostrum cupiditate quaerat beatae in?</li>
-                  <hr>
-                  <li>1달 전summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis. Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id accusamus minus enim sint.</li>
-                </ul>
-              </div>
-              </li>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneweek-collapse" aria-expanded="true" type="buton">
+              1주일 전<hr>
+            </button>
+            <div class="collapse show" id="oneweek-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+              
+                <li>{{해당요약문}} summary3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam illo, minus sequi iste nam exercitationem minima accusantium atque, voluptas facere saepe accusamus vel molestias dolor asperiores commodi nulla aut cumque?</li>
+                <hr>
+                <li>1주일 전 summary4 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus, quo! Mollitia, tempora error. Harum incidunt modi distinctio necessitatibus hic nobis non pariatur voluptatem, quisquam sunt numquam voluptatum vero quam repudiandae?</li>
+                <hr>
+                <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
+                    Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
+                    accusamus minus enim sint.</li>
+            </ul>
+            </div>
+          </li>
+          <li class="mb-1">
+            <button class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true" type="button">
+              1달 전
+            </button>
+            <div class="collapse show" id="orders-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+              <li>summary5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, eum, autem voluptate praesentium molestiae aliquam soluta officiis labore a explicabo maiores tenetur vitae pariatur mollitia libero facilis cupiditate repellat dolorum?</li>
+              <hr>
+              <li>summary6 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum ducimus reiciendis cumque laborum voluptate dolorum blanditiis praesentium illum exercitationem, similique fuga error aperiam ipsa voluptatem nostrum cupiditate quaerat beatae in?</li>
+              <hr>
+              <li>1달 전summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis. Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id accusamus minus enim sint.</li>
+              <hr>
+              <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
+                  Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
+                  accusamus minus enim sint.</li>
             </ul>
           </div>
+          </li>
+        </ul>
+        
+      </div>
+      <div id="mySidepanel" class="sidepanel">
+        <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
+        <!-- <main class="d-flex flex-nowrap"> -->
+        <div class="flex-shrink-0 p-3" style="width: 220px;">
+          <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+            <span class="fs-5 fw-semibold">Category</span>
+          </a>
+  
+          <form action="#" method="post">
+            {% csrf_token %}
+            <div class="category">
+              <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" type="button">
+                    언론사 선택
+                  </button>
+                  <div class="collapse show" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li><input type="checkbox" name="" id=""
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</li>
+                      <li><input type="checkbox" name="" id=""
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</li>
+                      <li><input type="checkbox" name="" id=""
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">경향신문</li>
+                      <li><input type="checkbox" name="" id=""
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</li>
+                      <li><input type="checkbox" name="" id=""
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</li>
+                      <li><input type="checkbox" name="" id=""
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">국민일보</li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
+                    분야 선택
+                  </button>
+                  <div class="collapse" id="dashboard-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li><input
+                            type="checkbox" name="" id=""
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">정치</li>
+                      <li><input
+                            type="checkbox" name="" id=""
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">경제</li>
+                      <li><input
+                            type="checkbox" name="" id=""
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">사회</li>
+                      <li><input
+                            type="checkbox" name="" id=""
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">생활/문화</li>
+                      <li><input
+                            type="checkbox" name="" id=""
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT/과학</li>
+                      <li><input
+                            type="checkbox" name="" id=""
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계</li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <input type="submit" class="btn btn-primary btn-sm" value="검색">
+            <input type="submit" class="btn btn-danger btn-sm" value="초기화">
+          </form>
         </div>
-        
-        
-  </body>
-</html>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

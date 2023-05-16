@@ -144,9 +144,16 @@
 
 /* ------------------------------------------------------------------------ */
 /* contents_main.css */
+#wrap{
+  /* height: auto; */
+  min-height: 100%;
+}
+
+
 
 #content{
     margin-top: 15px;
+    margin-bottom: 16px;
     /* height: 550px; */
     width: 95%;
     position : relative;
@@ -154,15 +161,9 @@
     /* border: 1px solid #818181; */
 }
 
-
-.main{
-    /* height: 100%; */
-}
-
-
 .summary{
     position: absolute;
-    height: 1080px;   /* 본문 ul길이 */
+    /* height: 1080px;   본문 ul길이 */
     width: calc(100% - 24px);
     /* border: 1px solid black ;    */
     /* border-radius: 10px; */

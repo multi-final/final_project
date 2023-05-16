@@ -2,121 +2,162 @@
 {% load static %}
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.111.3">
-    <title>Headers · Bootstrap v5.3</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/sidepanel.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'news/header.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'scrap/header.css' %}">
-    <script src="https://kit.fontawesome.com/7156905f88.js" crossorigin="anonymous"></script>
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    <script>
-      function openNav() {
-        document.getElementById("mySidepanel").style.width = "250px";
-        document.getElementById("mySidepanel").style.height = "548px";
-      }
-      
-      function closeNav() {
-        document.getElementById("mySidepanel").style.width = "0";
-        document.getElementById("mySidepanel").style.height = "0";
-      }
-      document.addEventListener('mouseup', function(e) {
-        var layerPopup = document.querySelector('.sidepanel');
-        if (!layerPopup.contains(e.target)) {
-          document.getElementById("mySidepanel").style.width = "0";
-          document.getElementById("mySidepanel").style.height = "0";
-        }
-      });
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.111.3">
+<title>Headers · Bootstrap v5.3</title>
+<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+<link rel="stylesheet" type="text/css" href="{% static 'news/sidepanel_news.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'scrap/sidepanel_scrap.css' %}"> -->
+<link rel="stylesheet" type="text/css" href="{% static 'news/header.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'scrap/header.css' %}">
+<link rel="shortcut icon" href="{% static 'news/image001.ico' %}">
+<script src="https://kit.fontawesome.com/7156905f88.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<script>
+  function openNav() {
+    document.getElementById("mySidepanel").style.width = "250px";
+    document.getElementById("mySidepanel").style.height = "548px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidepanel").style.width = "0";
+    document.getElementById("mySidepanel").style.height = "0";
+  }
+  document.addEventListener('mouseup', function (e) {
+    var layerPopup = document.querySelector('.sidepanel');
+    if (!layerPopup.contains(e.target)) {
+      document.getElementById("mySidepanel").style.width = "0";
+      document.getElementById("mySidepanel").style.height = "0";
+    }
+  });
 
 
-      function div2Resize() {
-            var ul1 = document.getElementById('ul1');
-            var div2 = document.getElementById('content');
-            div2.style.height = ul1.clientHeight + 'px';
-            console.log(ul1.clientHeight)
-        }
-        window.onload = function() {
-            div2Resize();
- 
-            // 브라우저 크기가 변할 시 동적으로 사이즈를 조절해야 하는경우
-            window.addEventListener('resize', div2Resize);
-        }
-      
-      </script>
-    <style>
-     
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
+  function div2Resize() {
+    var ul1 = document.getElementById('ul1');
+    var div2 = document.getElementById('content');
+    div2.style.height = (ul1.scrollHeight + 32) + 'px';
+  }
+  window.onload = function () {
+    div2Resize();
+
+    // 브라우저 크기가 변할 시 동적으로 사이즈를 조절해야 하는경우
+    window.addEventListener('resize', div2Resize);
+    // document.getElementById('test').addEventListener('click', div2Resize)
+  }
+
+const target = document.querySelector('.rot')
+
+const observer = new ResizeObserver((entries) => {
+  // 관찰 중인 배열 형식의 객체 리스트
+  entries.forEach((entry) => {
+      console.log(entry.contentBoxSize)
+  });
+});
+
+// 크기변화를 관찰할 요소지정
+observer.observe(target);
+
+  
+  const ul1 = document.getElementById('ul1');
+  const div2 = document.getElementById('content');
+
+  // 1. ResizeObserver 객체 만들기
+  const observer2 = new ResizeObserver(entries => {
+    for (let entry of entries) {
+      div2.style.height = ul1.style.height
+    }
+  });
+
+// 2. 감지할 요소 추가하기
+observer2.observe(ul1);
 
 
-    </style>
 
-    
-    <!-- Custom styles for this template -->
-  </head>
-  <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  <symbol id="bootstrap" viewBox="0 0 118 94">
-    <title>Bootstrap</title>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
-  </symbol>
-  <symbol id="home" viewBox="0 0 16 16">
-    <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
-  </symbol>
-  <symbol id="speedometer2" viewBox="0 0 16 16">
-    <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
-    <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
-  </symbol>
-  <symbol id="table" viewBox="0 0 16 16">
-    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
-  </symbol>
-  <symbol id="people-circle" viewBox="0 0 16 16">
-    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-  </symbol>
-  <symbol id="grid" viewBox="0 0 16 16">
-    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
-  </symbol>
-</svg>
 
-<main>
-  <header>
-    <div class="px-3 py-2 text-bg-white shadow-sm p-3 mb-5 bg-body">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-dark text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-          </a>
+</script>
+<style>
+  .bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+  }
 
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="#" class="nav-link text-dark">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
-                Scrap
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-dark">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                Users
-              </a>
-            </li>
-          </ul>
+  .nav-item a {
+    font-size: 14px;
+  }
+
+  .text-center {
+    font-size: 10px;
+  }
+
+  #logo {
+    font-family: 'Black Han Sans', sans-serif;
+  }
+</style>
+
+
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="px-3 py-2 text-bg-white shadow-sm p-3 mb-5 bg-body">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" style="margin-top: -10px; margin-right: 8px;"><img src="{% static 'news/image001.ico' %}" alt=""
+                width="40" height="39"></a>
+            <a href="/" style="font-size: 35px; color: #808080;"
+              class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none" id="logo">
+              오간뉴
+            </a>
+
+            <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+              <li>
+                <a href="#" class="nav-link text-dark">
+                  <i class="fa-solid fa-bookmark fa-lg" style="color: #808080;"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link text-dark">
+                  <i class="fa-solid fa-circle-user fa-lg" style="color: #808080;"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
-  
-</main>
+    </header>
+  </main>
 
-{% block content %}
-{% endblock %}
-  </body>
+  {% block content %}
+  {% endblock %}
+
+
+  <div id="footer" class="px-4 py-1 mb-0 text-bg-white"
+    style="box-shadow: 0 -.125rem .25rem rgba(0,0,0,.075); padding: 0; height: 153px; margin-bottom: 0px;">
+    <div class="container">
+      <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">고은영</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">박기현</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">유재찬</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">조민우</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">하정수</a></li>
+        </ul>
+        <p class="text-center text-body-secondary"><img src="{% static 'news/image001.ico' %}" alt="" width="20"
+            height="20" style="margin-right: 5px;"> 오간뉴:메추리</p>
+      </footer>
+    </div>
+  </div>
+
+</body>
+
 </html>
