@@ -1,76 +1,30 @@
 {% extends 'base/base.html' %}
 
   {% block content %}
+
+
   <div id="content" class="container" style="min-height: 1080px;">
+    <p>press:{{press}}</p><p>section: {{section}}</p>
     <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
     <div class="summary">
       <ul id="ul1">
-        <li>[세계일보]김남국 의원은 전세자금 6억 원을 뺀 종잣돈으로 주식을 샀고, 다시 주식을 팔아 코인에 투자했다며, 투자 과정에 불법은 없었다는 입장을 반복했다가 결국 사과했습니다. 불법은 없었다고
-          주장했지만, 여야 할 것 없이 비판이 이어지자 결국 고개를 숙인 겁니다.</li>
         <hr>
-        <li>summary2 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur error accusantium quisquam
-          minima facere dolorem, ex cupiditate quas. Iste, nobis! Perferendis laboriosam porro possimus unde quod
-          molestias culpa enim deserunt.</li>
-        <hr>
-        <li>summary3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam illo, minus sequi iste nam
-          exercitationem minima accusantium atque, voluptas facere saepe accusamus vel molestias dolor asperiores commodi
-          nulla aut cumque?</li>
-        <hr>
-        <li>summary4 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus, quo! Mollitia, tempora error.
-          Harum incidunt modi distinctio necessitatibus hic nobis non pariatur voluptatem, quisquam sunt numquam
-          voluptatum vero quam repudiandae?</li>
-        <hr>
-        <li>summary5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, eum, autem voluptate
-          praesentium molestiae aliquam soluta officiis labore a explicabo maiores tenetur vitae pariatur mollitia libero
-          facilis cupiditate repellat dolorum?</li>
-        <hr>
-        <li>summary6 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum ducimus reiciendis cumque laborum
-          voluptate dolorum blanditiis praesentium illum exercitationem, similique fuga error aperiam ipsa voluptatem
-          nostrum cupiditate quaerat beatae in?</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <div><span>1일전<hr></span></div>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
-        <hr>
-        <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-          Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-          accusamus minus enim sint.</li>
+        {% for article in articles %}
+        <li>
+          <table width="100%">
+            <tr style="text-align: center;">
+              <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
+              <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">17/May/2023</b></td>
+              <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
+            </tr>
+            <tr>
+              <td colspan="2">{{article}}</td>
+              <td width="50px"><button>scrap</button></td>
+            </tr>
+          </table>
+          <hr>
+        </li>
+        {% endfor %}
       </ul>
       
     </div>
@@ -82,7 +36,7 @@
           <span class="fs-5 fw-semibold">Category</span>
         </a>
 
-        <form action="#" method="post">
+        <form action="" method="post">
           {% csrf_token %}
           <div class="category">
             <ul class="list-unstyled ps-0">
@@ -93,17 +47,17 @@
                 </button>
                 <div class="collapse show" id="home-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><input type="checkbox" name="" id=""
+                    <li><input type="checkbox" name="press" id="" value="0"
                         class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</li>
-                    <li><input type="checkbox" name="" id=""
+                    <li><input type="checkbox" name="press" id="" value="1"
                         class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</li>
-                    <li><input type="checkbox" name="" id=""
+                    <li><input type="checkbox" name="press" id="" value="2"
                         class="link-body-emphasis d-inline-flex text-decoration-none rounded">경향신문</li>
-                    <li><input type="checkbox" name="" id=""
+                    <li><input type="checkbox" name="press" id="" value="3"
                         class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</li>
-                    <li><input type="checkbox" name="" id=""
+                    <li><input type="checkbox" name="press" id="" value="4"
                         class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</li>
-                    <li><input type="checkbox" name="" id=""
+                    <li><input type="checkbox" name="press" id="" value="5"
                         class="link-body-emphasis d-inline-flex text-decoration-none rounded">국민일보</li>
                   </ul>
                 </div>
@@ -116,22 +70,22 @@
                 <div class="collapse" id="dashboard-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><input
-                          type="checkbox" name="" id=""
+                          type="checkbox" name="section" id="" value="0"
                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">정치</li>
                     <li><input
-                          type="checkbox" name="" id=""
+                          type="checkbox" name="section" id="" value="1"
                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">경제</li>
                     <li><input
-                          type="checkbox" name="" id=""
+                          type="checkbox" name="section" id="" value="2"
                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">사회</li>
                     <li><input
-                          type="checkbox" name="" id=""
+                          type="checkbox" name="section" id="" value="3"
                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">생활/문화</li>
                     <li><input
-                          type="checkbox" name="" id=""
+                          type="checkbox" name="section" id="" value="4"
                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT/과학</li>
                     <li><input
-                          type="checkbox" name="" id=""
+                          type="checkbox" name="section" id="" value="5"
                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계</li>
                   </ul>
                 </div>
