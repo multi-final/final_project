@@ -1,13 +1,13 @@
 {% extends 'base/base.html' %}
 
   {% block content %}
-  <div id="wrap">
+  <div id="wrap" style="min-height: 1080px;">
     <div id="content" class="container">
       <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
       <div class="summary">
-        <ul id="ul1" class="rot">
+        <ul id="ul1">
           <li class="scrap">
-            <button id="test" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneday-collapse" aria-expanded="true" type="button">
+            <button id="test" onclick="rresize()" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneday-collapse" aria-expanded="true" type="button">
               1일 전
             </button>
             <div class="collapse show" id="oneday-collapse">
@@ -22,7 +22,7 @@
             </div>
           </li>
           <li class="mb-1">
-            <button class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneweek-collapse" aria-expanded="true" type="buton">
+            <button onclick="rresize()" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneweek-collapse" aria-expanded="true" type="buton">
               1주일 전<hr>
             </button>
             <div class="collapse show" id="oneweek-collapse">
@@ -39,7 +39,7 @@
             </div>
           </li>
           <li class="mb-1">
-            <button class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true" type="button">
+            <button onclick="rresize()" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true" type="button">
               1달 전
             </button>
             <div class="collapse show" id="orders-collapse">
@@ -49,6 +49,14 @@
               <li>summary6 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum ducimus reiciendis cumque laborum voluptate dolorum blanditiis praesentium illum exercitationem, similique fuga error aperiam ipsa voluptatem nostrum cupiditate quaerat beatae in?</li>
               <hr>
               <li>1달 전summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis. Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id accusamus minus enim sint.</li>
+              <hr>
+              <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
+                  Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
+                  accusamus minus enim sint.</li>
+              <hr>
+              <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
+                  Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
+                  accusamus minus enim sint.</li>
               <hr>
               <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
                   Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
