@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('news.urls')),
     path('scrap/', include('scrap.urls')),
     # path('base/', views.base, name='base')
+    path('users/', include('users.urls'))
 ]

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # "django.contrib.staticfiles.finders.FileSystemFinder",
     # "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    'rest_framework',
     'news',
     'scrap',
     'django_bootstrap5',
@@ -117,6 +118,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# User Model 지정
+AUTH_USER_MODEL = 'users.User'
 
 
 # Static files (CSS, JavaScript, Images)
