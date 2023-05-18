@@ -6,13 +6,13 @@
       <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
       <div class="summary">
         <ul id="ul1">
-
-        {% for article in articles %}
+        {% if savedate  -datenow %}
+        <!-- {% for article in articles %}
         <li>
           <table width="100%">
             <tr style="text-align: center;">
               <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
-              <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">17/May/2023</b></td>
+              <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.d_chk}}</b></td>
               <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
             </tr>
             <tr>
@@ -22,37 +22,39 @@
           </table>
           <hr>
         </li>
-        {% endfor %}
-
-        {% for article in articles %}
-        <li>
-          <table style="width: 100%">
-            <hr>
-            <tr>
-              <td>{{article.date}}</td>
-            </tr>
-            <tr>
-              <td>{{article.article}}</td>
-              <td style="width: 50px"><button>scrap</button></td>
-            </tr>
-          </table>
-        </li>
-        {% endfor %}
+        {% endfor %} -->
 
           <li class="scrap">
             <button id="test" onclick="rresize()" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneday-collapse" aria-expanded="true" type="button">
               오늘
             </button>
             <div class="collapse show" id="oneday-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">    
-                
-                
-                <li>[세계일보]김남국 의원은 전세자금 6억 원을 뺀 종잣돈으로 주식을 샀고, 다시 주식을 팔아 코인에 투자했다며, 투자 과정에 불법은 없었다는 입장을 반복했다가 결국 사과했습니다. 불법은 없었다고 주장했지만, 여야 할 것 없이 비판이 이어지자 결국 고개를 숙인 겁니다.</li>
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+                <hr>
+                {% for article in articles %}
+                  {% if article.d_chk == 'today' %}
+                  <li>
+                    <table width="100%">
+                      <tr style="text-align: center;">
+                        <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
+                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.d_diff}}</b></td>
+                        <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">{{article.article}}</td>
+                        <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
+                      </tr>
+                    </table>
+                    <hr>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+                <!-- <li>[세계일보]김남국 의원은 전세자금 6억 원을 뺀 종잣돈으로 주식을 샀고, 다시 주식을 팔아 코인에 투자했다며, 투자 과정에 불법은 없었다는 입장을 반복했다가 결국 사과했습니다. 불법은 없었다고 주장했지만, 여야 할 것 없이 비판이 이어지자 결국 고개를 숙인 겁니다.</li>
                 <hr>
                 <li>1일 전 summary2 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur error accusantium quisquam minima facere dolorem, ex cupiditate quas. Iste, nobis! Perferendis laboriosam porro possimus unde quod molestias culpa enim deserunt.</li>
                 <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
                   Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-                  accusamus minus enim sint.</li>  
+                  accusamus minus enim sint.</li>   -->
               </ul>
             </div>
           </li>
@@ -62,14 +64,32 @@
             </button>
             <div class="collapse show" id="oneweek-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-              
-                <li>{{해당요약문}} summary3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam illo, minus sequi iste nam exercitationem minima accusantium atque, voluptas facere saepe accusamus vel molestias dolor asperiores commodi nulla aut cumque?</li>
+                <hr>
+                {% for article in articles %}
+                  {% if article.d_chk == 'yesterday' %}
+                  <li>
+                    <table width="100%">
+                      <tr style="text-align: center;">
+                        <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
+                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.d_diff}}</b></td>
+                        <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">{{article.article}}</td>
+                        <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
+                      </tr>
+                    </table>
+                    <hr>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+                <!-- <li>{{해당요약문}} summary3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam illo, minus sequi iste nam exercitationem minima accusantium atque, voluptas facere saepe accusamus vel molestias dolor asperiores commodi nulla aut cumque?</li>
                 <hr>
                 <li>1주일 전 summary4 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus, quo! Mollitia, tempora error. Harum incidunt modi distinctio necessitatibus hic nobis non pariatur voluptatem, quisquam sunt numquam voluptatum vero quam repudiandae?</li>
                 <hr>
                 <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
                     Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-                    accusamus minus enim sint.</li>
+                    accusamus minus enim sint.</li> -->
             </ul>
             </div>
           </li>
@@ -79,7 +99,26 @@
             </button>
             <div class="collapse show" id="orders-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-              <li>summary5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, eum, autem voluptate praesentium molestiae aliquam soluta officiis labore a explicabo maiores tenetur vitae pariatur mollitia libero facilis cupiditate repellat dolorum?</li>
+              <hr>
+              {% for article in articles %}
+                  {% if article.d_chk == 'week ago' %}
+                  <li>
+                    <table width="100%">
+                      <tr style="text-align: center;">
+                        <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
+                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.d_diff}}</b></td>
+                        <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">{{article.article}}</td>
+                        <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
+                      </tr>
+                    </table>
+                    <hr>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+              <!-- <li>summary5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, eum, autem voluptate praesentium molestiae aliquam soluta officiis labore a explicabo maiores tenetur vitae pariatur mollitia libero facilis cupiditate repellat dolorum?</li>
               <hr>
               <li>summary6 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum ducimus reiciendis cumque laborum voluptate dolorum blanditiis praesentium illum exercitationem, similique fuga error aperiam ipsa voluptatem nostrum cupiditate quaerat beatae in?</li>
               <hr>
@@ -95,7 +134,7 @@
               <hr>
               <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
                   Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-                  accusamus minus enim sint.</li>
+                  accusamus minus enim sint.</li> -->
             </ul>
           </div>
           </li>
