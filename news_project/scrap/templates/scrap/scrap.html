@@ -6,17 +6,16 @@
       <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
       <div class="summary">
         <ul id="ul1">
-        {% if savedate  -datenow %}
-        <!-- {% for article in articles %}
+        <!-- {% for dbarticle in dbarticles_today %}
         <li>
           <table width="100%">
             <tr style="text-align: center;">
-              <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
-              <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.d_chk}}</b></td>
-              <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
+              <td style="text-align: left;"><b style="font-size: 0.8em;">{{dbarticle.headline}}</b></td>
+              <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{dbarticle.created_date}}</b></td>
+              <td style="margin-right: 0px; font-size: 0.8em;"><b>{{dbarticle.writer}}</b></td>
             </tr>
             <tr>
-              <td colspan="2">{{article.article}}</td>
+              <td colspan="2">{{dbarticle.content}}</td>
               <td width="50px"><button style="width: 49px">X</button></td>
             </tr>
           </table>
@@ -31,30 +30,22 @@
             <div class="collapse show" id="oneday-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
                 <hr>
-                {% for article in articles %}
-                  {% if article.d_chk == 'today' %}
-                  <li>
-                    <table width="100%">
-                      <tr style="text-align: center;">
-                        <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
-                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.d_diff}}</b></td>
-                        <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">{{article.article}}</td>
-                        <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
-                      </tr>
-                    </table>
-                    <hr>
-                  </li>
-                  {% endif %}
+                {% for article in dbarticles_today %}
+                <li>
+                  <table width="100%">
+                    <tr style="text-align: center;">
+                      <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.press.name}}, {{article.section.name}}] {{article.headline}}</b></td>
+                      <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
+                      <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">{{article.content}}</td>
+                      <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
+                    </tr>
+                  </table>
+                  <hr>
+                </li>
                 {% endfor %}
-                <!-- <li>[세계일보]김남국 의원은 전세자금 6억 원을 뺀 종잣돈으로 주식을 샀고, 다시 주식을 팔아 코인에 투자했다며, 투자 과정에 불법은 없었다는 입장을 반복했다가 결국 사과했습니다. 불법은 없었다고 주장했지만, 여야 할 것 없이 비판이 이어지자 결국 고개를 숙인 겁니다.</li>
-                <hr>
-                <li>1일 전 summary2 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur error accusantium quisquam minima facere dolorem, ex cupiditate quas. Iste, nobis! Perferendis laboriosam porro possimus unde quod molestias culpa enim deserunt.</li>
-                <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-                  Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-                  accusamus minus enim sint.</li>   -->
               </ul>
             </div>
           </li>
@@ -65,76 +56,48 @@
             <div class="collapse show" id="oneweek-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
                 <hr>
-                {% for article in articles %}
-                  {% if article.d_chk == 'yesterday' %}
-                  <li>
-                    <table width="100%">
-                      <tr style="text-align: center;">
-                        <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
-                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.d_diff}}</b></td>
-                        <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">{{article.article}}</td>
-                        <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
-                      </tr>
-                    </table>
-                    <hr>
-                  </li>
-                  {% endif %}
+                {% for article in dbarticles_yesterday %}
+                <li>
+                  <table width="100%">
+                    <tr style="text-align: center;">
+                      <td style="text-align: left;"><b style="font-size: 0.8em;">{{article.headline}}</b></td>
+                      <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
+                      <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">{{article.content}}</td>
+                      <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
+                    </tr>
+                  </table>
+                  <hr>
+                </li>
                 {% endfor %}
-                <!-- <li>{{해당요약문}} summary3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam illo, minus sequi iste nam exercitationem minima accusantium atque, voluptas facere saepe accusamus vel molestias dolor asperiores commodi nulla aut cumque?</li>
-                <hr>
-                <li>1주일 전 summary4 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus, quo! Mollitia, tempora error. Harum incidunt modi distinctio necessitatibus hic nobis non pariatur voluptatem, quisquam sunt numquam voluptatum vero quam repudiandae?</li>
-                <hr>
-                <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-                    Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-                    accusamus minus enim sint.</li> -->
             </ul>
             </div>
           </li>
           <li class="mb-1">
             <button onclick="rresize()" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true" type="button">
-              1주일 전
+              이번주
             </button>
             <div class="collapse show" id="orders-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
               <hr>
-              {% for article in articles %}
-                  {% if article.d_chk == 'week ago' %}
-                  <li>
-                    <table width="100%">
-                      <tr style="text-align: center;">
-                        <td style="text-align: left;"><b style="font-size: 0.8em;"> 0Lorem ipsum dolor sit amet consectetur adipisicing elit.</b></td>
-                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.d_diff}}</b></td>
-                        <td style="margin-right: 0px; font-size: 0.8em;"><b>곽곽곽</b></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">{{article.article}}</td>
-                        <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
-                      </tr>
-                    </table>
-                    <hr>
-                  </li>
-                  {% endif %}
-                {% endfor %}
-              <!-- <li>summary5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, eum, autem voluptate praesentium molestiae aliquam soluta officiis labore a explicabo maiores tenetur vitae pariatur mollitia libero facilis cupiditate repellat dolorum?</li>
-              <hr>
-              <li>summary6 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum ducimus reiciendis cumque laborum voluptate dolorum blanditiis praesentium illum exercitationem, similique fuga error aperiam ipsa voluptatem nostrum cupiditate quaerat beatae in?</li>
-              <hr>
-              <li>1달 전summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis. Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id accusamus minus enim sint.</li>
-              <hr>
-              <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-                  Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-                  accusamus minus enim sint.</li>
-              <hr>
-              <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-                  Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-                  accusamus minus enim sint.</li>
-              <hr>
-              <li>summary7 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat mollitia minima quasi quis.
-                  Necessitatibus quae consequuntur odit at, dolorem placeat fuga voluptatibus excepturi doloribus modi id
-                  accusamus minus enim sint.</li> -->
+              {% for article in dbarticles_this_week %}
+              <li>
+                <table width="100%">
+                  <tr style="text-align: center;">
+                    <td style="text-align: left;"><b style="font-size: 0.8em;">{{article.headline}}</b></td>
+                    <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
+                    <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">{{article.content}}</td>
+                    <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
+                  </tr>
+                </table>
+                <hr>
+              </li>
+              {% endfor %}
             </ul>
           </div>
           </li>
@@ -143,13 +106,12 @@
       </div>
       <div id="mySidepanel" class="sidepanel">
         <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
-        <!-- <main class="d-flex flex-nowrap"> -->
         <div class="flex-shrink-0 p-3" style="width: 220px;">
           <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <span class="fs-5 fw-semibold">Category</span>
           </a>
   
-          <form action="#" method="post">
+          <form action="" method="post">
             {% csrf_token %}
             <div class="category">
               <ul class="list-unstyled ps-0">
@@ -160,18 +122,26 @@
                   </button>
                   <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li><input type="checkbox" name="" id=""
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</li>
-                      <li><input type="checkbox" name="" id=""
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</li>
-                      <li><input type="checkbox" name="" id=""
+                      <li><input type="checkbox" name="press" id="" value="1"
                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">경향신문</li>
-                      <li><input type="checkbox" name="" id=""
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</li>
-                      <li><input type="checkbox" name="" id=""
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</li>
-                      <li><input type="checkbox" name="" id=""
+                      <li><input type="checkbox" name="press" id="" value="2"
                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">국민일보</li>
+                      <li><input type="checkbox" name="press" id="" value="3"
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">동아일보</li>
+                      <li><input type="checkbox" name="press" id="" value="4"
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">문화일보</li>
+                      <li><input type="checkbox" name="press" id="" value="5"
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">서울신문</li>
+                      <li><input type="checkbox" name="press" id="" value="6"
+                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</li>
+                      <li><input type="checkbox" name="press" id="" value="7"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</li>
+                      <li><input type="checkbox" name="press" id="" value="8"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</li>
+                      <li><input type="checkbox" name="press" id="" value="9"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</li>
+                      <li><input type="checkbox" name="press" id="" value="10"
+                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">한국일보</li>
                     </ul>
                   </div>
                 </li>
@@ -183,30 +153,28 @@
                   <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       <li><input
-                            type="checkbox" name="" id=""
+                            type="checkbox" name="section" id="" value="1"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded">정치</li>
                       <li><input
-                            type="checkbox" name="" id=""
+                            type="checkbox" name="section" id="" value="2"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded">경제</li>
                       <li><input
-                            type="checkbox" name="" id=""
+                            type="checkbox" name="section" id="" value="3"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded">사회</li>
                       <li><input
-                            type="checkbox" name="" id=""
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">생활/문화</li>
-                      <li><input
-                            type="checkbox" name="" id=""
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT/과학</li>
-                      <li><input
-                            type="checkbox" name="" id=""
+                            type="checkbox" name="section" id="" value="4"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계</li>
+                      <li><input
+                            type="checkbox" name="section" id="" value="5"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT</li>
+  
                     </ul>
                   </div>
                 </li>
               </ul>
             </div>
             <input type="submit" class="btn btn-primary btn-sm" value="검색">
-            <input type="submit" class="btn btn-danger btn-sm" value="초기화">
+            <input type="button" class="btn btn-danger btn-sm" value="초기화" onclick="location.replace(location.href)">
           </form>
         </div>
       </div>

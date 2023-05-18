@@ -1,0 +1,42 @@
+[
+      {
+        "model": "news.section",
+        "pk": 1,
+        "fields": {
+            "id": 1,
+            "name": "정치"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 2,
+        "fields": {
+            "id": 2,
+            "name": "경제"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 3,
+        "fields": {
+            "id": 3,
+            "name": "사회"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 4,
+        "fields": {
+            "id": 4,
+            "name": "세계"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 5,
+        "fields": {
+            "id": 5,
+            "name": "it"
+        }
+    }
+]
