@@ -34,12 +34,12 @@
                 <li>
                   <table width="100%">
                     <tr style="text-align: center;">
-                      <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.press.name}}, {{article.section.name}}] {{article.headline}}</b></td>
+                      <td style="text-align: left;"><b style="font-size: 0.8em;"><a href="{{article.url}}" target="_blank" style="margin: 0; padding: 0;">[{{article.press.name}}, {{article.section.name}}] {{article.headline}}</a></b></td>
                       <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
                       <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
                     </tr>
                     <tr>
-                      <td colspan="2">{{article.content}}</td>
+                      <td colspan="2"><a href="{{article.url}}" target="_blank" style="margin: 0; padding: 0;">{{article.content}}</a></td>
                       <td width="50px"><button class="btn btn-danger" style="width: 49px">X</button></td>
                     </tr>
                   </table>
