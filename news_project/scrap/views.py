@@ -10,7 +10,7 @@ import datetime
 def scrap(request):
     if request.method=='GET':
         now = datetime.datetime.now() # 현재 형식          <= 24시간전 < 데이터 < 48시간전 30
-        articles = Article.objects.all().select_related()
+        articles = Article.objects.all().select_related().order_by('-created_date')
         dbarticles_today = articles.filter(created_date__gte = (datetime.datetime.now()-datetime.timedelta(1)))
         dbarticles_yesterday = articles.filter(created_date__range = (datetime.datetime.now()-datetime.timedelta(2), datetime.datetime.now()-datetime.timedelta(1)))
         dbarticles_this_week = articles.filter(created_date__range = (datetime.datetime.now()-datetime.timedelta(8), datetime.datetime.now()-datetime.timedelta(2)))
@@ -24,7 +24,7 @@ def scrap(request):
         press_form=request.POST.getlist('press')
         section_form=request.POST.getlist('section')
         if not press_form and not section_form:
-            articles = Article.objects.all().select_related()
+            articles = Article.objects.all().select_related().order_by('-created_date')
         elif press_form and not section_form:
             press_form=list(map(int,press_form))
             articles = Article.objects.filter(press__in=press_form).select_related()

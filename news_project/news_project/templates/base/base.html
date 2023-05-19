@@ -16,6 +16,7 @@
 
 <!-- javascripts -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <!-- icon -->
 <link rel="shortcut icon" href="{% static 'news/logo.ico' %}">
@@ -52,7 +53,17 @@
   function div2Resize() {
     var ul1 = document.getElementById('ul1');
     var div2 = document.getElementById('content');
+    var row = document.querySelector('.row');
+    var button_col = document.getElementById('button_col');
+    var summary_col = document.getElementById('summary_col');
+    // row -> content
+    // button_col -> row.height
+    // summary_col -> ul1
+    var col = row.childNodes
     div2.style.height = (ul1.scrollHeight + 32) + 'px';
+    row.style.height = (ul1.scrollHeight + 32) + 'px';
+    // button_col.style.height = (ul1.scrollHeight + 32) + 'px';
+    // summary_col.style.height = (ul1.scrollHeight + 32) + 'px';
   }
   window.onload = function () {
     div2Resize();
@@ -117,7 +128,7 @@
 <body>
   <main>
     <header>
-      <div class="px-3 py-2 text-bg-white shadow-sm p-3 mb-5 bg-body">
+      <div class="px-3 py-1 text-bg-white shadow-sm p-3 mb-1 bg-body ">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" style="margin-top: -10px; margin-right: 8px;"><img src="{% static 'news/logo.ico' %}" alt=""

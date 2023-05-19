@@ -172,7 +172,7 @@
 .summary ul{
     /* overflow-y: auto; */
     overflow-x: hidden;
-    padding:0 5%;
+    padding: 0 0%;
 }
 
 .summary ul li{
