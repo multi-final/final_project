@@ -1,15 +1,18 @@
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 
-from .serializers import UserSerializer
+from .forms import UserForm
 
-
-class UserRegistrationView(APIView):
-    def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)  # 사용자 인증
+            login(request, user)  # 로그인
+            return redirect('/')
+    else:
+        form = UserForm()
+    return render(request, 'users/signup.html', {'form': form})

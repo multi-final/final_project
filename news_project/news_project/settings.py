@@ -123,6 +123,8 @@ USE_TZ = True
 # User Model 지정
 AUTH_USER_MODEL = 'users.User'
 
+# 로그인 성공 후 리다이렉트 경로
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
