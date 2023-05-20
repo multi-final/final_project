@@ -58,38 +58,29 @@ def main(req):
         except EmptyPage:
             articles = paginator.page(paginator.num_pages)
         
-        # press_form=json.dumps(press_form)
-        # section_form=json.dumps(section_form)
-
         return render(req, 'news/main.html', {'articles':articles, "press_list":press_form, "section_list":section_form})
 def main_ajax(req):
-        press_form=req.POST.getlist('press')
-        section_form=req.POST.getlist('section')
-        print(type(press_form))
-        print(section_form)
+        press_form=list(map(int,req.POST.getlist('press')[0].split()))
+        section_form=list(map(int,req.POST.getlist('section')[0].split()))
         if not press_form and not section_form:
             post_list = Article.objects.all().select_related()
         elif press_form and not section_form:
-            press_form=list(map(int,press_form))
             post_list = Article.objects.filter(press__in=press_form).select_related()
         elif not press_form and section_form:
-            section_form=list(map(int,section_form))
             post_list = Article.objects.filter(section__in=section_form).select_related()
         else:
-            press_form=list(map(int,press_form))
-            section_form=list(map(int,section_form))
             post_list = Article.objects.filter(Q(press__in=press_form)&Q(section__in=section_form)).select_related()
         
         post_list = post_list.order_by('-created_date')
         paginator = Paginator(post_list, 10)
-        page = req.POST.get('page')
-
+        page = int(req.POST.get('page'))
         try:
             post_list = paginator.page(page)
         except PageNotAnInteger:
             post_list = paginator.page(1)
         except EmptyPage:
-            post_list = paginator.page(paginator.num_pages)
+            # post_list = paginator.page(paginator.num_pages)
+            post_list = None
 
         context = {'articles':post_list, "press_list":press_form, "section_list":section_form}
         return render(req, 'news/main_ajax.html', context) #Ajax 로 호출하는 템플릿은 _ajax로 표시.

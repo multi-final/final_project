@@ -6,7 +6,7 @@
   <div id="content" class="container" style="min-height: 1080px;">
     <div class="row">
       <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
-        <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
+        <button class="openbtn" onclick="openNav()" style="margin-top: 12px;"><i class="fa-solid fa-bars"></i></button>
         <div id="mySidepanel" class="sidepanel">
           <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
           <div class="flex-shrink-0 p-3" style="width: 220px;">
@@ -86,7 +86,6 @@
       <div id="summary_col" class="col-9">
         <div class="summary">
           <ul id="ul1" style="max-width: 85%;">
-            <hr>
             {% for article in articles %}
             <li>
               <table width="100%">
@@ -105,55 +104,69 @@
             {% endfor %}
             <div id="post_list_ajax"></div>
             <input id="page" type="hidden" value="2">
+            
+            <div id="wrapper">
+              <button id="load-more" onclick="click_load_more()">load more</button>
+            </div>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <p id="press_list">{{press_list}}</p>
-  <p id="section_list">{{section_list}}</p>
-  <script type="text/javascript">
     
-  </script>
   <script>
-    // console.log(press_list)
     var token = $('input[name="csrfmiddlewaretoken"]').prop('value');
-    
-    $(window).scroll(function(){
-      var scrollHeight = $(window).scrollTop() + $(window).height();
-      var documentHeight = $(document).height();
-      
-              if (scrollHeight + 300 >= documentHeight){
-                // var press_list = "{{press_list|escapejs}}"
-                var press_list = "{{press_list}}"
-                var section_list = "{{section_list|safe}}"
-                console.log(press_list)
-                // var press_list = ['10']
-                // var section_list = ['1']
-                var page = $("#page").val();
-                callMorePostAjax(page, press_list, section_list);
-                $("#page").val(parseInt(page)+1);
-            }
+    const loadmore= document.getElementById('load-more')
+    var isEnd = false
+    // 무한 스크롤로 구현
+    // $(window).scroll(function(){
+    //   var scrollHeight = $(window).scrollTop() + $(window).height();
+    //   var documentHeight = $(document).height();
+    //         if (!isEnd){
+    //           loadmore.classList.add('disabled');
+    //           loadmore.setAttribute('disabled', false)
+    //           if (scrollHeight + 300 >= documentHeight){
+    //             var press_list = "{{press_list|join:' '}}"
+    //             var section_list = "{{section_list|join:' '}}"
+    //             var page = $("#page").val();
+    //             callMorePostAjax(page, press_list, section_list);
+    //             $("#page").val(parseInt(page)+1);
+    //           }
+    //         }
+    //     });
+
+    // load more 버튼으로 구현
+    function click_load_more(){
+      if(!isEnd){
+        var press_list = "{{press_list|join:' '}}"
+        var section_list = "{{section_list|join:' '}}"
+        var page = $("#page").val();
+        callMorePostAjax(page, press_list, section_list);
+        $("#page").val(parseInt(page)+1);
+      }else{
+        loadmore.innerText='No Data';
+        loadmore.setAttribute('disabled', false);
+      }
+    }
+
+    function callMorePostAjax(page, press_list, section_list) {
+        $.ajax( {
+        type : 'POST',
+        url: "main_ajax/",
+        data: {
+        'page': page,
+        'press':press_list,
+        'section':section_list,
+        'csrfmiddlewaretoken': token,
+        },
+        success: addMorePostAjax,
+        dataType: 'html'
         });
+    }
 
-        function callMorePostAjax(page, press_list, section_list) {
-            $.ajax( {
-            type : 'POST',
-            url: "main_ajax/",
-            data: {
-            'page': page,
-            'press':press_list,
-            'section':section_list,
-            'csrfmiddlewaretoken': token,
-            },
-            success: addMorePostAjax,
-            dataType: 'html'
-            });
-        }
-
-        function addMorePostAjax(data, textStatus, jqXHR) {
-            $('#post_list_ajax').append(data);
-            div2Resize();
-        } 
+    function addMorePostAjax(data, textStatus, jqXHR) {
+        $('#post_list_ajax').append(data);
+        div2Resize();
+    } 
   </script>
   {% endblock %}

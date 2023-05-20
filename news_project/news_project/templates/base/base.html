@@ -67,7 +67,6 @@
   }
   window.onload = function () {
     div2Resize();
-
     // 브라우저 크기가 변할 시 동적으로 사이즈를 조절해야 하는경우
     window.addEventListener('resize', div2Resize);
     // document.getElementById('test').addEventListener('click', div2Resize)
@@ -119,6 +118,35 @@
 }
 #ul1 a:hover{
   color: rgb(62, 116, 255);
+}
+#load-more {
+  width: calc((100% / 3) - 8px);
+  padding: 16px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  margin-bottom: 10px;
+}
+#wrapper{
+  /* margin: auto; */
+  margin-right: 25px;
+  width: inherit;
+  text-align: center;
+  margin-top: 50px;
+}
+#load-more:not([disabled]):hover {
+  color: white;
+  background-color: #808080;
+  box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2);
+}
+
+#load-more[disabled] {
+  background-color: #eaeaea !important;
 }
 
 </style>
