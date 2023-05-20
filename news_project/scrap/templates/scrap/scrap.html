@@ -1,13 +1,91 @@
 {% extends 'base/base.html' %}
 
   {% block content %}
-  <div id="wrap" style="min-height: 1080px;">
-    <div id="content" class="container">
-      <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
-      <div class="summary">
+  <!-- <div id="wrap" style="min-height: 1080px;"> -->
+    <div id="content" class="container" style="min-height: 1080px;">
+      <div class="row">
+        <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 30px;">
+        <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
+          <div id="mySidepanel" class="sidepanel">
+            <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
+            <div class="flex-shrink-0 p-3" style="width: 220px;">
+              <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">Category</span>
+              </a>
+              
+              <form action="" method="post">
+                {% csrf_token %}
+                <div class="category">
+                  <ul class="list-unstyled ps-0">
+                    <li class="mb-1">
+                      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" type="button">
+                      언론사 선택
+                    </button>
+                    <div class="collapse show" id="home-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                          <li><input type="checkbox" name="press" id="" value="1"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">경향신문</li>
+                            <li><input type="checkbox" name="press" id="" value="2"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">국민일보</li>
+                              <li><input type="checkbox" name="press" id="" value="3"
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">동아일보</li>
+                          <li><input type="checkbox" name="press" id="" value="4"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">문화일보</li>
+                            <li><input type="checkbox" name="press" id="" value="5"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">서울신문</li>
+                          <li><input type="checkbox" name="press" id="" value="6"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</li>
+                          <li><input type="checkbox" name="press" id="" value="7"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</li>
+                          <li><input type="checkbox" name="press" id="" value="8"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</li>
+                            <li><input type="checkbox" name="press" id="" value="9"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</li>
+                          <li><input type="checkbox" name="press" id="" value="10"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">한국일보</li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="mb-1">
+                      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
+                        분야 선택
+                      </button>
+                      <div class="collapse" id="dashboard-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                          <li><input
+                            type="checkbox" name="section" id="" value="1"
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">정치</li>
+                          <li><input
+                                type="checkbox" name="section" id="" value="2"
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">경제</li>
+                          <li><input
+                                type="checkbox" name="section" id="" value="3"
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">사회</li>
+                          <li><input
+                                type="checkbox" name="section" id="" value="4"
+                                class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계</li>
+                                <li><input
+                                  type="checkbox" name="section" id="" value="5"
+                                  class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT</li>
+      
+                                </ul>
+                              </div>
+                    </li>
+                  </ul>
+                </div>
+                <input type="submit" class="btn btn-primary btn-sm" value="검색">
+                <input type="button" class="btn btn-danger btn-sm" value="초기화" onclick="location.replace(location.href)">
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="summary_col" class="col-9">
+        <div class="summary">
         <ul id="ul1">
         <!-- {% for dbarticle in dbarticles_today %}
-        <li>
+          <li>
           <table width="100%">
             <tr style="text-align: center;">
               <td style="text-align: left;"><b style="font-size: 0.8em;">{{dbarticle.headline}}</b></td>
@@ -22,14 +100,13 @@
           <hr>
         </li>
         {% endfor %} -->
-
-          <li class="scrap">
+        
+        <li class="scrap">
             <button id="test" onclick="rresize()" class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#oneday-collapse" aria-expanded="true" type="button">
               오늘
             </button>
             <div class="collapse show" id="oneday-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-                <hr>
                 {% for article in dbarticles_today %}
                 <li>
                   <table width="100%">
@@ -55,7 +132,6 @@
             </button>
             <div class="collapse show" id="oneweek-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-                <hr>
                 {% for article in dbarticles_yesterday %}
                 <li>
                   <table width="100%">
@@ -80,10 +156,9 @@
               이번주
             </button>
             <div class="collapse show" id="orders-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-              <hr>
-              {% for article in dbarticles_this_week %}
-              <li>
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+                {% for article in dbarticles_this_week %}
+                <li>
                 <table width="100%">
                   <tr style="text-align: center;">
                     <td style="text-align: left;"><b style="font-size: 0.8em;">{{article.headline}}</b></td>
@@ -102,82 +177,10 @@
           </div>
           </li>
         </ul>
-        
-      </div>
-      <div id="mySidepanel" class="sidepanel">
-        <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
-        <div class="flex-shrink-0 p-3" style="width: 220px;">
-          <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-            <span class="fs-5 fw-semibold">Category</span>
-          </a>
-  
-          <form action="" method="post">
-            {% csrf_token %}
-            <div class="category">
-              <ul class="list-unstyled ps-0">
-                <li class="mb-1">
-                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                    data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" type="button">
-                    언론사 선택
-                  </button>
-                  <div class="collapse show" id="home-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li><input type="checkbox" name="press" id="" value="1"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">경향신문</li>
-                      <li><input type="checkbox" name="press" id="" value="2"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">국민일보</li>
-                      <li><input type="checkbox" name="press" id="" value="3"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">동아일보</li>
-                      <li><input type="checkbox" name="press" id="" value="4"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">문화일보</li>
-                      <li><input type="checkbox" name="press" id="" value="5"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">서울신문</li>
-                      <li><input type="checkbox" name="press" id="" value="6"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</li>
-                      <li><input type="checkbox" name="press" id="" value="7"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</li>
-                      <li><input type="checkbox" name="press" id="" value="8"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</li>
-                      <li><input type="checkbox" name="press" id="" value="9"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</li>
-                      <li><input type="checkbox" name="press" id="" value="10"
-                        class="link-body-emphasis d-inline-flex text-decoration-none rounded">한국일보</li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="mb-1">
-                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                    data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
-                    분야 선택
-                  </button>
-                  <div class="collapse" id="dashboard-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li><input
-                            type="checkbox" name="section" id="" value="1"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">정치</li>
-                      <li><input
-                            type="checkbox" name="section" id="" value="2"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">경제</li>
-                      <li><input
-                            type="checkbox" name="section" id="" value="3"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">사회</li>
-                      <li><input
-                            type="checkbox" name="section" id="" value="4"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계</li>
-                      <li><input
-                            type="checkbox" name="section" id="" value="5"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT</li>
-  
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <input type="submit" class="btn btn-primary btn-sm" value="검색">
-            <input type="button" class="btn btn-danger btn-sm" value="초기화" onclick="location.replace(location.href)">
-          </form>
-        </div>
       </div>
     </div>
+    
   </div>
+  </div>
+<!-- </div> -->
   {% endblock %}
