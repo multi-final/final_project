@@ -1,18 +1,43 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-
+from django.http import HttpResponse
+from .models import User
 from .forms import UserForm
 
-def signup(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)  # 사용자 인증
-            login(request, user)  # 로그인
-            return redirect('/')
-    else:
+
+# fields = ("username", "password1", "password2", "email")
+def signup(req):
+    if req.method == 'GET':
         form = UserForm()
-    return render(request, 'users/signup.html', {'form': form})
+        return render(req, 'users/signup.html', {'form': form})
+    if req.method == "POST":
+        form = UserForm(req.POST)
+        if form.is_valid():
+            new_user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password1']
+            )
+            login(req,new_user)
+            return redirect('/')
+        else:
+            return render(req,'users/signup.html',{'form':form})
+
+def user_login(req):
+    if req.method == 'GET':
+        return render(req, 'users/login.html')
+    if req.method == 'POST':
+        username = req.POST['username']
+        password = req.POST['password']
+
+        login = authenticate(req,username=username, password=password)
+        print(login)
+        if login is not None:
+            login(req, login)
+            return redirect('/')
+        else:
+            return HttpResponse('<script> alert("로그인 실패."); location.href="/users/login/";</script>')
+
+def user_logout(req):
+    logout(req)
+    return redirect('/')
