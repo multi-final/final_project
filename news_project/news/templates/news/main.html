@@ -96,7 +96,13 @@
                 </tr>
                 <tr>
                   <td colspan="2"><a href="{{article.url}}" target='_blank'>{{article.content}}</a></td>
-                  <td width="50px"><button class="btn btn-warning">scrap</button></td>
+                  <td width="50px">
+                    {% if request.user.is_authenticated %}
+                    <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
+                    {% else %}
+                    <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
+                    {% endif %}
+                  </td>
                 </tr>
               </table>
               <hr>
@@ -167,6 +173,13 @@
     function addMorePostAjax(data, textStatus, jqXHR) {
         $('#post_list_ajax').append(data);
         div2Resize();
-    } 
+    }
+
+    function sendID(button) {
+    var id = button.value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'scrap/insert/' + id, true);
+    xhr.send();
+    }
   </script>
   {% endblock %}

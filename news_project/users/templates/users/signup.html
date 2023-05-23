@@ -1,51 +1,206 @@
+{% load django_bootstrap5 %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div class="container my-3">
-    <form method="post" action="{% url 'users:signup' %}">
-        {% csrf_token %}
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ field.label }}</strong>
-                        {{ field.errors }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error }}</strong>
-                </div>
-            {% endfor %}
-        {% endif %}
 
-        <div class="mb-3">
-            <label for="username">사용자 이름</label>
-            <input type="text" class="form-control" name="username" id="username"
-                   value="{{ form.username.value|default_if_none:'' }}">
+<head>
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>register</title>
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+    id="bootstrap-css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+</head>
+<style>
+  body {
+    background: #C5E1A5;
+  }
+
+  form {
+    width: 60%;
+    margin: 60px auto;
+    background: #efefef;
+    padding: 60px 120px 80px 120px;
+    text-align: center;
+    -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    display: block;
+    position: relative;
+    margin: 40px 0px;
+  }
+
+  .label-txt {
+    position: absolute;
+    top: -1.6em;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: rgb(120, 120, 120);
+    transition: ease .3s;
+  }
+
+  .input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .line-box {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background: #BCBCBC;
+  }
+
+  .line {
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8BC34A;
+    transition: ease .6s;
+  }
+
+  .input:focus+.line-box .line {
+    width: 100%;
+  }
+
+  .label-active {
+    top: -3em;
+  }
+
+  button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: rgb(220, 220, 220);
+    font-weight: bold;
+    color: rgb(120, 120, 120);
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: ease .3s;
+  }
+
+  button:hover {
+    background: #8BC34A;
+    color: #ffffff;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const inputs = document.querySelectorAll('.input');
+    const labels = document.querySelectorAll('.label-txt');
+
+    inputs.forEach(function (input) {
+      input.addEventListener('focus', function () {
+        const parent = this.parentNode;
+        const label = parent.querySelector('.label-txt');
+        label.classList.add('label-active');
+      });
+
+      input.addEventListener('blur', function () {
+        const parent = this.parentNode;
+        const label = parent.querySelector('.label-txt');
+        if (this.value.trim() === '') {
+          label.classList.remove('label-active');
+        }
+      });
+    });
+
+  });
+
+
+
+  // function isSame() {
+  //   const password1 = document.querySelector('#password1').value;
+  //   const password2 = document.querySelector('#password2').value;
+  //   // if (pw.length < 6 || pw.length > 16) {
+  //   //     window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
+  //   //     document.getElementById('pw').value=document.getElementById('pwCheck').value='';
+  //   //     document.getElementById('same').innerHTML='';
+  //   // }
+  //   if (password1 != '' && document.password2 != '') {
+  //     if (password1 == password2) {
+  //       document.getElementById('return').innerHTML = '비밀번호가 일치합니다.';
+  //       document.getElementById('return').style.color = '#5887f7';
+  //     }
+  //     else {
+  //       document.getElementById('return').innerHTML = '비밀번호가 일치하지 않습니다.';
+  //       document.getElementById('return').style.color = '#fa4b4b';
+  //     }
+  //   }
+  // }
+</script>
+
+<body>
+
+  <form method="post" action="{% url 'users:signup' %}">
+    {% csrf_token %}
+    {% if form.errors %}
+      {% for field in form %}
+        {% for error in field.errors %}
+          <div class="alert alert-danger" style="font-size: small;">
+            <strong style="font-size: small;">{{ field.label }}</strong>
+            {{ field.errors }}
+          </div>
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+          <strong>{{ error }}</strong>
         </div>
-        <div class="mb-3">
-            <label for="password1">비밀번호</label>
-            <input type="password" class="form-control" name="password1" id="password1"
-                   value="{{ form.password1.value|default_if_none:'' }}">
-        </div>
-        <div class="mb-3">
-            <label for="password2">비밀번호 확인</label>
-            <input type="password" class="form-control" name="password2" id="password2"
-                   value="{{ form.password2.value|default_if_none:'' }}">
-        </div>
-        <div class="mb-3">
-            <label for="email">이메일</label>
-            <input type="text" class="form-control" name="email" id="email"
-                   value="{{ form.email.value|default_if_none:'' }}">
-        </div>
-        <button type="submit" class="btn btn-primary">생성하기</button>
-    </form>
-</div>
+      {% endfor %}
+    {% endif %}
+
+    <label>
+      <p class="label-txt">ENTER USERNAME</p>
+      <input type="text" class="input" name="username" id="username"
+      value="{{ form.username.value|default_if_none:'' }}">
+      <div class="line-box">
+        <div class="line"></div>
+      </div>
+    </label>
+    <label>
+      <p class="label-txt">ENTER PASSWORD</p>
+      <input type="password" class="input" name="password1" id="password1"
+        value="{{ form.password1.value|default_if_none:'' }}">
+        <div class="line-box">
+        <div class="line"></div>
+      </div>
+    </label>
+    <label>
+      <p class="label-txt">CONFIRM PASSWORD</p>
+      <input type="password" class="input" name="password2" id="password2"
+        value="{{ form.password2.value|default_if_none:'' }}">
+        <!-- <input type="password" class="input" name="password2" id="password2"
+        value="{{ form.password2.value|default_if_none:'' }}" onkeyup="isSame()"> -->
+      <div class="line-box">
+        <div class="line"></div>
+      </div>
+      <p id="return"> </p>
+    </label>
+    <label>
+      <p class="label-txt">ENTER EMAIL</p>
+      <input type="text" class="input" name="email" id="email" value="{{ form.email.value|default_if_none:'' }}">
+      <div class="line-box">
+        <div class="line"></div>
+      </div>
+    </label>
+    <button type="submit">가입</button>
+  </form>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Section, Press, Article
+from scrap.models import Scrap
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
@@ -34,7 +35,6 @@ def main(req):
     else:
         press_form=req.POST.getlist('press')
         section_form=req.POST.getlist('section')
-        print(type(press_form))
         if not press_form and not section_form:
             articles = Article.objects.all().select_related()
         elif press_form and not section_form:
@@ -59,6 +59,7 @@ def main(req):
             articles = paginator.page(paginator.num_pages)
         
         return render(req, 'news/main.html', {'articles':articles, "press_list":press_form, "section_list":section_form})
+
 def main_ajax(req):
         press_form=list(map(int,req.POST.getlist('press')[0].split()))
         section_form=list(map(int,req.POST.getlist('section')[0].split()))
@@ -84,3 +85,4 @@ def main_ajax(req):
 
         context = {'articles':post_list, "press_list":press_form, "section_list":section_form}
         return render(req, 'news/main_ajax.html', context) #Ajax 로 호출하는 템플릿은 _ajax로 표시.
+
