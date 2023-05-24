@@ -1,21 +1,28 @@
 {% if articles %}
   {% for article in articles %}
-    <li>
-        <table width="100%">
-          <tr style="text-align: center;">
-            <td style="text-align: left;"><b style="font-size: 0.8em;"><a href="{{article.url}}" target='_blank'>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</a></b></td>
-            <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
-            <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
-          </tr>
-          <tr>
-            <td colspan="2"><a href="{{article.url}}" target='_blank'>{{article.content}}</a></td>
-            <td width="50px"><button class="btn btn-warning">scrap</button></td>
-          </tr>
-        </table>
-        <hr>
-    </li>
+  <li>
+    <div id="div{{article.id}}">
+      <table width="100%">
+        <tr style="text-align: center;">
+          <td style="text-align: left;"><b style="font-size: 0.8em;"><a href="{{article.url}}" target='_blank'>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</a></b></td>
+          <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
+          <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
+        </tr>
+        <tr>
+          <td colspan="2"><a href="{{article.url}}" target='_blank'>{{article.content}}</a></td>
+          <td width="50px">
+            {% if request.user.is_authenticated %}
+            <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
+            {% else %}
+            <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+      <hr>
+    </div>
+  </li>
   {% endfor %}
-
 {% else %}
   <script>
     var isEnd = true

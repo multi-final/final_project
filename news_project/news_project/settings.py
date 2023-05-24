@@ -118,7 +118,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # User Model 지정
 AUTH_USER_MODEL = 'users.User'

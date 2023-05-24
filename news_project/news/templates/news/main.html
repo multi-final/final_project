@@ -1,10 +1,17 @@
 {% extends 'base/base.html' %}
 
   {% block content %}
-
-
+  <!-- 유저가 스크랩한 리스트 가져오기  -->
+  <div id="chk">
+    {% for scp in scrap %}
+      <div id="scrap_test" style="display: none;">{{scp.article_id}}</div>
+    {% endfor %}
+  </div>
+  
   <div id="content" class="container" style="min-height: 1080px;">
     <div class="row">
+
+      <!-- 카테고리 선택창 -->
       <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
         <button class="openbtn" onclick="openNav()" style="margin-top: 12px;"><i class="fa-solid fa-bars"></i></button>
         <div id="mySidepanel" class="sidepanel">
@@ -13,7 +20,7 @@
             <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
               <span class="fs-5 fw-semibold">Category</span>
             </a>
-
+            
             <form action="" method="post">
               {% csrf_token %}
               <div class="category">
@@ -82,33 +89,38 @@
           </div>
         </div>
       </div>
-
+      <!-- 요약 기사 출력 부분 -->
       <div id="summary_col" class="col-9">
         <div class="summary">
           <ul id="ul1" style="max-width: 85%;">
             {% for article in articles %}
             <li>
-              <table width="100%">
-                <tr style="text-align: center;">
-                  <td style="text-align: left;"><b style="font-size: 0.8em;"><a href="{{article.url}}" target='_blank'>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</a></b></td>
-                  <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
-                  <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
-                </tr>
-                <tr>
-                  <td colspan="2"><a href="{{article.url}}" target='_blank'>{{article.content}}</a></td>
-                  <td width="50px">
-                    {% if request.user.is_authenticated %}
-                    <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
-                    {% else %}
-                    <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
-                    {% endif %}
-                  </td>
-                </tr>
-              </table>
-              <hr>
+              <div id="div{{article.id}}">
+                <table width="100%">
+                  <tr style="text-align: center;">
+                    <td style="text-align: left;"><b style="font-size: 0.8em;"><a href="{{article.url}}" target='_blank'>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</a></b></td>
+                    <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
+                    <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><a href="{{article.url}}" target='_blank'>{{article.content}}</a></td>
+                    <td width="50px">
+                      {% if request.user.is_authenticated %}
+                      <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
+                      {% else %}
+                      <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
+                      {% endif %}
+                    </td>
+                  </tr>
+                </table>
+                <hr>
+              </div>
             </li>
             {% endfor %}
-            <div id="post_list_ajax"></div>
+            <!-- ajax 응답 요청 기사 출력부 -->
+            <div id="post_list_ajax">
+              <!-- main_ajax.html -->
+            </div>
             <input id="page" type="hidden" value="2">
             
             <div id="wrapper">
@@ -154,7 +166,7 @@
         loadmore.setAttribute('disabled', false);
       }
     }
-
+    // 요약기사 더 요청(ajax)
     function callMorePostAjax(page, press_list, section_list) {
         $.ajax( {
         type : 'POST',
@@ -169,17 +181,51 @@
         dataType: 'html'
         });
     }
-
+    // 요약 기사 출력
     function addMorePostAjax(data, textStatus, jqXHR) {
         $('#post_list_ajax').append(data);
         div2Resize();
+        $('#ul1 li button').each(function (index, item){
+        // ajax로 요약기사가 된 후에 arr를 통해 이미 스크랩한 버튼 비활성화
+        if (item.value == arr[0]){
+          arr.shift()
+          item.disabled = true;
+        }
+      })
     }
 
-    function sendID(button) {
-    var id = button.value;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'scrap/insert/' + id, true);
-    xhr.send();
-    }
+    // 유저가 scrap버튼 클릭시 스크랩 후 비활성화 요청(ajax) 
+    function sendID(id) {
+    $.ajax({
+      type: 'GET',
+      url: 'scrap/insert/' + id.value,
+      data: {
+
+      },
+      success: () => {
+        id.disabled = true
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
+  }
+
+    // 스크랩 된 내용의 스크랩 버튼 비활성화
+    arr = []
+
+    $(document.querySelector('#chk')).ready(function(){
+      $('#chk div').each(function (index, item) {
+        arr.push(item.innerHTML);
+        item.remove()
+      });
+      $('#ul1 li button').each(function (index, item){
+        if (item.value == arr[0]){
+          arr.shift()
+          item.disabled = true;
+        }
+      })
+    });
+
   </script>
   {% endblock %}
