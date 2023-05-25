@@ -154,7 +154,6 @@
 }
 /* header css */
 #dropdown_menu{
-  display: none;
   z-index: 1;
   position: absolute;
   background-color: white;
@@ -183,9 +182,6 @@
   background-color: #cacaca;
 }
 
-#profil:hover #dropdown_menu{
-  display: block;
-}
 
 #menu_user{
   text-align: center;
@@ -232,7 +228,41 @@
 
 
 </style>
+<script>
+  document.addEventListener('mouseup', function (e) {
+    var layerPopup = document.querySelector('#dropdown_menu');
+    var layerPopup2 = document.querySelector('#drop_a');
+    if (!layerPopup.contains(e.target) && !layerPopup2.contains(e.target)) {
+      document.getElementById("dropdown_menu").style.display = 'none';
+      document.getElementById("dropdown_menu").value = 'none';
+    }
+  });
 
+  // var dropdown_a = document.getElementById('drop_a');
+  // dropdown_a.addEventListener('click',(e)=>{
+  //   var dropdown_menu = document.getElementById('dropdown_menu');
+  //   if (dropdown_menu.style.display == "none"){
+  //     console.log('if'+dropdown_menu.style.display);
+  //     dropdown_menu.style.display = 'block';
+  //   }else{
+  //     console.log('else'+e.style.display);
+  //     dropdown_menu.style.display = 'none';
+  //   }
+  // });
+  function showHide(id){
+  var e = document.getElementById(id);
+  if (e.value == "none"){
+    e.style.display = 'block';
+    e.value = 'block';
+  }else if(e.value=='block'){
+    e.style.display = 'none';
+    e.value = 'none';
+  }else{ //e.value가 undefined 일 때,(페이지 로드하고도 value에 접근을 못하는지 안됨)
+    e.style.display = 'block';
+    e.value = 'block';
+  }
+  }
+</script>
 </head>
 
 <body>
@@ -261,13 +291,13 @@
                 <!-- 로그인 시 -->
                 {% if request.user.is_authenticated %}
                 <div id="profil">
-                  <a href="#" onclick="" class="nav-link text-dark">
+                  <a href="#" class="nav-link" id="drop_a" onclick="showHide('dropdown_menu')">
                     <i class="fa-solid fa-circle-user fa-lg" style="color: #808080;"></i>
                   </a>
-                  <div id="dropdown_menu">
+                  <div id="dropdown_menu" value="none" style="display: none;">
                     <div id="menu_user"><p>{{request.user.username}}</p></div>
-                    <div id="flex"><a href="#">preset</a></div>  <!--  진행 예정(preset을 저장할 추가적인 DB필요)  -->
-                    <div id="flex"><a href="#">My Page</a></div>  <!--  진행 예정  -->
+                    <div id="flex"><a href="users/password">Password</a></div>  <!--  진행 예정(preset을 저장할 추가적인 DB필요)  -->
+                    <div id="flex"><a href="/users/withdrawal">Withdrawal</a></div>  <!--  진행 예정  -->
                     <div id="flex"><a href="/users/logout">Logout</a></div>
                   </div>
                 </div>
@@ -286,6 +316,7 @@
         </div>
       </div>
     </header>
+
   </main>
 
   <!-- 본문이 들어갈 공간 -->
