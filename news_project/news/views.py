@@ -25,7 +25,6 @@ def main(req):
         
         if scrap:
             return render(req, 'news/main.html', {'articles':articles, 'scrap':scrap})
-       
         else:
             return render(req, 'news/main.html', {'articles':articles})
     else:
