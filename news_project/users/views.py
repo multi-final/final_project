@@ -1,6 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from .models import User
 from .forms import UserForm
 
@@ -41,3 +44,18 @@ def user_login(req):
 def user_logout(req):
     logout(req)
     return redirect('/')
+# 
+def password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return HttpResponse()
+        else:
+            messages.error(request, 'Please correct the error below.')
+    
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'users/password.html', {'form': form})
