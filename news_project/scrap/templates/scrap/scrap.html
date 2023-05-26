@@ -1,12 +1,11 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<!-- <div id="wrap" style="min-height: 1080px;"> -->
 <div id="content" class="container" style="min-height: 1080px; margin-right: 15%;">
   <!-- 카테고리, 본문 -->
   <div class="row">
     <!-- 카테고리 -->
-    <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 30px;">
+    <div id="button_col" class="col-1" style="min-height: 1080px; padding: 0; width:32px; margin-left: 30px;">
       <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
       <div id="mySidepanel" class="sidepanel">
         <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
@@ -26,26 +25,28 @@
                   </button>
                   <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li><input type="checkbox" name="press" id="" value="1"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">경향신문</li>
-                      <li><input type="checkbox" name="press" id="" value="2"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">국민일보</li>
-                      <li><input type="checkbox" name="press" id="" value="3"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">동아일보</li>
-                      <li><input type="checkbox" name="press" id="" value="4"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">문화일보</li>
-                      <li><input type="checkbox" name="press" id="" value="5"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">서울신문</li>
-                      <li><input type="checkbox" name="press" id="" value="6"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</li>
-                      <li><input type="checkbox" name="press" id="" value="7"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</li>
-                      <li><input type="checkbox" name="press" id="" value="8"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</li>
-                      <li><input type="checkbox" name="press" id="" value="9"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</li>
-                      <li><input type="checkbox" name="press" id="" value="10"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">한국일보</li>
+                      <div class="checkli">
+                        <li><input type="checkbox" id="press1" name="press" value="1"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press1">경향신문</label></li>
+                        <li><input type="checkbox" id="press2" name="press" value="2"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press2">국민일보</label></li>
+                        <li><input type="checkbox" id="press3" name="press" value="3"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press3">동아일보</label></li>
+                        <li><input type="checkbox" id="press4" name="press" value="4"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press4">문화일보</label></li>
+                        <li><input type="checkbox" id="press5" name="press" value="5"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press5">서울신문</label></li>
+                        <li><input type="checkbox" id="press6" name="press" value="6"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press6">세계일보</label></li>
+                        <li><input type="checkbox" id="press7" name="press" value="7"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press7">조선일보</label></li>
+                        <li><input type="checkbox" id="press8" name="press" value="8"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press8">중앙일보</label></li>
+                        <li><input type="checkbox" id="press9" name="press" value="9"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9">한겨례</label></li>
+                        <li><input type="checkbox" id="press10" name="press" value="10"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li>
+                        </div>
                     </ul>
                   </div>
                 </li>
@@ -56,16 +57,23 @@
                   </button>
                   <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <li><input type="checkbox" name="section" id="" value="1"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">정치</li>
-                      <li><input type="checkbox" name="section" id="" value="2"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">경제</li>
-                      <li><input type="checkbox" name="section" id="" value="3"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">사회</li>
-                      <li><input type="checkbox" name="section" id="" value="4"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계</li>
-                      <li><input type="checkbox" name="section" id="" value="5"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT</li>
+                      <div class="checkli">
+                        <li><input
+                              type="checkbox" id="section1" name="section" value="1"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section1">정치</label> </li>
+                        <li><input
+                              type="checkbox"id="section2"  name="section" value="2"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section2">경제</label></li>
+                        <li><input
+                              type="checkbox" id="section3" name="section" value="3"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section3">사회</label></li>
+                        <li><input
+                              type="checkbox" id="section4" name="section" value="4"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section4">세계</label></li>
+                        <li><input
+                              type="checkbox" id="section5" name="section" value="5"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section5">IT</label></li>
+                        </div>
                     </ul>
                   </div>
                 </li>
@@ -125,10 +133,12 @@
             <div class="collapse" id="thisweek-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
                 {% for article in dbarticles_this_week %}
+                <div id="div{{article.id}}">
                 <li>
                   <table width="100%">
                     <tr style="text-align: center;">
-                      <td style="text-align: left;"><b style="font-size: 0.8em;">{{article.article.headline}}</b></td>
+                      <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.article.press.name}},
+                        {{article.article.section.name}}] {{article.article.headline}}</b></td>
                       <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
                       </td>
                       <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
@@ -141,6 +151,7 @@
                   </table>
                   <hr>
                 </li>
+              </div>
                 {% endfor %}
               </ul>
             </div>
@@ -154,22 +165,25 @@
             <div class="collapse" id="lastweek-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
                 {% for article in dbarticles_last_week %}
-                <li>
-                  <table width="100%">
-                    <tr style="text-align: center;">
-                      <td style="text-align: left;"><b style="font-size: 0.8em;">{{article.article.headline}}</b></td>
-                      <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
-                      </td>
-                      <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2">{{article.article.content}}</td>
-                      <td width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.article}}"
-                          onclick="delete_scrap('{{article.id}}')">X</button></td>
-                    </tr>
-                  </table>
-                  <hr>
-                </li>
+                <div id="div{{article.id}}">
+                  <li>
+                    <table width="100%">
+                      <tr style="text-align: center;">
+                        <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.article.press.name}},
+                          {{article.article.section.name}}] {{article.article.headline}}</b></td>
+                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
+                        </td>
+                        <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">{{article.article.content}}</td>
+                        <td width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.article}}"
+                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                      </tr>
+                    </table>
+                    <hr>
+                  </li>
+                </div>
                 {% endfor %}
               </ul>
             </div>
@@ -183,22 +197,25 @@
             <div class="collapse" id="long_ago-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
                 {% for article in dbarticles_long_ago %}
-                <li>
-                  <table width="100%">
-                    <tr style="text-align: center;">
-                      <td style="text-align: left;"><b style="font-size: 0.8em;">{{article.article.headline}}</b></td>
-                      <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
-                      </td>
-                      <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2">{{article.article.content}}</td>
-                      <td width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.article}}"
-                          onclick="delete_scrap('{{article.id}}')">X</button></td>
-                    </tr>
-                  </table>
-                  <hr>
-                </li>
+                <div id="div{{article.id}}">
+                  <li>
+                    <table width="100%">
+                      <tr style="text-align: center;">
+                        <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.article.press.name}},
+                          {{article.article.section.name}}] {{article.article.headline}}</b></td>
+                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
+                        </td>
+                        <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">{{article.article.content}}</td>
+                        <td width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.article}}"
+                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                      </tr>
+                    </table>
+                    <hr>
+                  </li>
+                </div>
                 {% endfor %}
               </ul>
             </div>
@@ -226,5 +243,4 @@
     });
   }
 </script>
-<!-- </div> -->
 {% endblock %}

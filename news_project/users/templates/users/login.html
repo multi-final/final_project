@@ -1,4 +1,5 @@
 {% load django_bootstrap5 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +9,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
   <!-- <title>login</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
     id="bootstrap-css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<link rel="shortcut icon" href="{% static 'news/logo.ico' %}">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <style>
     body {
       background: #C5E1A5;
@@ -120,35 +124,19 @@
       });
 
     });
-
-
-
-    function isSame() {
-      const password1 = document.querySelector('#passwd1').value;
-      const password2 = document.querySelector('#passwd2').value;
-      // if (pw.length < 6 || pw.length > 16) {
-      //     window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
-      //     document.getElementById('pw').value=document.getElementById('pwCheck').value='';
-      //     document.getElementById('same').innerHTML='';
-      // }
-      if (password1 != '' && document.password2 != '') {
-        if (password1 == password2) {
-          document.getElementById('return').innerHTML = '비밀번호가 일치합니다.';
-          document.getElementById('return').style.color = '#5887f7';
-        }
-        else {
-          document.getElementById('return').innerHTML = '비밀번호가 일치하지 않습니다.';
-          document.getElementById('return').style.color = '#fa4b4b';
-        }
-      }
-    }
   </script>
 </head>
 
 <body>
+  {% if error %}
+    <script>
+      $(document).ready(function(){
+        alert('아이디나 비밀번호를 확인하세요.')
+    });
+    </script>
+  {% endif %}
 
   <form method="post" action="{% url 'users:login' %}">
-  <!-- <form method="post" action="/users/login/"> -->
     {% csrf_token %}
     <label>
       <p class="label-txt">ENTER YOUR USERNAME</p>
@@ -166,6 +154,7 @@
     </label>
     <p><a href="/users/signup" style="font-size: small;">회원가입<a></p>
     <button type="submit">로그인</button>
+    <input type="button" class="btn btn-danger" onclick="location.href='javascript:window.history.back()'" value="뒤로가기"></input>
   </form>
 </body>
 

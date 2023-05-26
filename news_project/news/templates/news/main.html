@@ -20,8 +20,8 @@
             <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
               <span class="fs-5 fw-semibold">Category</span>
             </a>
-            
-            <form action="" method="post">
+
+            <form method="post">
               {% csrf_token %}
               <div class="category">
                 <ul class="list-unstyled ps-0">
@@ -30,28 +30,30 @@
                       data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" type="button">
                       언론사 선택
                     </button>
-                    <div class="collapse show" id="home-collapse">
+                    <div class="collapse show" id="home-collapse" style="margin-top:5px;">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><input type="checkbox" name="press" id="" value="1"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">경향신문</li>
-                        <li><input type="checkbox" name="press" id="" value="2"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">국민일보</li>
-                        <li><input type="checkbox" name="press" id="" value="3"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">동아일보</li>
-                        <li><input type="checkbox" name="press" id="" value="4"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">문화일보</li>
-                        <li><input type="checkbox" name="press" id="" value="5"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">서울신문</li>
-                        <li><input type="checkbox" name="press" id="" value="6"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계일보</li>
-                        <li><input type="checkbox" name="press" id="" value="7"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">조선일보</li>
-                        <li><input type="checkbox" name="press" id="" value="8"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">중앙일보</li>
-                        <li><input type="checkbox" name="press" id="" value="9"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">한겨례</li>
-                        <li><input type="checkbox" name="press" id="" value="10"
-                          class="link-body-emphasis d-inline-flex text-decoration-none rounded">한국일보</li>
+                        <div class="checkli">
+                        <li><input type="checkbox" id="press1" name="press" value="1"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press1">경향신문</label></li>
+                        <li><input type="checkbox" id="press2" name="press" value="2"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press2">국민일보</label></li>
+                        <li><input type="checkbox" id="press3" name="press" value="3"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press3">동아일보</label></li>
+                        <li><input type="checkbox" id="press4" name="press" value="4"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press4">문화일보</label></li>
+                        <li><input type="checkbox" id="press5" name="press" value="5"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press5">서울신문</label></li>
+                        <li><input type="checkbox" id="press6" name="press" value="6"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press6">세계일보</label></li>
+                        <li><input type="checkbox" id="press7" name="press" value="7"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press7">조선일보</label></li>
+                        <li><input type="checkbox" id="press8" name="press" value="8"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press8">중앙일보</label></li>
+                        <li><input type="checkbox" id="press9" name="press" value="9"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9">한겨례</label></li>
+                        <li><input type="checkbox" id="press10" name="press" value="10"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li>
+                        </div>
                       </ul>
                     </div>
                   </li>
@@ -60,24 +62,25 @@
                       data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
                       분야 선택
                     </button>
-                    <div class="collapse" id="dashboard-collapse">
+                    <div class="collapse" id="dashboard-collapse" style="margin-top:5px;">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <div class="checkli">
                         <li><input
-                              type="checkbox" name="section" id="" value="1"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">정치</li>
+                              type="checkbox" id="section1" name="section" value="1"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section1">정치</label> </li>
                         <li><input
-                              type="checkbox" name="section" id="" value="2"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">경제</li>
+                              type="checkbox"id="section2"  name="section" value="2"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section2">경제</label></li>
                         <li><input
-                              type="checkbox" name="section" id="" value="3"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">사회</li>
+                              type="checkbox" id="section3" name="section" value="3"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section3">사회</label></li>
                         <li><input
-                              type="checkbox" name="section" id="" value="4"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">세계</li>
+                              type="checkbox" id="sectio4" name="section" value="4"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section4">세계</label></li>
                         <li><input
-                              type="checkbox" name="section" id="" value="5"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded">IT</li>
-
+                              type="checkbox" id="section5" name="section" value="5"
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section5">IT</label></li>
+                        </div>
                       </ul>
                     </div>
                   </li>
