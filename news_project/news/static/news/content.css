@@ -2,19 +2,31 @@
     /* height: 0; Specify a height */
     width: 0; /* 0 width - change this with JavaScript */
     /* position: absolute;  */
-    z-index: 2;
+    z-index: 1;
     top: 30px;
     left: 0;
     /* margin-left: 13px; */
-    background-color: #fffffff0; /* Black*/
+    /* background-color: #ffffff00;  */
     overflow-x: auto; /*Disable horizontal scroll*/
     /* overflow-y: auto; */
     /* padding-top: 60px; Place content 60px from the top */
     margin-top: 1px;
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
     position: sticky;
+    backdrop-filter: blur(2px);
+    background-color: rgba(255, 255, 255, 0.872);
   }
- 
+  /* li{
+    list-style: none;
+  } */
+  .checkli li{
+    list-style: none;
+    margin-left: 28px;
+    margin-bottom: 2px;
+  }
+  .checkli label{
+    margin-left: 5px;
+  }
   
   .category{
     /* overflow-y: auto; */

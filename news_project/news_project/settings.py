@@ -96,15 +96,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        # 사용자 속성과 비슷한가
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        # 비밀번호 최소길이
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        # 흔한 비밀번호인가
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        # 비밀번호 전체가 숫자인가 아닌가
     },
 ]
 

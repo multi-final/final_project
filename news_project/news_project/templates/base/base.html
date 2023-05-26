@@ -32,7 +32,7 @@
   // 사이드 카테고리 여닫기
   function openNav() {
     document.getElementById("mySidepanel").style.width = "250px";
-    document.getElementById("mySidepanel").style.height = "548px";
+    document.getElementById("mySidepanel").style.height = "573px";
   }
 
   function closeNav() {
@@ -40,7 +40,7 @@
     document.getElementById("mySidepanel").style.height = "0";
   }
 
-  // 카테고리 패널 외 클릭 시 닫기
+  // 카테고리 패널 외 클릭 시 패널 닫기
   document.addEventListener('mouseup', function (e) {
     var layerPopup = document.querySelector('.sidepanel');
     if (!layerPopup.contains(e.target)) {
@@ -80,7 +80,9 @@
       entries.forEach((entry) => {
         var ul1 = document.getElementById('ul1');
         var div2 = document.getElementById('content');
+        var button_col = document.getElementById('button_col');
         div2.style.height = (ul1.scrollHeight + 32) + 'px';
+        button_col.style.height = (ul1.scrollHeight + 32) + 'px';
       });
     });
 
@@ -93,7 +95,6 @@
   li{
     list-style: none;
   }
-
   .bi {
     vertical-align: -.125em;
     fill: currentColor;
@@ -118,7 +119,7 @@
   transition: 0.3s;
 }
 
-#ul1 a:hover{
+#ul1 .articleurl:hover{
   color: rgb(62, 116, 255);
 }
 
@@ -143,7 +144,6 @@
   text-align: center;
   margin-top: 50px;
 }
-
 #load-more:not([disabled]):hover {
   color: white;
   background-color: #808080;
@@ -153,7 +153,7 @@
 #load-more[disabled] {
   background-color: #eaeaea !important;
 }
-/* header css */
+/* 프로필 아이콘 클릭시 드롭다운 제공 */
 #dropdown_menu{
   z-index: 1;
   position: absolute;
@@ -172,16 +172,20 @@
   padding-left: 8px;
   width: 100px;
   height: 30px;
-  transition: 1s;
+  transition: 0.2s;
 }
 #dropdown_menu #flex a{
   font-size: small;
   text-decoration: none;
   color: black;
+  transition: 0.2s;
 }
 
 #dropdown_menu #flex:hover{
   background-color: #cacaca;
+}
+#dropdown_menu #flex:hover a{
+  color: white;
 }
 
 
@@ -194,7 +198,7 @@
 #menu_user p{
   margin: 0;
 }
-
+/* 우상단 아이콘 호버시 툴팁 제공 */
 #toolwrap:hover #tooltip{
   visibility: visible;
 }
@@ -228,6 +232,24 @@
   color: white;
 }
 
+.nav-item a{
+  color: #808080;
+  text-decoration: none;
+}
+
+.nav-item a:hover{
+  color: #0d0d0d;
+  text-decoration: underline;
+}
+/* 카테고리 checkbox */
+.checkli li{
+    list-style: none;
+    margin-left: 28px;
+    margin-bottom: 2px;
+}
+.checkli label{
+  margin-left: 5px;
+}
 
 </style>
 <script>
@@ -282,12 +304,21 @@
 
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li>
+                {% if request.user.is_authenticated %}
                 <div id="toolwrap">
-                <a href="/scrap" class="nav-link text-dark">
-                  <i class="fa-solid fa-bookmark fa-lg" style="color: #808080;"></i>
-                </a>
-                <p id="tooltip"><span>Scrap</span></p>
+                  <a href="/scrap" class="nav-link text-dark">
+                    <i class="fa-solid fa-bookmark fa-lg" style="color: #808080;"></i>
+                  </a>
+                  <p id="tooltip"><span>Scrap</span></p>
                 </div>
+                {% else %}
+                <div id="toolwrap">
+                  <a href="/users/login" class="nav-link text-dark">
+                    <i class="fa-solid fa-bookmark fa-lg" style="color: #808080;"></i>
+                  </a>
+                  <p id="tooltip"><span>Scrap</span></p>
+                </div>
+                {% endif %}
               </li>
               <li>
                 <!-- 로그인 시 -->
@@ -350,13 +381,13 @@
       width: 100%;
       height: 100%;
     }
+    
     #pass_modal_wrap{
+      backdrop-filter: blur(5px);
       position: absolute;
       display: block;
       z-index: 2;
-      background-color: black;
-      opacity: 0.6;
-      backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.6);
       /* filter: blur(10px); */
       top: 0;
       left: 0;
@@ -367,6 +398,7 @@
       justify-content: center;
       align-items: center;
     }
+
     #pass_modal{
       position: absolute;
       display: block;
@@ -374,25 +406,26 @@
       height: 400px;
       z-index: 3;
       border-radius: 10px;
-      background-color: white;
+      background-color: rgb(255, 255, 255);
       top: 50%;
       left: 50%;
       margin-left: -300px;
       margin-top: -200px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
+
     #wd_modal_hide{
       display: none;
       width: 100%;
       height: 100%;
     }
+
     #wd_modal_wrap{
       position: absolute;
       display: block;
       z-index: 2;
-      background-color: black;
-      opacity: 0.6;
-      backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
       /* filter: blur(10px); */
       top: 0;
       left: 0;
@@ -403,6 +436,7 @@
       justify-content: center;
       align-items: center;
     }
+
     #wd_modal{
       position: absolute;
       display: block;
@@ -415,8 +449,9 @@
       left: 50%;
       margin-left: -300px;
       margin-top: -200px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
+
     #passwordform{
       height: 150.44px;
       margin-top: 10%;
@@ -427,6 +462,7 @@
       margin-bottom: 20px;
       padding-left: 207.11px;
     }
+
     #passwordform label{
       letter-spacing: 0.15rem;
       font-size: 12px;
@@ -436,8 +472,29 @@
     #buttondiv{
       text-align: center;
       
-    }#buttondiv button{
+    }
+    
+    #buttondiv button{
       font-size: 12px;
+    }
+
+    #wd_modal button{
+      position: absolute;
+      margin-left: 41.5%;
+      margin-top: 280px;
+    }
+
+    #agree_box{
+      position: absolute;
+      width: 100%;
+      margin-top: 150px;
+    }
+
+    #wd_modal p{
+      width: 100%;
+      position: absolute;
+      margin-top: 100px;
+      text-align: center;
     }
   </style>
   <div id="pass_modal_hide">
@@ -445,33 +502,47 @@
     </div>
     <div id="pass_modal">
       <div id="passwordform">
-        <form method="post" action="/users/password" id="password" name="password">
+        <form method="post" action="" id="password" name="password">
           {% csrf_token %}
+          {% for message in messages %}
+          <div>
+            {{message}}
+          </div>
+          {% endfor %}
           <div>
             <label for="id_old_password">Old Password</label>
-            <p><input type="password" name="old_password" autocomplete="current-password" autofocus required id="id_old_password"></p>
+            <p><input type="password" name="old_password" id="current-password" autocomplete="current-password" autofocus required id="id_old_password"></p>
           </div>
           <div>
             <label for="id_new_password1">New Password</label>
-            <p><input type="password" name="new_password1" autocomplete="new-password" autofocus required id="id_new_password1"></p>
+            <p><input type="password" name="new_password1" id="new-password1" autocomplete="new-password" autofocus required id="id_new_password1"></p>
           </div>
           <div>
             <label for="id_new_password2">Confirm Password</label>
-            <p><input type="password" name="new_password2" autocomplete="new-password" autofocus required id="id_new_password2"></p>
+            <p><input type="password" name="new_password2" id="new-password2" autocomplete="new-password" autofocus required id="id_new_password2"></p>
           </div>
-          <div id="buttondiv" style="padding-left: 0px;"><button onclick="to_ajax('password')" class="btn btn-primary">Save Change</button></div>
+          <div id="buttondiv" style="padding-left: 0px;"><button onclick="to_ajax('password',event)" class="btn btn-primary">Save Change</button></div>
         </form>
       </div>
     </div>
   </div>
+
   <div id="wd_modal_hide">
     <div id="wd_modal_wrap">
     </div>
-    <div id="wd_modal">
-  
-    </div>
+      <div id="wd_modal">
+        <h1 style="position: absolute; width: 100%; text-align: center; margin-top: 30px;">경고</h1>
+        <p>회원탈퇴는 되돌릴 수 없습니다.</p>
+        <p style="margin-top: 120px;">정말로 탈퇴하시겠습니까?</p>
+        <div id="agree_box">
+          <p><label for="agree">회원 탈퇴에 동의합니다.</label><input name="agree" type="checkbox" id="agree"></p>
+        </div>
+        <button class="btn btn-danger" id="del_btn" disabled="true" onclick="location.href='/users/withdrawal/'" style="font-weight: bold;">Withdrawal</button>
+      </div>
   </div>
+
   <script>
+    // 모달창 열기
     function modal_open(id){
       modal = document.getElementById(id);
       modal.style.display = 'block';
@@ -480,63 +551,84 @@
       document.documentElement.style.overflow='hidden';
       document.documentElement.style.height='auto';
     }
-
+    // 모달창 외의 공간 클릭시 모달창 닫기
     document.addEventListener('mouseup', function (e) {
     var layerPopup = document.querySelector('#pass_modal');
     var layerPopup2 = document.querySelector('#wd_modal');
     if (!layerPopup.contains(e.target) && !layerPopup2.contains(e.target)) {
       document.getElementById("pass_modal_hide").style.display = 'none';
       document.getElementById("wd_modal_hide").style.display = 'none';
+      document.getElementById("current-password").value='';
+      document.getElementById("new-password1").value='';
+      document.getElementById("new-password2").value='';
       document.documentElement.removeAttribute('style');
     }
   });
-
-  function to_ajax(ur){
+  // password ajax 요청 및 응답 처리부분
+  function to_ajax(ur,e){
+    e.preventDefault()
     var password = $("form[name=password]").serialize() ;
+    
     $.ajax({
       type : 'post',
-      url : '/users/password',
+      url : '/users/password/',
       data : password,
       dataType : 'json',
       error: function(xhr, status, error){
         alert(error);
       },
       success : function(json){
-        alert(success)
+        if(json.error_code == 0){  // 비밀번호 변경 성공시
+          alert(json.message)
+          document.getElementById("current-password").value='';
+          document.getElementById("new-password1").value='';
+          document.getElementById("new-password2").value='';
+          document.getElementById("pass_modal_hide").style.display = 'none';
+          updateCSRFToken();
+          document.documentElement.removeAttribute('style');
+          console.log('error_code0:'+json.message)
+        }else{
+          modal_open('pass_modal_hide')
+          alert(json.message)
+          console.log('error_code1:'+json.message)
+        }
       }
     });
 
   }
+// 비밀번호 변경시 csrf 토큰이 쿠키와 맞지 않아 변경 -> (새로고침 없이)또 변경 하면 403 오류
+// 쿠키에서 원래 csrf 토큰 가져와서 업데이트
+  function updateCSRFToken() {
+  const csrftoken = getCookie('csrftoken');
+  
+  $('#password input[name="csrfmiddlewaretoken"]').val(csrftoken);
+}
+// 쿠키 가져오기
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+// 회원 탈퇴 동의 체크박스
+$(document).ready(function(){
+    $("#agree").change(function(){
+        if($("#agree").is(":checked")){   // 체크 시 탈퇴 버튼 활성화
+            document.querySelector('#del_btn').disabled = false;
+        }else{   // 아닐 시 탈퇴버튼 비활성화
+            document.querySelector('#del_btn').disabled = true;
+        }
+    });
+});
+
   </script>
 </body>
 </html>
-
-<script>
-
-	function to_ajax(ur){
- 
-
-		var queryString = $("form[name=testForm]").serialize() ;
-
-		$.ajax({
-			type : 'post',
-			url : '/users/' + ur,
-			data : queryString,
-			dataType : 'json',
-			error: function(xhr, status, error){
-				alert(error);
-			},
-			success : function(json){
-        
-			}
-		});
- 
-	}
-
-
-</script>
-
-<form name="testForm" id="testForm">
-	<input type="text" name="name" id="name" value="홍길동" />
-	<input type="text" name="id" id="id" value="1234567" />
-</form>
