@@ -146,7 +146,7 @@
 }
 #load-more:not([disabled]):hover {
   color: white;
-  background-color: #808080;
+  background-color: #b2b2b2;
   box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2);
 }
 
@@ -250,6 +250,29 @@
 .checkli label{
   margin-left: 5px;
 }
+/* 검색창 */
+#search{
+  float: right;
+  display: flex;
+  width: 141.78px;
+  flex-direction: row;
+  border: 1px solid #808080;
+  border-radius: 3px;
+}
+
+#search_icon{
+  margin-left: 5px;
+}
+#search_box{
+  width: 120px;
+  font-size: 11px;
+  border: none;
+  margin-left: 2px;
+  padding: 3px;
+}
+#search_box:focus{
+  outline: none;
+}
 
 </style>
 <script>
@@ -262,17 +285,6 @@
     }
   });
 
-  // var dropdown_a = document.getElementById('drop_a');
-  // dropdown_a.addEventListener('click',(e)=>{
-  //   var dropdown_menu = document.getElementById('dropdown_menu');
-  //   if (dropdown_menu.style.display == "none"){
-  //     console.log('if'+dropdown_menu.style.display);
-  //     dropdown_menu.style.display = 'block';
-  //   }else{
-  //     console.log('else'+e.style.display);
-  //     dropdown_menu.style.display = 'none';
-  //   }
-  // });
   function showHide(id){
   var e = document.getElementById(id);
   if (e.value == "none"){
@@ -321,7 +333,7 @@
                 {% endif %}
               </li>
               <li>
-                <!-- 로그인 시 -->
+                <!-- 로그인 시 유저 편의기능 메뉴 표시 -->
                 {% if request.user.is_authenticated %}
                 <div id="profil">
                   <a href="#" class="nav-link" id="drop_a" onclick="showHide('dropdown_menu')">
@@ -363,11 +375,11 @@
       <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
           <!-- 각자의 github 링크 연결 -->
-          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">고은영</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">박기현</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">유재찬</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">조민우</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-1 text-body-secondary">하정수</a></li>
+          <li class="nav-item"><a href="https://github.com/iameun02" class="nav-link px-1 text-body-secondary" target="_blank">고은영</a></li>
+          <li class="nav-item"><a href="https://github.com/kihyun2" class="nav-link px-1 text-body-secondary" target="_blank">박기현</a></li>
+          <li class="nav-item"><a href="https://github.com/DevRyu10" class="nav-link px-1 text-body-secondary" target="_blank">유재찬</a></li>
+          <li class="nav-item"><a href="https://github.com/minu-97" class="nav-link px-1 text-body-secondary" target="_blank">조민우</a></li>
+          <li class="nav-item"><a href="https://github.com/Eric4848" class="nav-link px-1 text-body-secondary" target="_blank">하정수</a></li>
         </ul>
         <p class="text-center text-body-secondary"><img src="{% static 'news/logo.ico' %}" alt="" width="20"
             height="20" style="margin-right: 5px;"> 오간뉴 : 메추리</p>
@@ -479,24 +491,21 @@
     }
 
     #wd_modal button{
-      position: absolute;
       margin-left: 41.5%;
-      margin-top: 280px;
     }
 
     #agree_box{
-      position: absolute;
       width: 100%;
-      margin-top: 150px;
+      margin-top: 50px;
     }
 
     #wd_modal p{
       width: 100%;
-      position: absolute;
-      margin-top: 100px;
       text-align: center;
     }
   </style>
+
+  <!-- 비밀번호 변경 -->
   <div id="pass_modal_hide">
     <div id="pass_modal_wrap">
     </div>
@@ -527,15 +536,16 @@
     </div>
   </div>
 
+  <!-- 회원 탈퇴 -->
   <div id="wd_modal_hide">
     <div id="wd_modal_wrap">
     </div>
       <div id="wd_modal">
-        <h1 style="position: absolute; width: 100%; text-align: center; margin-top: 30px;">경고</h1>
-        <p>회원탈퇴는 되돌릴 수 없습니다.</p>
-        <p style="margin-top: 120px;">정말로 탈퇴하시겠습니까?</p>
+        <h1 style="position: absolute; width: 100%; text-align: center; margin-top: 50px;">경고</h1>
+        <p style="margin-top: 140px;">회원탈퇴는 되돌릴 수 없습니다.</p>
+        <p>정말로 탈퇴하시겠습니까?</p>
         <div id="agree_box">
-          <p><label for="agree">회원 탈퇴에 동의합니다.</label><input name="agree" type="checkbox" id="agree"></p>
+          <p><input name="agree" type="checkbox" id="agree" style="margin-right: 10px;"><label for="agree">회원 탈퇴에 동의합니다.</label></p>
         </div>
         <button class="btn btn-danger" id="del_btn" disabled="true" onclick="location.href='/users/withdrawal/'" style="font-weight: bold;">Withdrawal</button>
       </div>
@@ -586,11 +596,9 @@
           document.getElementById("pass_modal_hide").style.display = 'none';
           updateCSRFToken();
           document.documentElement.removeAttribute('style');
-          console.log('error_code0:'+json.message)
         }else{
           modal_open('pass_modal_hide')
           alert(json.message)
-          console.log('error_code1:'+json.message)
         }
       }
     });
@@ -618,6 +626,7 @@ function getCookie(name) {
   }
   return cookieValue;
 }
+
 // 회원 탈퇴 동의 체크박스
 $(document).ready(function(){
     $("#agree").change(function(){

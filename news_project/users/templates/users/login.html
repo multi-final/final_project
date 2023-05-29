@@ -10,26 +10,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <!-- <title>login</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
-    id="bootstrap-css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <link rel="shortcut icon" href="{% static 'news/logo.ico' %}">
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <style>
     body {
-      background: #C5E1A5;
+      background: #e6e6e6;
     }
 
     form {
       width: 60%;
       margin: 60px auto;
-      background: #efefef;
+      background: #f2f2f2;
       padding: 60px 120px 80px 120px;
       text-align: center;
       -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
-      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+      box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
     }
 
     label {
@@ -61,7 +56,7 @@
       position: relative;
       width: 100%;
       height: 2px;
-      background: #BCBCBC;
+      background: rgb(220, 220, 220);
     }
 
     .line {
@@ -71,7 +66,7 @@
       top: 0px;
       left: 50%;
       transform: translateX(-50%);
-      background: #8BC34A;
+      background: rgb(180, 180, 180);
       transition: ease .6s;
     }
 
@@ -94,11 +89,46 @@
       border-radius: 3px;
       cursor: pointer;
       transition: ease .3s;
+      font-size: 13px;
     }
 
     button:hover {
-      background: #8BC34A;
+      background: #808080;
       color: #ffffff;
+    }
+
+    #prev {
+      display: inline-block;
+      padding: 12px 24px;
+      background: rgb(220, 220, 220);
+      font-weight: bold;
+      color: rgb(120, 120, 120);
+      border: none;
+      outline: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: ease .3s;
+      font-size: 13px;
+    }
+
+    #prev:hover{
+      background: rgb(220, 80, 80);
+      color: #ffffff;
+    }
+
+    #create {
+      text-decoration: none;
+      color: rgb(120, 120, 120);
+      font-size: 13px;
+    }
+
+    input:autofill,
+    input:autofill:hover,
+    input:autofill:focus,
+    input:autofill:active {
+      -webkit-text-fill-color: #000;
+      box-shadow: 0 0 0px 1000px #f2f2f2 inset;
+      transition: background-color 5000s ease-in-out 0s;
     }
   </style>
   <script>
@@ -152,9 +182,9 @@
         <div class="line"></div>
       </div>
     </label>
-    <p><a href="/users/signup" style="font-size: small;">회원가입<a></p>
+    <p><a id="create" href="/users/signup" style="font-size: small;">회원가입<a></p>
     <button type="submit">로그인</button>
-    <input type="button" class="btn btn-danger" onclick="location.href='javascript:window.history.back()'" value="뒤로가기"></input>
+    <input id="prev" type="button" onclick="location.href='javascript:window.history.back()'" value="뒤로가기"></input>
   </form>
 </body>
 

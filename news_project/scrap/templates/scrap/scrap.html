@@ -85,7 +85,7 @@
         </div>
       </div>
     </div>
-    <!-- 스크랩 된 본문 -->
+    <!-- 스크랩한 본문 -->
     <div id="summary_col" class="col-1">
       <div class="summary">
         <ul id="ul1">
@@ -227,6 +227,7 @@
   </div>
 </div>
 <script>
+  // 스크랩한 기사 삭제
   function delete_scrap(id) {
     $.ajax({
       type: 'GET',
@@ -234,6 +235,7 @@
       data: {
 
       },
+      // 삭제 성공 시 본문에서 가림
       success: () => {
         $('#div' + id).hide();
       },

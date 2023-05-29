@@ -2,16 +2,19 @@
 
   {% block content %}
   <!-- 유저가 스크랩한 리스트 가져오기  -->
+  {% if q %}
+    <input id="search_q" type="hidden" value="{{q}}">
+  {% endif %}
   <div id="chk">
     {% for scp in scrap %}
       <div id="scrap_test" style="display: none;">{{scp.article_id}}</div>
     {% endfor %}
   </div>
-  
+  <!-- 카테고리, 본문 -->
   <div id="content" class="container" style="min-height: 1080px;">
     <div class="row">
 
-      <!-- 카테고리 선택창 -->
+      <!-- 카테고리 -->
       <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
         <button class="openbtn" onclick="openNav()" style="margin-top: 12px;"><i class="fa-solid fa-bars"></i></button>
         <div id="mySidepanel" class="sidepanel">
@@ -95,7 +98,13 @@
       <!-- 요약 기사 출력 부분 -->
       <div id="summary_col" class="col-9">
         <div class="summary">
-          <ul id="ul1" style="max-width: 85%;">
+          <ul id="ul1" style="max-width: 85%; margin-top: 22.06px;">
+            <form id="search" action="/search/">
+              <div id="search_icon"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #808080;"></i></div>
+              <input id="search_box" type="search" name="search" placeholder="검색">
+              <input type="hidden" value="{{press_list}}" name="press">
+              <input type="hidden" value="{{section_list}}" name="section">
+            </form>
             {% for article in articles %}
             <li>
               <div id="div{{article.id}}">
@@ -139,6 +148,7 @@
     var token = $('input[name="csrfmiddlewaretoken"]').prop('value');
     const loadmore= document.getElementById('load-more')
     var isEnd = false
+    
     // 무한 스크롤로 구현
     // $(window).scroll(function(){
     //   var scrollHeight = $(window).scrollTop() + $(window).height();
@@ -161,29 +171,33 @@
       if(!isEnd){
         var press_list = "{{press_list|join:' '}}"
         var section_list = "{{section_list|join:' '}}"
+        var q = "{{q}}"
         var page = $("#page").val();
-        callMorePostAjax(page, press_list, section_list);
+        callMorePostAjax(page, press_list, section_list, q);
         $("#page").val(parseInt(page)+1);
       }else{
         loadmore.innerText='No Data';
         loadmore.setAttribute('disabled', false);
       }
     }
+    
     // 요약기사 더 요청(ajax)
-    function callMorePostAjax(page, press_list, section_list) {
+    function callMorePostAjax(page, press_list, section_list,q) {
         $.ajax( {
         type : 'POST',
-        url: "main_ajax/",
+        url: "/main_ajax/",
         data: {
         'page': page,
         'press':press_list,
         'section':section_list,
+        'q':q,
         'csrfmiddlewaretoken': token,
         },
         success: addMorePostAjax,
         dataType: 'html'
         });
     }
+
     // 요약 기사 출력
     function addMorePostAjax(data, textStatus, jqXHR) {
         $('#post_list_ajax').append(data);
@@ -201,7 +215,7 @@
     function sendID(id) {
     $.ajax({
       type: 'GET',
-      url: 'scrap/insert/' + id.value,
+      url: '/scrap/insert/' + id.value,
       data: {
 
       },
