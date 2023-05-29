@@ -9,8 +9,10 @@ import datetime
 
 def scrap(request):
     if request.method=='GET':
-        now = datetime.datetime.now() # 현재 형식          <= 24시간전 < 데이터 < 48시간전 30
+        now = datetime.datetime.now()
+        # 유저가 스크랩 한 기사 필터링
         articles = Scrap.objects.filter(user = request.user).select_related().order_by('-created_date')
+        # 설정한 기간별로 기사 나누기
         dbarticles_today = articles.filter(created_date__gte = (now-datetime.timedelta(1)))
         dbarticles_this_week = articles.filter(created_date__range = (now-datetime.timedelta(8), now-datetime.timedelta(1)))
         dbarticles_last_week = articles.filter(created_date__range = (now-datetime.timedelta(15), now-datetime.timedelta(8)))
@@ -41,15 +43,11 @@ def scrap(request):
                  'dbarticles_last_week':dbarticles_last_week,'dbarticles_long_ago':dbarticles_long_ago}
         return render(request, 'scrap/scrap.html', context)
 
-# class Scrap(models.Model):
-#     id = models.IntegerField(primary_key=True)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-#     created_date = models.DateTimeField(auto_now_add=True)
 def scrap_insert(req,id):
     if req.user.is_authenticated:
         user = req.user
-        article = Article.objects.get(id=id)
+        article = Article.objects.get(id=id)   # 스크랩한 기사
+        # 스크랩 한 내용 저장
         Scrap.objects.create(
             user = user,
             article = article
@@ -57,6 +55,7 @@ def scrap_insert(req,id):
         return HttpResponse()
     else:
         return HttpResponse('유효하지 않음.')
+    
 def scrap_delete(req, id):
     scrap = Scrap.objects.get(id=id)
     try:
