@@ -3,7 +3,13 @@
   {% block content %}
   <!-- 유저가 스크랩한 리스트 가져오기  -->
   {% if q %}
-    <input id="search_q" type="hidden" value="{{q}}">
+    <input id="search_q" type="text" value="{{q}}" style="display: none;">
+  {% endif %}
+  {% if press_list %}
+    <input id="press" type="hidden" value="{{press_list}}">
+  {% endif %}
+  {% if section_list %}
+    <input id="section" type="hidden" value="{{section_list}}">
   {% endif %}
   <div id="chk">
     {% for scp in scrap %}
@@ -16,7 +22,7 @@
 
       <!-- 카테고리 -->
       <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
-        <button class="openbtn" onclick="openNav()" style="margin-top: 12px;"><i class="fa-solid fa-bars"></i></button>
+        <button class="openbtn" onclick="openNav()" style="margin-top: 22.06px;"><i class="fa-solid fa-bars"></i></button>
         <div id="mySidepanel" class="sidepanel">
           <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
           <div class="flex-shrink-0 p-3" style="width: 220px;">
@@ -96,33 +102,59 @@
         </div>
       </div>
       <!-- 요약 기사 출력 부분 -->
+      <style>
+        .contentwrap{
+          margin-right: 10px;
+          font-size: 12px;
+        }
+        .highlight{
+          background-color: yellow;
+          font-weight: bold;
+        }
+        #count{
+          float: right;
+          font-size: 5px;
+          text-align: right;
+          letter-spacing: 1px;
+        }
+        #searchwrap{
+          float: right;
+          display: flex;
+          flex-direction: column;
+        }
+      </style>
       <div id="summary_col" class="col-9">
         <div class="summary">
           <ul id="ul1" style="max-width: 85%; margin-top: 22.06px;">
-            <form id="search" action="/search/">
-              <div id="search_icon"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #808080;"></i></div>
-              <input id="search_box" type="search" name="search" placeholder="검색">
-              <input type="hidden" value="{{press_list}}" name="press">
-              <input type="hidden" value="{{section_list}}" name="section">
-            </form>
+            <div id="searchwrap">
+              <form id="search" action="/search/" style="margin-bottom: 8px;">
+                <div id="search_icon"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #808080;"></i></div>
+                <input id="search_box" type="search" name="search" placeholder="검색">
+                <input type="hidden" value="{{press_list}}" name="press">
+                <input type="hidden" value="{{section_list}}" name="section">
+              </form>
+              <!-- <i class="fa-regular fa-clock" style="color: #808080;"></i> -->
+              <!-- <div id="count">{{articles_count}}</div> -->
+          </div>
             {% for article in articles %}
+            <!-- <div>{{article.since_time}}</div> -->
             <li>
               <div id="div{{article.id}}">
                 <table width="100%">
                   <tr style="text-align: center;">
-                    <td style="text-align: left;"><b style="font-size: 0.8em;"><a href="{{article.url}}" target='_blank'>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</a></b></td>
-                    <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
-                    <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.writer}}</b></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2"><a href="{{article.url}}" target='_blank'>{{article.content}}</a></td>
-                    <td width="50px">
+                    <td style="text-align: left;"><b style="font-size: 12px;"><a href="{{article.url}}" target='_blank'>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</a></b></td>
+                    <td width="150px"><b style="text-align: right; margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
+                    <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.writer}}</b></td>
+                    <td rowspan="2" width="50px">
                       {% if request.user.is_authenticated %}
                       <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
                       {% else %}
                       <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
                       {% endif %}
                     </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.content}}</div></a></td>
                   </tr>
                 </table>
                 <hr>
@@ -143,7 +175,18 @@
       </div>
     </div>
   </div>
-    
+  {% if q %}
+  <script>
+    function highlight(){
+      var q = $('#search_q').val();
+      $('.contentwrap:contains("'+q+'")').each(function(){
+        var regex = new RegExp(q,"gi");
+        $(this).html($(this).text().replace(regex, "<span class='highlight'>"+q+"</span>"));
+      });
+    }
+    highlight();
+  </script>
+  {% endif %}
   <script>
     var token = $('input[name="csrfmiddlewaretoken"]').prop('value');
     const loadmore= document.getElementById('load-more')
@@ -169,9 +212,9 @@
     // load more 버튼으로 구현
     function click_load_more(){
       if(!isEnd){
-        var press_list = "{{press_list|join:' '}}"
-        var section_list = "{{section_list|join:' '}}"
         var q = "{{q}}"
+        var press_list = $("#press").val();
+        var section_list = $("#section").val();
         var page = $("#page").val();
         callMorePostAjax(page, press_list, section_list, q);
         $("#page").val(parseInt(page)+1);
@@ -200,15 +243,16 @@
 
     // 요약 기사 출력
     function addMorePostAjax(data, textStatus, jqXHR) {
-        $('#post_list_ajax').append(data);
-        div2Resize();
-        $('#ul1 li button').each(function (index, item){
-        // ajax로 요약기사가 된 후에 arr를 통해 이미 스크랩한 버튼 비활성화
-        if (item.value == arr[0]){
-          arr.shift()
-          item.disabled = true;
-        }
+      $('#post_list_ajax').append(data);
+      div2Resize();
+      $('#ul1 li button').each(function (index, item){
+      // ajax로 요약기사가 된 후에 arr를 통해 이미 스크랩한 버튼 비활성화
+      if (item.value == arr[0]){
+        arr.shift()
+        item.disabled = true;
+      }
       })
+      highlight();
     }
 
     // 유저가 scrap버튼 클릭시 스크랩 후 비활성화 요청(ajax) 
