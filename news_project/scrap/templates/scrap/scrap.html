@@ -102,18 +102,16 @@
                   <li>
                     <table>
                       <tr style="text-align: center;">
-                        <td style="text-align: left;"><b style="font-size: 0.8em;"><a href="{{article.article.url}}"
-                              target="_blank" style="margin: 0; padding: 0;">[{{article.article.press.name}},
-                              {{article.article.section.name}}] {{article.article.headline}}</a></b></td>
+                        <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.article.press.name}},
+                          {{article.article.section.name}}] {{article.article.headline}}</b></td>
                         <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
                         </td>
-                        <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
+                        <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.article.writer}}</b></td>
+                        <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                          onclick="delete_scrap('{{article.id}}')">X</button></td>
                       </tr>
                       <tr>
-                        <td colspan="2"><a href="{{article.article.url}}" target="_blank"
-                            style="margin: 0;">{{article.article.content}}</a></td>
-                        <td width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
-                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                        <td colspan="3">{{article.article.content}}</td>
                       </tr>
                     </table>
                     <hr>
@@ -141,12 +139,12 @@
                         {{article.article.section.name}}] {{article.article.headline}}</b></td>
                       <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
                       </td>
-                      <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
+                      <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.article.writer}}</b></td>
+                      <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                        onclick="delete_scrap('{{article.id}}')">X</button></td>
                     </tr>
                     <tr>
-                      <td colspan="2">{{article.article.content}}</td>
-                      <td width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
-                          onclick="delete_scrap('{{article.id}}')">X</button></td>
+                      <td colspan="3">{{article.article.content}}</td>
                     </tr>
                   </table>
                   <hr>
@@ -173,12 +171,12 @@
                           {{article.article.section.name}}] {{article.article.headline}}</b></td>
                         <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
                         </td>
-                        <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
+                        <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.article.writer}}</b></td>
+                        <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                          onclick="delete_scrap('{{article.id}}')">X</button></td>
                       </tr>
                       <tr>
-                        <td colspan="2">{{article.article.content}}</td>
-                        <td width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.article}}"
-                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                        <td colspan="3">{{article.article.content}}</td>
                       </tr>
                     </table>
                     <hr>
@@ -205,12 +203,12 @@
                           {{article.article.section.name}}] {{article.article.headline}}</b></td>
                         <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b>
                         </td>
-                        <td style="margin-right: 0px; font-size: 0.8em;"><b>{{article.article.writer}}</b></td>
+                        <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.article.writer}}</b></td>
+                        <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                          onclick="delete_scrap('{{article.id}}')">X</button></td>
                       </tr>
                       <tr>
-                        <td colspan="2">{{article.article.content}}</td>
-                        <td width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.article}}"
-                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                        <td colspan="3">{{article.article.content}}</td>
                       </tr>
                     </table>
                     <hr>

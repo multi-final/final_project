@@ -39,8 +39,15 @@ def scrap(request):
         dbarticles_this_week = articles.filter(created_date__range = (now-datetime.timedelta(8), now-datetime.timedelta(1)))
         dbarticles_last_week = articles.filter(created_date__range = (now-datetime.timedelta(15), now-datetime.timedelta(8)))
         dbarticles_long_ago = articles.filter(created_date__lt = (now-datetime.timedelta(15)))
-        context={'dbarticles_today':dbarticles_today,'dbarticles_this_week':dbarticles_this_week,
-                 'dbarticles_last_week':dbarticles_last_week,'dbarticles_long_ago':dbarticles_long_ago}
+        
+        context={
+
+            'dbarticles_today':dbarticles_today,
+            'dbarticles_this_week':dbarticles_this_week,
+            'dbarticles_last_week':dbarticles_last_week,
+            'dbarticles_long_ago':dbarticles_long_ago
+
+            }
         return render(request, 'scrap/scrap.html', context)
 
 def scrap_insert(req,id):
