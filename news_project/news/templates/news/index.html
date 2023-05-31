@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<style>
+    #header{
+        text-align: center;
+    }
+
+    #main {
+        border: 1px solid red;
+        display: flex;
+        /* flex-direction: column; */
+        text-align: center;
+        width: 100%;
+    }
+    #row{
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        margin: 0 auto;
+    }
+    #row div{
+        margin: 0 auto;
+    }
+    #wordwrap{
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto;
+    }
+    #westwrap{
+        display: flex;
+        flex-direction: column;
+    }
+    #wordcloud{
+        border: 1px solid black;
+        width: 800px;
+        height: 300px;
+        
+    }
+    #weather{
+        border: 1px solid black;
+        width: 200px;
+        height: 150px;
+        /* margin: 0 auto; */
+    }
+    #stock{
+        border: 1px solid black;
+        width: 200px;
+        height: 150px;
+        /* margin: 0 auto; */
+    }
+    #intro{
+        border: 1px solid black;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+</style>
+<div id="header">헤더 기사 순위</div>
+<div id="main">
+    <div id="wordwrap">
+        <div id="wordcloud">워드 클라우드</div>
+        <div id="westwrap">
+            <div style="height: 100%; border: solid 1px black;" >검색어 순위</div>
+        </div>
+    </div>
+    <!-- <div id="intro">소개글</div> -->
+</div>
+<div id="row">
+    <div id="weather">날씨</div>
+    <div id="stock">증시</div>
+</div>
+{% endblock %}

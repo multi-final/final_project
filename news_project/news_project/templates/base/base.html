@@ -303,6 +303,29 @@
 <body>
   <main>
     <header>
+      <style>
+        #nav_wrap{
+          display: flex;
+          position: absolute;
+          left: 50%;
+          margin-left: -73.6px;
+          text-align: center;
+          top: 30px;
+          /* margin-left: 38.2%; */
+          background-color: white;
+          z-index: 1;
+
+        }
+        #navmain{
+          border: 1px solid black;
+        }
+        #navcont{
+          border: 1px solid black;
+        }
+        #navintr{
+          border: 1px solid black;
+        }
+      </style>
       <div class="px-3 py-1 text-bg-white shadow-sm p-3 mb-1 bg-body ">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -312,8 +335,21 @@
               class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none" id="logo">
               오간뉴
             </a>
-
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+              <div id="toolwrap">
+                <a href="/scrap" class="nav-link text-dark">
+                  <i class="fa-solid fa-lightbulb fa-lg" style="color: #808080;"></i>
+                </a>
+                <p id="tooltip"><span>How</span></p>
+              </div>
+              <li>
+                <div id="toolwrap">
+                  <a href="/scrap" class="nav-link text-dark">
+                    <i class="fa-solid fa-list fa-lg" style="color: #808080;"></i>
+                  </a>
+                  <p id="tooltip"><span>Articles</span></p>
+                </div>
+              </li>
               <li>
                 {% if request.user.is_authenticated %}
                 <div id="toolwrap">
@@ -359,6 +395,11 @@
           </div>
         </div>
       </div>
+      <!-- <div id="nav_wrap">
+        <div id="navmain">메인<i class="fa-solid fa-house"></i></div>
+        <div id="navcont">본문<i class="fa-solid fa-list"></i></div>
+        <div id="navintr">소개<i class="fa-solid fa-lightbulb"></i></div>
+      </div> -->
     </header>
   </main>
 
@@ -518,15 +559,15 @@
           </div>
           {% endfor %}
           <div>
-            <label for="id_old_password">Old Password</label>
+            <label for="current-password">Old Password</label>
             <p><input type="password" name="old_password" id="current-password" autocomplete="current-password" autofocus required id="id_old_password"></p>
           </div>
           <div>
-            <label for="id_new_password1">New Password</label>
+            <label for="new-password1">New Password</label>
             <p><input type="password" name="new_password1" id="new-password1" autocomplete="new-password" autofocus required id="id_new_password1"></p>
           </div>
           <div>
-            <label for="id_new_password2">Confirm Password</label>
+            <label for="new-password2">Confirm Password</label>
             <p><input type="password" name="new_password2" id="new-password2" autocomplete="new-password" autofocus required id="id_new_password2"></p>
           </div>
           <div id="buttondiv" style="padding-left: 0px;"><button onclick="to_ajax('password',event)" class="btn btn-primary">Save Change</button></div>

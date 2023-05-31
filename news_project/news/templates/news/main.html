@@ -42,7 +42,27 @@
                     <div class="collapse show" id="home-collapse" style="margin-top:5px;">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <div class="checkli">
-                        <li><input type="checkbox" id="press1" name="press" value="1"
+                        <li><input type="checkbox" id="press1" name="press" value="32"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press1">경향신문</label></li>
+                        <li><input type="checkbox" id="press2" name="press" value="5"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press2">국민일보</label></li>
+                        <li><input type="checkbox" id="press3" name="press" value="20"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press3">동아일보</label></li>
+                        <li><input type="checkbox" id="press4" name="press" value="21"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press4">문화일보</label></li>
+                        <li><input type="checkbox" id="press5" name="press" value="81"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press5">서울신문</label></li>
+                        <li><input type="checkbox" id="press6" name="press" value="22"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press6">세계일보</label></li>
+                        <li><input type="checkbox" id="press7" name="press" value="23"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press7">조선일보</label></li>
+                        <li><input type="checkbox" id="press8" name="press" value="25"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press8">중앙일보</label></li>
+                        <li><input type="checkbox" id="press9" name="press" value="28"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9">한겨례</label></li>
+                        <li><input type="checkbox" id="press10" name="press" value="469"
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li>
+                        <!-- <li><input type="checkbox" id="press1" name="press" value="1"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press1">경향신문</label></li>
                         <li><input type="checkbox" id="press2" name="press" value="2"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press2">국민일보</label></li>
@@ -61,7 +81,7 @@
                         <li><input type="checkbox" id="press9" name="press" value="9"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9">한겨례</label></li>
                         <li><input type="checkbox" id="press10" name="press" value="10"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li> -->
                         </div>
                       </ul>
                     </div>
@@ -75,19 +95,19 @@
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <div class="checkli">
                         <li><input
-                              type="checkbox" id="section1" name="section" value="1"
+                              type="checkbox" id="section1" name="section" value="100"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section1">정치</label> </li>
                         <li><input
-                              type="checkbox"id="section2"  name="section" value="2"
+                              type="checkbox"id="section2"  name="section" value="101"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section2">경제</label></li>
                         <li><input
-                              type="checkbox" id="section3" name="section" value="3"
+                              type="checkbox" id="section3" name="section" value="102"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section3">사회</label></li>
                         <li><input
-                              type="checkbox" id="sectio4" name="section" value="4"
+                              type="checkbox" id="section4" name="section" value="104"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section4">세계</label></li>
                         <li><input
-                              type="checkbox" id="section5" name="section" value="5"
+                              type="checkbox" id="section5" name="section" value="105"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section5">IT</label></li>
                         </div>
                       </ul>
@@ -134,7 +154,7 @@
                 <input type="hidden" value="{{section_list}}" name="section">
               </form>
               <!-- <i class="fa-regular fa-clock" style="color: #808080;"></i> -->
-              <!-- <div id="count">{{articles_count}}</div> -->
+              <div id="count">{{articles_count}}</div>
           </div>
             {% for article in articles %}
             <!-- <div>{{article.since_time}}</div> -->
@@ -142,11 +162,12 @@
               <div id="div{{article.id}}">
                 <table width="100%">
                   <tr style="text-align: center;">
-                    <td style="text-align: left;"><b style="font-size: 12px;"><a href="{{article.url}}" target='_blank'>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</a></b></td>
-                    <td width="150px"><b style="text-align: right; margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
-                    <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.writer}}</b></td>
+                    <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 12px;"><b>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</b></a></td>
+                    <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</td>
+                    <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;">{{article.writer}}</td>
                     <td rowspan="2" width="50px">
                       {% if request.user.is_authenticated %}
+                      <!-- <i class="fa-solid fa-bookmark fa-lg" style="color: #000000;"></i> -->
                       <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
                       {% else %}
                       <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
@@ -252,7 +273,9 @@
         item.disabled = true;
       }
       })
-      highlight();
+      if (typeof highlight === 'function'){
+        highlight();
+      }
     }
 
     // 유저가 scrap버튼 클릭시 스크랩 후 비활성화 요청(ajax) 
