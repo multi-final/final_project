@@ -1,10 +1,21 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article
+from .models import Article, Section, Press
 from scrap.models import Scrap
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
 from datetime import datetime as dt
+
+# id = models.IntegerField(primary_key=True)
+#     headline = models.CharField(max_length=128)
+#     press = models.ForeignKey(Press, on_delete=models.CASCADE)
+#     section = models.ForeignKey(Section, on_delete=models.CASCADE)
+#     writer = models.CharField(max_length=32)
+#     url = models.CharField(max_length=32)
+#     content = models.TextField()
+#     created_date = models.DateTimeField()
+def index(req):
+    return render(req,'news/index.html')
 
 def main(req):
     # 카테고리 미선택 시
@@ -15,13 +26,12 @@ def main(req):
         scrap = {}
         if req.user.is_authenticated:
             scrap = Scrap.objects.filter(user=req.user).select_related().order_by('-article__created_date')
-  
         # time_now = dt.now()
         articles_count=articles.count()
         # 페이지네이터로 분리
         paginator = Paginator(articles, 10)
         page = None
-        
+
         try:
             articles = paginator.page(page)
         except PageNotAnInteger:
@@ -88,10 +98,13 @@ def main_ajax(req):
         # 이전에 검색했던 카테고리 정보
         press_form=0
         section_form=0
-        if req.POST.get('press') != None:
-            press_form=json.loads(req.POST.get('press'))
-        if req.POST.get('section') != None:
-            section_form=json.loads(req.POST.get('section'))
+        press_form=req.POST.get('press')
+        section_form=req.POST.get('section')
+
+        if press_form:
+            press_form=json.loads(press_form)
+        if section_form:
+            section_form=json.loads(section_form)
         
         if not press_form and not section_form:
             post_list = Article.objects.all().select_related()
@@ -132,18 +145,15 @@ def search(req):
         scrap={}
         if req.user.is_authenticated:
             scrap = Scrap.objects.filter(user=req.user).select_related()
+        search = req.GET.get('search')
+        press = req.GET.get('press').replace("'","")
+        section = req.GET.get('section').replace("'","")
 
-        search=req.GET.get('search')
+        if press:
+            press = json.loads(press)
 
-        if 'press=' in req.GET:
-            press = json.loads(req.GET.get('press'))
-        else:
-            press=None
-
-        if 'section=' in req.GET:
-            section = json.loads(req.GET.get('section'))
-        else:
-            section=None
+        if section:
+            section = json.loads(section)
 
         if not press and not section:
             post_list = Article.objects.all().select_related()
@@ -189,20 +199,25 @@ def search(req):
         search=req.GET.get('search')
         press=req.POST.getlist('press')
         section=req.POST.getlist('section')
+
         if not press and not section:
             post_list = Article.objects.all().select_related()
             
         elif press and not section:
+            press=list(map(int,press))
             post_list = Article.objects.filter(press__in=press).select_related()
             if scrap:
                 scrap = scrap.filter(article__press__in=press).select_related()
 
         elif not press and section:
+            section=list(map(int,section))
             post_list = Article.objects.filter(section__in=section).select_related()
             if scrap:
                 scrap = scrap.filter(article__section__in=section).select_related()
 
         else:
+            press=list(map(int,press))
+            section=list(map(int,section))
             post_list = Article.objects.filter(Q(press__in=press)&Q(section__in=section)).select_related()
             if scrap:
                 scrap = scrap.filter(Q(article__press__in=press)&Q(article__section__in=section)).select_related()
@@ -210,6 +225,7 @@ def search(req):
         post_list = post_list.filter(Q(headline__contains=search)|Q(content__contains=search)).select_related()
         
         post_list = post_list.order_by('-created_date')
+        articles_count = post_list.count()
         paginator = Paginator(post_list, 10)
         page = req.POST.get('page')
         try:
