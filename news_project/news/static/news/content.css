@@ -1,21 +1,26 @@
   .sidepanel {
     /* height: 0; Specify a height */
-    width: 0; /* 0 width - change this with JavaScript */
     /* position: absolute;  */
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    height: 600px;
     z-index: 1;
-    top: 30px;
+    top: 0;
     left: 0;
     /* margin-left: 13px; */
     /* background-color: #ffffff00;  */
-    overflow-x: auto; /*Disable horizontal scroll*/
+    /* overflow-x: auto; Disable horizontal scroll */
     /* overflow-y: auto; */
     /* padding-top: 60px; Place content 60px from the top */
     margin-top: 1px;
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
-    position: sticky;
+    /* position: sticky; */
     backdrop-filter: blur(2px);
     background-color: rgba(255, 255, 255, 0.872);
+
   }
+  
   /* li{
     list-style: none;
   } */
@@ -154,15 +159,13 @@
   }
 
 /* ------------------------------------------------------------------------ */
-  #wrap{
-    /* height: auto; */
-    min-height: 1080px;
-  }
-
-
+#wrap{
+  /* height: auto; */
+  min-height: 1080px;
+}
 
 #content{
-    margin-top: 15px;
+    /* margin-top: 15px; */
     margin-bottom: 16px;
     /* height: 550px; */
     width: 95%;
