@@ -17,19 +17,135 @@
     {% endfor %}
   </div>
   <!-- 카테고리, 본문 -->
-  <div id="content" class="container" style="min-height: 1080px;">
-    <div class="row">
+  
+  <style>
+    .fix {
+      position:fixed;
+      animation: nav_down 0.5s ease
+    }
 
+    /* @keyframes nav_down {
+      0%{
+        transform: translateY(-50px)
+      }
+      100%{
+        transform: translateY(0px)
+      }
+    } */
+    #searchnav{
+      z-index: 2;
+      visibility: visible;
+      position: sticky;
+      top: 0px;
+      display: flex;
+      width: 100vw;
+      height: 50px;
+      background-color: rgb(255, 255, 255);
+      align-items: center;
+      box-shadow: 0px 4px 3px -2px rgba(128, 128, 128, 0.443);
+      /* box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2); */
+    }
+    #section{
+      display: flex;
+      flex-direction: row;
+      width: 1200px;
+      /* margin: 0 auto; */
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3;
+    }
+    .navopenbtn{
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #ffffff00;
+      color: rgb(84, 84, 84);
+      border: none;
+      border-top-left-radius: 10px;
+      position: sticky;
+      top: 0;
+      transition: 0.5s;
+    }
+    .navopenbtn:hover{
+      color: #a5a5a4;
+      transition: 0.3s;
+    }
+    #nav_searchwrap{
+    }
+    #nav_search{
+      display: flex;
+      flex-direction: row;
+      border: 1px solid #808080;
+      border-radius: 4px;
+      width: 305px;
+    }
+    #nav_search_box{
+      width: 280px;
+      font-size: 11px;
+      border: none;
+      margin-left: 2px;
+      padding: 3px;
+    }
+    #nav_search_box:focus{
+      outline: none;
+    }
+  </style>
+  <div id="searchnav">
+    <div id="section" class="container">
+      <button id="navopen" class="navopenbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
+      <div id="nav_searchwrap">
+        <form id="nav_search" action="/search/">
+          <div id="nav_search_icon" style="margin-left: 5px;"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #808080;"></i></div>
+          <input id="nav_search_box" type="search" name="search" placeholder="검색">
+          <input type="hidden" value="{{press_list}}" name="press">
+          <input type="hidden" value="{{section_list}}" name="section">
+        </form>
+      </div>
+      <a href="#"><i class="fa-solid" style="color: #7a7a7a;">TOP</i></a>
+    </div>
+  </div>
+  <div id="content" class="container" style="min-height: 1080px;">
+    
+    <div class="row">
       <!-- 카테고리 -->
       <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
-        <button class="openbtn" onclick="openNav()" style="margin-top: 22.06px;"><i class="fa-solid fa-bars"></i></button>
+        <!-- <button class="openbtn" onclick="openNav()" style="margin-top: 22.06px;"><i class="fa-solid fa-bars"></i></button> -->
+      <!-- </div>
+    <div class="row"> -->
+      <style>
+        .sidepanel{
+          position: relative;
+          overflow: hidden;
+          width: 180px;
+          height: 600px;
+          transform: translateX(-150px);
+          top: 0;
+        }
+        #innerSidepanel{
+          position:absolute;
+          background-color: #ffffff;
+          width: 180px;
+          height: 573px;
+          left:100%; top:0; bottom:0; right:-100%;
+          transform-origin:50% 50%;
+          transition:0.5s;
+        }
+        .openn{
+          left: 0 !important;
+          right: 0 !important;
+        }
+        #stickypanel{
+          position: sticky;
+          top: 50px;
+        }
+      </style>
+      <div id="stickypanel">
         <div id="mySidepanel" class="sidepanel">
+          <div id="innerSidepanel">
           <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
-          <div class="flex-shrink-0 p-3" style="width: 220px;">
+          <div class="flex-shrink-0 p-3" style="width: 180px;">
             <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
               <span class="fs-5 fw-semibold">Category</span>
             </a>
-
             <form method="post">
               {% csrf_token %}
               <div class="category">
@@ -121,11 +237,14 @@
           </div>
         </div>
       </div>
+      </div>
+    </div>
       <!-- 요약 기사 출력 부분 -->
       <style>
         .contentwrap{
           margin-right: 10px;
-          font-size: 12px;
+          font-size: 15px;
+          letter-spacing: 0.04rem;
         }
         .highlight{
           background-color: yellow;
@@ -142,30 +261,34 @@
           display: flex;
           flex-direction: column;
         }
+        tr{
+          padding-bottom: 20px;
+        }
+        
       </style>
       <div id="summary_col" class="col-9">
         <div class="summary">
-          <ul id="ul1" style="max-width: 85%; margin-top: 22.06px;">
-            <div id="searchwrap">
+          <ul id="ul1" style="max-width: 85%;">
+            <!-- <div id="searchwrap">
               <form id="search" action="/search/" style="margin-bottom: 8px;">
                 <div id="search_icon"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #808080;"></i></div>
                 <input id="search_box" type="search" name="search" placeholder="검색">
                 <input type="hidden" value="{{press_list}}" name="press">
                 <input type="hidden" value="{{section_list}}" name="section">
               </form>
-              <!-- <i class="fa-regular fa-clock" style="color: #808080;"></i> -->
+              <i class="fa-regular fa-clock" style="color: #808080;"></i>
               <div id="count">{{articles_count}}</div>
-          </div>
+            </div> -->
             {% for article in articles %}
             <!-- <div>{{article.since_time}}</div> -->
             <li>
               <div id="div{{article.id}}">
-                <table width="100%">
+                <table id="startsc" width="100%">
                   <tr style="text-align: center;">
-                    <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 12px;"><b>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</b></a></td>
-                    <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</td>
-                    <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;">{{article.writer}}</td>
-                    <td rowspan="2" width="50px">
+                    <td style="text-align: left; padding-bottom: 15px;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</b></a></td>
+                    <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.created_date.year}}년 {{article.created_date.month}}월 {{article.created_date.day}}일</td>
+                    <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.writer}}</td>
+                    <td rowspan="4" width="50px">
                       {% if request.user.is_authenticated %}
                       <!-- <i class="fa-solid fa-bookmark fa-lg" style="color: #000000;"></i> -->
                       <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
@@ -174,9 +297,14 @@
                       {% endif %}
                     </td>
                   </tr>
+                  <!-- <tr>
+                    <td colspan="3" style="padding-top: 10px; padding-bottom: 20px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.content}}</div></a></td>
+                  </tr> -->
+                  {% for centence in article.centence_split %}
                   <tr>
-                    <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.content}}</div></a></td>
+                    <td colspan="3" style="padding-top: 10px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{centence}}.</div></a></td>
                   </tr>
+                  {% endfor %}
                 </table>
                 <hr>
               </div>
@@ -208,6 +336,44 @@
     highlight();
   </script>
   {% endif %}
+  <script>
+    
+    // // 스크롤 시 검색창 열기
+    // function scrollNav(){
+    //   const search = document.getElementById('startsc');
+    //   const searchheight = search.clientHeight;
+    //   console.log(searchheight)
+    //   document.addEventListener('scroll',onScroll,{passive:true});
+
+    //   const sidepan = document.getElementById('mySidepanel');
+    //   const navbutton = document.getElementById('navopen');
+    //   let siderect = sidepan.getBoundingClientRect();
+    //   let originTop = siderect.top;
+    //   let originLeft = siderect.left;
+
+    //   let navrect = navbutton.getBoundingClientRect();
+    //   const btnTop = navrect.top;
+    //   const btnLeft = navrect.left;
+
+    //   function onScroll(){
+    //     const scrollposition = pageYOffset;
+    //     const navbar = document.getElementById('searchnav');
+    //     if (searchheight<=scrollposition){
+    //       navbar.style.visibility='visible';
+    //       navbar.classList.add('fix');
+    //       sidepan.style.top = btnTop + 'px';
+    //       sidepan.style.left = btnLeft + 'px';
+    //     }
+    //     else{
+    //       navbar.classList.remove('fix');
+    //       // navbar.style.visibility='hidden';
+    //       sidepan.style.top = originTop + 'px';
+    //       sidepan.style.left = originLeft + 'px';
+    //     }
+    //   }
+    // }
+    // scrollNav();
+  </script>
   <script>
     var token = $('input[name="csrfmiddlewaretoken"]').prop('value');
     const loadmore= document.getElementById('load-more')

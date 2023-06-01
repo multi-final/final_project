@@ -35,4 +35,9 @@ class Article(models.Model):
             return f'{minutes}분 전'
         else:
             return '방금 전'
+    
+    def centence_split(self):
+        centences = self.content.split('.')
+        centences.pop()
+        return centences
         

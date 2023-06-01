@@ -28,24 +28,26 @@
 <script src="https://kit.fontawesome.com/7156905f88.js" crossorigin="anonymous"></script>
 
 <script>
-
   // 사이드 카테고리 여닫기
   function openNav() {
-    document.getElementById("mySidepanel").style.width = "250px";
-    document.getElementById("mySidepanel").style.height = "573px";
+    let sidepanel = document.getElementById('innerSidepanel');
+    sidepanel.classList.add('openn')
+    // document.getElementById("mySidepanel").style.width = "180px";
+    // document.getElementById("mySidepanel").style.height = "573px";
   }
 
   function closeNav() {
-    document.getElementById("mySidepanel").style.width = "0";
-    document.getElementById("mySidepanel").style.height = "0";
+    let sidepanel = document.getElementById('innerSidepanel');
+    sidepanel.classList.remove('openn')
+    // document.getElementById("mySidepanel").style.width = "0";
+    // document.getElementById("mySidepanel").style.height = "0";
   }
 
   // 카테고리 패널 외 클릭 시 패널 닫기
   document.addEventListener('mouseup', function (e) {
-    var layerPopup = document.querySelector('.sidepanel');
+    var layerPopup = document.querySelector('#innerSidepanel');
     if (!layerPopup.contains(e.target)) {
-      document.getElementById("mySidepanel").style.width = "0";
-      document.getElementById("mySidepanel").style.height = "0";
+      layerPopup.classList.remove('openn')
     }
   });
 
@@ -211,8 +213,9 @@
   font-size: 10px;
   width: 50px;
   height: 30px;
-  z-index: 1;
+  z-index: 4;
   visibility: hidden;
+  margin: 0 auto;
 }
 
 #tooltip::before{
@@ -227,9 +230,10 @@
 }
 
 #tooltip span{
-  position: absolute;
+  position: relative;
   top: 25%;
   color: white;
+  text-align: center;
 }
 
 .nav-item a{
@@ -326,7 +330,7 @@
           border: 1px solid black;
         }
       </style>
-      <div class="px-3 py-1 text-bg-white shadow-sm p-3 mb-1 bg-body ">
+      <div class="px-3 py-1 text-bg-white shadow-sm p-3 bg-body" style="z-index:3;">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" style="margin-top: -10px; margin-right: 8px;"><img src="{% static 'news/logo.ico' %}" alt=""
@@ -336,18 +340,20 @@
               오간뉴
             </a>
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-              <div id="toolwrap">
-                <a href="/scrap" class="nav-link text-dark">
-                  <i class="fa-solid fa-lightbulb fa-lg" style="color: #808080;"></i>
-                </a>
-                <p id="tooltip"><span>How</span></p>
-              </div>
+              <li>
+                <div id="toolwrap">
+                  <a href="/scrap" class="nav-link text-dark">
+                    <i class="fa-solid fa-lightbulb fa-lg" style="color: #808080;"></i>
+                  </a>
+                  <p id="tooltip"><span style="position: absolute; margin-left: 3px;">How</span></p>
+                </div>
+              </li>
               <li>
                 <div id="toolwrap">
                   <a href="/scrap" class="nav-link text-dark">
                     <i class="fa-solid fa-list fa-lg" style="color: #808080;"></i>
                   </a>
-                  <p id="tooltip"><span>Articles</span></p>
+                  <p id="tooltip"><span style="position: absolute; margin-left: -3px;">Articles</span></p>
                 </div>
               </li>
               <li>
@@ -464,6 +470,18 @@
       margin-left: -300px;
       margin-top: -200px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      animation: down_modal 0.5s ease
+    }
+
+    @keyframes down_modal {
+      0%{
+        opacity: 0;
+        transform: translateY(-100px)
+      }
+      100%{
+        opacity: 1;
+        transform: translateY(0px)
+      }
     }
 
     #wd_modal_hide{
@@ -502,6 +520,7 @@
       margin-left: -300px;
       margin-top: -200px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      animation: down_modal 0.5s ease
     }
 
     #passwordform{
