@@ -286,3 +286,7 @@ pyrightconfig.json
 news_project/templates
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django,visualstudiocode
+
+# django settings
+news_project/settings/local.py
+news_project/settings/prod.py
