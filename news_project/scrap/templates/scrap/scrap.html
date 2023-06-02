@@ -1,229 +1,388 @@
 {% extends 'base/base.html' %}
 
-{% block content %}
-<div id="content" class="container" style="min-height: 1080px; margin-right: 15%;">
-  <!-- 카테고리, 본문 -->
-  <div class="row">
-    <!-- 카테고리 -->
-    <div id="button_col" class="col-1" style="min-height: 1080px; padding: 0; width:32px; margin-left: 30px;">
-      <button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
-      <div id="mySidepanel" class="sidepanel">
-        <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
-        <div class="flex-shrink-0 p-3" style="width: 220px;">
-          <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-            <span class="fs-5 fw-semibold">Category</span>
-          </a>
+  {% block content %}
+  <!-- 유저가 스크랩한 리스트 가져오기  -->
+  {% if q %}
+    <input id="search_q" type="text" value="{{q}}" style="display: none;">
+  {% endif %}
 
-          <form action="" method="post">
-            {% csrf_token %}
-            <div class="category">
-              <ul class="list-unstyled ps-0">
-                <li class="mb-1">
-                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                    data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" type="button">
-                    언론사 선택
-                  </button>
-                  <div class="collapse show" id="home-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <div class="checkli">
-                        <li><input type="checkbox" id="press1" name="press" value="1"
+  <!-- 카테고리, 본문 -->
+  
+  <style>
+    .fix {
+      position:fixed;
+      animation: nav_down 0.5s ease
+    }
+
+    /* @keyframes nav_down {
+      0%{
+        transform: translateY(-50px)
+      }
+      100%{
+        transform: translateY(0px)
+      }
+    } */
+
+    #searchnav{
+      z-index: 2;
+      visibility: visible;
+      position: sticky;
+      top: 0px;
+      display: flex;
+      width: 100vw;
+      height: 50px;
+      background-color: rgb(255, 255, 255);
+      align-items: center;
+      box-shadow: 0px 4px 3px -2px rgba(0,0,0,.075);
+    }
+
+    #section{
+      display: flex;
+      flex-direction: row;
+      width: 1200px;
+      /* margin: 0 auto; */
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .navopenbtn{
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #ffffff00;
+      color: rgb(84, 84, 84);
+      border: none;
+      border-top-left-radius: 10px;
+      position: sticky;
+      top: 0;
+      transition: 0.5s;
+    }
+
+    .navopenbtn:hover{
+      color: #a5a5a4;
+      transition: 0.3s;
+    }
+
+    #nav_search{
+      display: flex;
+      flex-direction: row;
+      border: 1px solid #808080;
+      border-radius: 4px;
+      width: 305px;
+    }
+
+    #nav_search_box{
+      width: 280px;
+      font-size: 11px;
+      border: none;
+      margin-left: 2px;
+      padding: 3px;
+    }
+
+    #nav_search_box:focus{
+      outline: none;
+    }
+  </style>
+  <div id="searchnav" style="margin-top: -5px;">
+    <div id="section" class="container">
+      <button id="navopen" class="navopenbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
+      <div id="nav_searchwrap">
+        <form id="nav_search" action="search/">
+          <div id="nav_search_icon" style="margin-left: 5px;"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #808080;"></i></div>
+          <input id="nav_search_box" type="search" name="search" placeholder="스크랩 검색">
+          <input type="hidden" value="{{press_list}}" name="press">
+          <input type="hidden" value="{{section_list}}" name="section">
+        </form>
+      </div>
+      <a href="#"><i class="fa-solid" style="color: #7a7a7a;">TOP</i></a>
+    </div>
+  </div>
+  <div id="content" class="container" style="min-height: 1080px;">
+    <div class="row">
+      <!-- 카테고리 -->
+      <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
+        <!-- <button class="openbtn" onclick="openNav()" style="margin-top: 22.06px;"><i class="fa-solid fa-bars"></i></button> -->
+      <!-- </div>
+    <div class="row"> -->
+      <style>
+        .sidepanel{
+          position: relative;
+          overflow: hidden;
+          width: 180px;
+          height: 600px;
+          transform: translateX(-150px);
+          top: 0;
+        }
+        #innerSidepanel{
+          position:absolute;
+          background-color: #ffffff;
+          width: 180px;
+          height: 573px;
+          left:100%; top:0; bottom:0; right:-100%;
+          transform-origin:50% 50%;
+          transition:0.5s;
+        }
+        .openn{
+          left: 0 !important;
+          right: 0 !important;
+        }
+        #stickypanel{
+          position: sticky;
+          top: 50px;
+        }
+      </style>
+      <div id="stickypanel">
+        <div id="mySidepanel" class="sidepanel">
+          <div id="innerSidepanel">
+          <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
+          <div class="flex-shrink-0 p-3" style="width: 180px;">
+            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+              <span class="fs-5 fw-semibold">Category</span>
+            </a>
+            <form method="post">
+              {% csrf_token %}
+              <div class="category">
+                <ul class="list-unstyled ps-0">
+                  <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" type="button">
+                      언론사 선택
+                    </button>
+                    <div class="collapse show" id="home-collapse" style="margin-top:5px;">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <div class="checkli">
+                        <li><input type="checkbox" id="press1" name="press" value="32"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press1">경향신문</label></li>
-                        <li><input type="checkbox" id="press2" name="press" value="2"
+                        <li><input type="checkbox" id="press2" name="press" value="5"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press2">국민일보</label></li>
-                        <li><input type="checkbox" id="press3" name="press" value="3"
+                        <li><input type="checkbox" id="press3" name="press" value="20"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press3">동아일보</label></li>
-                        <li><input type="checkbox" id="press4" name="press" value="4"
+                        <li><input type="checkbox" id="press4" name="press" value="21"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press4">문화일보</label></li>
-                        <li><input type="checkbox" id="press5" name="press" value="5"
+                        <li><input type="checkbox" id="press5" name="press" value="81"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press5">서울신문</label></li>
-                        <li><input type="checkbox" id="press6" name="press" value="6"
+                        <li><input type="checkbox" id="press6" name="press" value="22"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press6">세계일보</label></li>
-                        <li><input type="checkbox" id="press7" name="press" value="7"
+                        <li><input type="checkbox" id="press7" name="press" value="23"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press7">조선일보</label></li>
-                        <li><input type="checkbox" id="press8" name="press" value="8"
+                        <li><input type="checkbox" id="press8" name="press" value="25"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press8">중앙일보</label></li>
-                        <li><input type="checkbox" id="press9" name="press" value="9"
+                        <li><input type="checkbox" id="press9" name="press" value="28"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9">한겨례</label></li>
-                        <li><input type="checkbox" id="press10" name="press" value="10"
+                        <li><input type="checkbox" id="press10" name="press" value="469"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li>
                         </div>
-                    </ul>
-                  </div>
-                </li>
-                <li class="mb-1">
-                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                    data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
-                    분야 선택
-                  </button>
-                  <div class="collapse" id="dashboard-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                      <div class="checkli">
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
+                      분야 선택
+                    </button>
+                    <div class="collapse" id="dashboard-collapse" style="margin-top:5px;">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <div class="checkli">
                         <li><input
-                              type="checkbox" id="section1" name="section" value="1"
+                              type="checkbox" id="section1" name="section" value="100"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section1">정치</label> </li>
                         <li><input
-                              type="checkbox"id="section2"  name="section" value="2"
+                              type="checkbox"id="section2"  name="section" value="101"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section2">경제</label></li>
                         <li><input
-                              type="checkbox" id="section3" name="section" value="3"
+                              type="checkbox" id="section3" name="section" value="102"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section3">사회</label></li>
                         <li><input
-                              type="checkbox" id="section4" name="section" value="4"
+                              type="checkbox" id="section4" name="section" value="104"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section4">세계</label></li>
                         <li><input
-                              type="checkbox" id="section5" name="section" value="5"
+                              type="checkbox" id="section5" name="section" value="105"
                               class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section5">IT</label></li>
                         </div>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <input type="submit" class="btn btn-primary btn-sm" value="검색">
-            <input type="button" class="btn btn-danger btn-sm" value="초기화" onclick="location.replace(location.href)">
-          </form>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <input type="submit" class="btn btn-primary btn-sm" value="검색">
+              <input type="button" class="btn btn-danger btn-sm" value="초기화" onclick="location.replace(location.href)">
+            </form>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+      <!-- 요약 기사 출력 부분 -->
+      <style>
+        .contentwrap{
+          margin-right: 10px;
+          font-size: 15px;
+          letter-spacing: 0.04rem;
+          padding-left: 25px;
+        }
+
+        .highlight{
+          background-color: yellow;
+          font-weight: bold;
+        }
+
+        #count{
+          float: right;
+          font-size: 5px;
+          text-align: right;
+          letter-spacing: 1px;
+        }
+
+        #searchwrap{
+          float: right;
+          display: flex;
+          flex-direction: column;
+        }
+        
+      </style>
+      <div id="summary_col" class="col-1">
+        <div class="summary">
+          <ul id="ul1">
+            <li class="scrap">
+              <button id="test" onclick="rresize()"
+                class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse" data-bs-target="#oneday-collapse" aria-expanded="true" type="button">
+                오늘
+              </button>
+              <div class="collapse show" id="oneday-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+                  {% for article in dbarticles_today %}
+                  <li>
+                  <div id="div{{article.id}}" style="width: 1100px;">
+                      <table width="100%">
+                        <tr style="text-align: center;">
+                          <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                          <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
+                          <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
+                          <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                        </tr>
+                        <tr>
+                          <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
+                        </tr>
+                      </table>
+                      <hr>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button onclick="rresize()"
+                class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse" data-bs-target="#thisweek-collapse" aria-expanded="false" type="buton">
+                이번주
+                <hr>
+              </button>
+              <div class="collapse" id="thisweek-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+                  {% for article in dbarticles_this_week %}
+                  <li>
+                    <div id="div{{article.id}}" style="width: 1100px;">
+                        <table width="100%">
+                          <tr style="text-align: center;">
+                            <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                            <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
+                            <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
+                            <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                              onclick="delete_scrap('{{article.id}}')">X</button></td>
+                          </tr>
+                          <tr>
+                            <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
+                          </tr>
+                        </table>
+                        <hr>
+                      </div>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button onclick="rresize()"
+                class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse" data-bs-target="#lastweek-collapse" aria-expanded="false" type="button">
+                지난주
+              </button>
+              <div class="collapse" id="lastweek-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+                  {% for article in dbarticles_last_week %}
+                  <li>
+                    <div id="div{{article.id}}" style="width: 1100px;">
+                        <table width="100%">
+                          <tr style="text-align: center;">
+                            <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                            <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
+                            <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
+                            <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                              onclick="delete_scrap('{{article.id}}')">X</button></td>
+                          </tr>
+                          <tr>
+                            <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
+                          </tr>
+                        </table>
+                        <hr>
+                      </div>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+            <li class="mb-1">
+              <button onclick="rresize()"
+                class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse" data-bs-target="#long_ago-collapse" aria-expanded="false" type="button">
+                오래전
+              </button>
+              <div class="collapse" id="long_ago-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
+                  {% for article in dbarticles_long_ago %}
+                  <li>
+                    <div id="div{{article.id}}" style="width: 1100px;">
+                        <table width="100%">
+                          <tr style="text-align: center;">
+                            <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                            <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
+                            <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
+                            <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                              onclick="delete_scrap('{{article.id}}')">X</button></td>
+                          </tr>
+                          <tr>
+                            <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
+                          </tr>
+                        </table>
+                        <hr>
+                      </div>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <!-- 스크랩한 본문 -->
-    <div id="summary_col" class="col-1">
-      <div class="summary">
-        <ul id="ul1">
-          <li class="scrap">
-            <button id="test" onclick="rresize()"
-              class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#oneday-collapse" aria-expanded="true" type="button">
-              오늘
-            </button>
-            <div class="collapse show" id="oneday-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-                {% for article in dbarticles_today %}
-                <div id="div{{article.id}}">
-                  <li>
-                    <table>
-                      <tr style="text-align: center;">
-                        <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.article.press.name}},
-                          {{article.article.section.name}}] {{article.article.headline}}</b></td>
-                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date.year}}년 {{article.created_date.month}}월 {{article.created_date.day}}일</b>
-                        </td>
-                        <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.article.writer}}</b></td>
-                        <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
-                          onclick="delete_scrap('{{article.id}}')">X</button></td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">{{article.article.content}}</td>
-                      </tr>
-                    </table>
-                    <hr>
-                  </li>
-                </div>
-                {% endfor %}
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button onclick="rresize()"
-              class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#thisweek-collapse" aria-expanded="false" type="buton">
-              이번주
-              <hr>
-            </button>
-            <div class="collapse" id="thisweek-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-                {% for article in dbarticles_this_week %}
-                <div id="div{{article.id}}">
-                <li>
-                  <table width="100%">
-                    <tr style="text-align: center;">
-                      <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.article.press.name}},
-                        {{article.article.section.name}}] {{article.article.headline}}</b></td>
-                      <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date.year}}년 {{article.created_date.month}}월 {{article.created_date.day}}일</b>
-                      </td>
-                      <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.article.writer}}</b></td>
-                      <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
-                        onclick="delete_scrap('{{article.id}}')">X</button></td>
-                    </tr>
-                    <tr>
-                      <td colspan="3">{{article.article.content}}</td>
-                    </tr>
-                  </table>
-                  <hr>
-                </li>
-              </div>
-                {% endfor %}
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button onclick="rresize()"
-              class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#lastweek-collapse" aria-expanded="false" type="button">
-              지난주
-            </button>
-            <div class="collapse" id="lastweek-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-                {% for article in dbarticles_last_week %}
-                <div id="div{{article.id}}">
-                  <li>
-                    <table width="100%">
-                      <tr style="text-align: center;">
-                        <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.article.press.name}},
-                          {{article.article.section.name}}] {{article.article.headline}}</b></td>
-                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date.year}}년 {{article.created_date.month}}월 {{article.created_date.day}}일</b>
-                        </td>
-                        <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.article.writer}}</b></td>
-                        <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
-                          onclick="delete_scrap('{{article.id}}')">X</button></td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">{{article.article.content}}</td>
-                      </tr>
-                    </table>
-                    <hr>
-                  </li>
-                </div>
-                {% endfor %}
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button onclick="rresize()"
-              class="btn btn-toggle btn-sm d-inline-flex align-items-center rounded border-0 collapsed"
-              data-bs-toggle="collapse" data-bs-target="#long_ago-collapse" aria-expanded="false" type="button">
-              오래전
-            </button>
-            <div class="collapse" id="long_ago-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="edit">
-                {% for article in dbarticles_long_ago %}
-                <div id="div{{article.id}}">
-                  <li>
-                    <table width="100%">
-                      <tr style="text-align: center;">
-                        <td style="text-align: left;"><b style="font-size: 0.8em;">[{{article.article.press.name}},
-                          {{article.article.section.name}}] {{article.article.headline}}</b></td>
-                        <td width="150px"><b style="margin-bottom: 0px; font-size: 0.8em;">{{article.created_date.year}}년 {{article.created_date.month}}월 {{article.created_date.day}}일</b>
-                        </td>
-                        <td style="text-align: right; margin-right: 0px; font-size: 0.8em; padding-right: 15px; width: 85px;"><b>{{article.article.writer}}</b></td>
-                        <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
-                          onclick="delete_scrap('{{article.id}}')">X</button></td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">{{article.article.content}}</td>
-                      </tr>
-                    </table>
-                    <hr>
-                  </li>
-                </div>
-                {% endfor %}
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
   </div>
-</div>
+{% if q %}
+<script>
+  function highlight(){
+    var q = $('#search_q').val();
+    $('.contentwrap:contains("'+q+'")').each(function(){
+      var regex = new RegExp(q,"gi");
+      $(this).html($(this).text().replace(regex, "<span class='highlight'>"+q+"</span>"));
+    });
+  }
+  highlight();
+</script>
+{% endif %}
+
+
 <script>
   // 스크랩한 기사 삭제
   function delete_scrap(id) {

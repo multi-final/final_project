@@ -318,19 +318,21 @@
           /* margin-left: 38.2%; */
           background-color: white;
           z-index: 1;
-
         }
+
         #navmain{
           border: 1px solid black;
         }
+
         #navcont{
           border: 1px solid black;
         }
+
         #navintr{
           border: 1px solid black;
         }
       </style>
-      <div class="px-3 py-1 text-bg-white shadow-sm p-3 bg-body" style="z-index:3;">
+      <div class="px-3 py-1 text-bg-white p-3 bg-body" style="box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); margin-bottom: 5px;">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" style="margin-top: -10px; margin-right: 8px;"><img src="{% static 'news/logo.ico' %}" alt=""
@@ -350,7 +352,7 @@
               </li>
               <li>
                 <div id="toolwrap">
-                  <a href="/scrap" class="nav-link text-dark">
+                  <a href="/main" class="nav-link text-dark">
                     <i class="fa-solid fa-list fa-lg" style="color: #808080;"></i>
                   </a>
                   <p id="tooltip"><span style="position: absolute; margin-left: -3px;">Articles</span></p>
@@ -401,11 +403,6 @@
           </div>
         </div>
       </div>
-      <!-- <div id="nav_wrap">
-        <div id="navmain">메인<i class="fa-solid fa-house"></i></div>
-        <div id="navcont">본문<i class="fa-solid fa-list"></i></div>
-        <div id="navintr">소개<i class="fa-solid fa-lightbulb"></i></div>
-      </div> -->
     </header>
   </main>
 
@@ -428,7 +425,7 @@
           <li class="nav-item"><a href="https://github.com/Eric4848" class="nav-link px-1 text-body-secondary" target="_blank">하정수</a></li>
         </ul>
         <p class="text-center text-body-secondary"><img src="{% static 'news/logo.ico' %}" alt="" width="20"
-            height="20" style="margin-right: 5px;"> 오간뉴 : 메추리</p>
+            height="20" style="margin-right: 5px;"> 오간뉴 prod by 매추리</p>
       </footer>
     </div>
   </div>
