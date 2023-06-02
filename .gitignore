@@ -290,4 +290,3 @@ news_project/templates
 # django settings
 news_project/settings/local.py
 news_project/settings/prod.py
-news_project/news_project/settings.py
