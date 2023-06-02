@@ -32,6 +32,7 @@
         transform: translateY(0px)
       }
     } */
+
     #searchnav{
       z-index: 2;
       visibility: visible;
@@ -42,9 +43,9 @@
       height: 50px;
       background-color: rgb(255, 255, 255);
       align-items: center;
-      box-shadow: 0px 4px 3px -2px rgba(128, 128, 128, 0.443);
-      /* box-shadow: 0 1px 9px rgba(0, 0, 0, 0.2); */
+      box-shadow: 0px 4px 3px -2px rgba(0,0,0,.075);
     }
+
     #section{
       display: flex;
       flex-direction: row;
@@ -54,6 +55,7 @@
       align-items: center;
       z-index: 3;
     }
+
     .navopenbtn{
       font-size: 20px;
       cursor: pointer;
@@ -65,12 +67,12 @@
       top: 0;
       transition: 0.5s;
     }
+
     .navopenbtn:hover{
       color: #a5a5a4;
       transition: 0.3s;
     }
-    #nav_searchwrap{
-    }
+
     #nav_search{
       display: flex;
       flex-direction: row;
@@ -78,6 +80,7 @@
       border-radius: 4px;
       width: 305px;
     }
+
     #nav_search_box{
       width: 280px;
       font-size: 11px;
@@ -85,11 +88,12 @@
       margin-left: 2px;
       padding: 3px;
     }
+
     #nav_search_box:focus{
       outline: none;
     }
   </style>
-  <div id="searchnav">
+  <div id="searchnav" style="margin-top: -5px;">
     <div id="section" class="container">
       <button id="navopen" class="navopenbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
       <div id="nav_searchwrap">
@@ -104,7 +108,6 @@
     </div>
   </div>
   <div id="content" class="container" style="min-height: 1080px;">
-    
     <div class="row">
       <!-- 카테고리 -->
       <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
@@ -178,26 +181,6 @@
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9">한겨례</label></li>
                         <li><input type="checkbox" id="press10" name="press" value="469"
                             class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li>
-                        <!-- <li><input type="checkbox" id="press1" name="press" value="1"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press1">경향신문</label></li>
-                        <li><input type="checkbox" id="press2" name="press" value="2"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press2">국민일보</label></li>
-                        <li><input type="checkbox" id="press3" name="press" value="3"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press3">동아일보</label></li>
-                        <li><input type="checkbox" id="press4" name="press" value="4"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press4">문화일보</label></li>
-                        <li><input type="checkbox" id="press5" name="press" value="5"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press5">서울신문</label></li>
-                        <li><input type="checkbox" id="press6" name="press" value="6"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press6">세계일보</label></li>
-                        <li><input type="checkbox" id="press7" name="press" value="7"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press7">조선일보</label></li>
-                        <li><input type="checkbox" id="press8" name="press" value="8"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press8">중앙일보</label></li>
-                        <li><input type="checkbox" id="press9" name="press" value="9"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9">한겨례</label></li>
-                        <li><input type="checkbox" id="press10" name="press" value="10"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li> -->
                         </div>
                       </ul>
                     </div>
@@ -246,21 +229,25 @@
           font-size: 15px;
           letter-spacing: 0.04rem;
         }
+
         .highlight{
           background-color: yellow;
           font-weight: bold;
         }
+
         #count{
           float: right;
           font-size: 5px;
           text-align: right;
           letter-spacing: 1px;
         }
+
         #searchwrap{
           float: right;
           display: flex;
           flex-direction: column;
         }
+
         tr{
           padding-bottom: 20px;
         }

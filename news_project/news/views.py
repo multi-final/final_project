@@ -6,16 +6,45 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
 from datetime import datetime as dt
 
-# id = models.IntegerField(primary_key=True)
-#     headline = models.CharField(max_length=128)
-#     press = models.ForeignKey(Press, on_delete=models.CASCADE)
-#     section = models.ForeignKey(Section, on_delete=models.CASCADE)
-#     writer = models.CharField(max_length=32)
-#     url = models.CharField(max_length=32)
-#     content = models.TextField()
-#     created_date = models.DateTimeField()
+
+# Keyword model 예상
+# id = char
+# section = Foreignkey
+# created_date = DateTime
+# counts = int
+# word = char
+
 def index(req):
-    return render(req,'news/index.html')
+    # 보내주는 키워드 갯수 설정 필요
+    # keywords = Keyword.objects.all.select_related().filter(created_date__gte = (now-datetime.timedelta(1)))
+    # keywords_politics = keywords.filter(press='100')
+    # keywords_economics = keywords.filter(press='101')
+    # keywords_social = keywords.filter(press='102')
+    # keywords_world = keywords.filter(press='104')
+    # keywords_IT = keywords.filter(press='105')
+    keywords = [{"x":"한글", "value":80},
+            {"x":"통신", "value":56},
+            {"x":"lists", "value":44},
+            {"x":"meaning", "value":40},
+            {"x":"useful", "value":36},
+            {"x":"different", "value":32},
+            {"x":"grammar", "value":28},
+            {"x":"teaching", "value":24},
+            {"x":"example", "value":20},
+            {"x":"thing", "value":12},
+            {"x":"riding", "value":80},
+            {"x":"increse", "value":56},
+            {"x":"titles", "value":44},
+            {"x":"understand", "value":40},
+            {"x":"useless", "value":36},
+            {"x":"difficult", "value":32},
+            {"x":"verb", "value":28},
+            {"x":"studing", "value":24},
+            {"x":"test", "value":20},
+            {"x":"one", "value":12}]
+    keywords_json = json.dumps(keywords)
+    print(keywords_json)
+    return render(req, 'news/index.html', {'keywords_json':keywords_json, 'keywords':keywords})   # {'keywords':keywords}...
 
 def main(req):
     # 카테고리 미선택 시
@@ -40,9 +69,9 @@ def main(req):
             articles = paginator.page(paginator.num_pages)
         
         if scrap:
-            return render(req, 'news/main.html', {'articles':articles, 'scrap':scrap , "articles_count":articles_count})
+            return render(req, 'news/main.html', {'articles':articles, 'scrap':scrap , "articles_value":articles_count})
         else:
-            return render(req, 'news/main.html', {'articles':articles, "articles_count":articles_count})
+            return render(req, 'news/main.html', {'articles':articles, "articles_value":articles_count})
     # 카테고리 선택 시
     else:
         scrap = {}
@@ -89,7 +118,7 @@ def main(req):
         
         if scrap:
             scrap = scrap.order_by('-article__created_date')
-            return render(req, 'news/main.html', {'articles':articles, "press_list":press_form, "section_list":section_form, "scrap":scrap, "articles_count":articles_count})
+            return render(req, 'news/main.html', {'articles':articles, "press_list":press_form, "section_list":section_form, "scrap":scrap, "articles_value":articles_count})
         
         else:
             return render(req, 'news/main.html', {'articles':articles, "press_list":press_form, "section_list":section_form, 'articles_count':articles_count})
@@ -188,10 +217,10 @@ def search(req):
 
         if scrap:
             scrap = scrap.order_by('-article__created_date')
-            return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "scrap":scrap, "q":search, "articles_count":articles_count})
+            return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "scrap":scrap, "q":search, "articles_value":articles_count})
             
         else:
-            return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "q":search, "articles_count":articles_count})
+            return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "q":search, "articles_value":articles_count})
     else:
         scrap={}
         if req.user.is_authenticated:
