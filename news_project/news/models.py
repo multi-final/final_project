@@ -41,3 +41,17 @@ class Article(models.Model):
         centences.pop()
         return centences
         
+# 예상 모델
+class Keyword(models.Model):
+    word = models.CharField(max_length=64)
+    count = models.IntegerField()
+    section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    date = models.DateTimeField()
+
+    # json형식으로 보내기 위해 변환하는 함수
+    def to_json(self):
+    	return {
+            "x": self.word,
+            #"category": self.section,
+            "value": self.count
+        }

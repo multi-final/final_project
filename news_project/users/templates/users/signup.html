@@ -115,6 +115,13 @@
       background: #c34a4a;
       color: #ffffff;
     }
+    .errorlist{
+      padding: 0;
+      text-align: left;
+      list-style: none;
+      color: #c34a4a;
+      font-size: 12px;
+    }
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -145,7 +152,7 @@
 
   <form method="post" action="{% url 'users:signup' %}">
     {% csrf_token %}
-    {% if form.errors %}
+    <!-- {% if form.errors %}
       {% for field in form %}
         {% for error in field.errors %}
           <div class="alert alert-danger" style="font-size: small;">
@@ -159,39 +166,61 @@
           <strong>{{ error }}</strong>
         </div>
       {% endfor %}
-    {% endif %}
+    {% endif %} -->
 
+    <!-- {% for field in form %}
+      <label>
+        <p class="label-txt">ENTER</p>
+        {{ field }}
+        <div class="line-box"><div class="line"></div>
+      </label>
+      {% if field.errors %}
+        <span>{{ field.errors }}</span>
+      {% endif %}
+    {% endfor %} -->
     <label>
       <p class="label-txt">ENTER USERNAME</p>
-      <input type="text" class="input" name="username" id="username"
+      <input type="text" class="input" name="username" required id="username"
       value="{{ form.username.value|default_if_none:'' }}">
       <div class="line-box">
         <div class="line"></div>
       </div>
+      {% if form.username.errors %}
+        <span>{{ form.username.errors }}</span>
+      {% endif %}
     </label>
     <label>
       <p class="label-txt">ENTER PASSWORD</p>
-      <input type="password" class="input" name="password1" id="password1"
+      <input type="password" class="input" name="password1" id="password1" required
         value="{{ form.password1.value|default_if_none:'' }}">
         <div class="line-box">
         <div class="line"></div>
       </div>
+      {% if form.password1.errors %}
+        <span>{{ form.password1.errors }}</span>
+      {% endif %}
     </label>
     <label>
       <p class="label-txt">CONFIRM PASSWORD</p>
-      <input type="password" class="input" name="password2" id="password2"
+      <input type="password" class="input" name="password2" id="password2" required
         value="{{ form.password2.value|default_if_none:'' }}">
       <div class="line-box">
         <div class="line"></div>
       </div>
       <p id="return"> </p>
+      {% if form.password2.errors %}
+        <span>{{ form.password2.errors }}</span>
+      {% endif %}
     </label>
     <label>
       <p class="label-txt">ENTER EMAIL</p>
-      <input type="text" class="input" name="email" id="email" value="{{ form.email.value|default_if_none:'' }}">
+      <input type="email" class="input" name="email" id="email">
       <div class="line-box">
         <div class="line"></div>
       </div>
+      {% if form.email.errors %}
+        <span>{{ form.email.errors }}</span>
+      {% endif %}
     </label>
     <button type="submit">가입</button>
     <input type="button" id="prev" onclick="location.href='javascript:window.history.back()'" value="뒤로가기"></input>

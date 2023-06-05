@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article, Section, Press
+from .models import Article, Keyword, Section
 from scrap.models import Scrap
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -17,34 +17,49 @@ from datetime import datetime as dt
 def index(req):
     # 보내주는 키워드 갯수 설정 필요
     # keywords = Keyword.objects.all.select_related().filter(created_date__gte = (now-datetime.timedelta(1)))
+    # keywords_js = json.dumps([keyword.to_json for keyword in keywords])
     # keywords_politics = keywords.filter(press='100')
     # keywords_economics = keywords.filter(press='101')
     # keywords_social = keywords.filter(press='102')
     # keywords_world = keywords.filter(press='104')
     # keywords_IT = keywords.filter(press='105')
-    keywords = [{"x":"한글", "value":80},
-            {"x":"통신", "value":56},
-            {"x":"lists", "value":44},
-            {"x":"meaning", "value":40},
-            {"x":"useful", "value":36},
-            {"x":"different", "value":32},
-            {"x":"grammar", "value":28},
-            {"x":"teaching", "value":24},
-            {"x":"example", "value":20},
-            {"x":"thing", "value":12},
-            {"x":"riding", "value":80},
-            {"x":"increse", "value":56},
-            {"x":"titles", "value":44},
-            {"x":"understand", "value":40},
-            {"x":"useless", "value":36},
-            {"x":"difficult", "value":32},
-            {"x":"verb", "value":28},
-            {"x":"studing", "value":24},
-            {"x":"test", "value":20},
-            {"x":"one", "value":12}]
-    keywords_json = json.dumps(keywords)
-    print(keywords_json)
-    return render(req, 'news/index.html', {'keywords_json':keywords_json, 'keywords':keywords})   # {'keywords':keywords}...
+    # keywords = [{"x":"한글", "value":80},
+    #         {"x":"통신", "value":56},
+    #         {"x":"lists", "value":44},
+    #         {"x":"meaning", "value":40},
+    #         {"x":"useful", "value":36},
+    #         {"x":"different", "value":32},
+    #         {"x":"grammar", "value":28},
+    #         {"x":"teaching", "value":24},
+    #         {"x":"example", "value":20},
+    #         {"x":"thing", "value":12},
+    #         {"x":"riding", "value":80},
+    #         {"x":"increse", "value":56},
+    #         {"x":"titles", "value":44},
+    #         {"x":"understand", "value":40},
+    #         {"x":"useless", "value":36},
+    #         {"x":"difficult", "value":32},
+    #         {"x":"verb", "value":28},
+    #         {"x":"studing", "value":24},
+    #         {"x":"test", "value":20},
+    #         {"x":"one", "value":12}]
+    # keywords_json = json.dumps(keywords)
+
+    today = dt.today()
+    start_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day) ,'%Y %m %d')
+    end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
+    keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
+    context = {
+        'keywords':json.dumps([keyword.to_json() for keyword in keywords.filter(section='000')]),
+        'keywords_politics':json.dumps([keyword.to_json() for keyword in keywords.filter(section='100')]),
+        'keywords_economics':json.dumps([keyword.to_json() for keyword in keywords.filter(section='101')]),
+        'keywords_social':json.dumps([keyword.to_json() for keyword in keywords.filter(section='102')]),
+        'keywords_world':json.dumps([keyword.to_json() for keyword in keywords.filter(section='104')]),
+        'keywords_IT':json.dumps([keyword.to_json() for keyword in keywords.filter(section='105')]),
+        }
+    
+
+    return render(req, 'news/index.html', context)   # {'keywords':keywords}...
 
 def main(req):
     # 카테고리 미선택 시
