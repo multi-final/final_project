@@ -3,32 +3,70 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import check_password
 from .models import User
-from .forms import UserForm
+from .forms import UserForm, customUserCreationForm
 import json
 
-
-def signup(req):
-    if req.method == 'GET':
-        return render(req, 'users/signup.html')
+# def signup(req):
+#     if req.method == 'GET':
+#         form = customUserCreationForm()
+#         return render(req,'users/signup.html', {'form':form})
     
-    else:
-        # fields = ("username", "password1", "password2", "email")
-        form = UserForm(req.POST)
-        # 형식에 맞으면
+#     else:
+#         form = customUserCreationForm(req.POST)
+#         # 형식에 맞으면
+#         if form.is_valid():
+#             user = form.save()
+#             auth_login(req, user, backend='django.contrib.auth.backends.ModelBackend')
+#             return redirect('/')
+#         else:
+#             form = customUserCreationForm()
+#             return render(req,'users/signup.html', {'form':form})
+
+# def signup(req):
+#     if req.method == 'GET':
+#         form = UserForm()
+#         return render(req,'users/signup.html', {'form':form})
+    
+#     else:
+#         # fields = ("username", "password1", "password2", "email")
+#         form = UserForm(req.POST)
+#         # 형식에 맞으면
+#         if form.is_valid():
+#             form.save()
+#             new_user = User.objects.create_user(
+#                 username=form.cleaned_data['username'],
+#                 email=form.cleaned_data['email'],
+#                 password=form.cleaned_data['password1']
+#             )
+#             login(req,new_user)
+#             return redirect('/')
+#         else:
+#             form = UserForm()
+#             return render(req,'users/signup.html', {'form':form})
+        
+
+
+
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
         if form.is_valid():
-            new_user = User.objects.create_user(
-                username=form.cleaned_data['username'],
-                email=form.cleaned_data['email'],
-                password=form.cleaned_data['password1']
-            )
-            login(req,new_user)
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)  # 사용자 인증
+            login(request, user)  # 로그인
             return redirect('/')
-        else:
-            return render(req,'users/signup.html')
+    else:
+        form = UserForm()
+    return render(request, 'users/signup.html', {'form': form})
+
+
 
 def user_login(req):
     if req.method == 'GET':
@@ -37,7 +75,7 @@ def user_login(req):
     else:
         username = req.POST.get('username')
         password = req.POST.get('password')
-
+        
         user_login = authenticate(req,username=username, password=password)
         if user_login is not None:
             login(req, user_login)
