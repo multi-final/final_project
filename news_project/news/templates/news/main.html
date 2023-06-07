@@ -88,27 +88,17 @@
   <style>
     .fix {
       position:fixed;
-      animation: nav_down 0.5s ease
     }
-
-    /* @keyframes nav_down {
-      0%{
-        transform: translateY(-50px)
-      }
-      100%{
-        transform: translateY(0px)
-      }
-    } */
 
     #searchnav{
       z-index: 2;
       visibility: visible;
       position: sticky;
-      top: 0px;
+      top: -1px;
       display: flex;
       width: 100vw;
       height: 50px;
-      background-color: rgb(255, 255, 255);
+      background-color: white;
       align-items: center;
       box-shadow: 0px 4px 3px -2px rgba(0,0,0,.075);
     }
@@ -175,6 +165,7 @@
     </div>
   </div>
   <div id="content" class="container" style="min-height: 1080px;">
+    
     <div class="row">
       <!-- 카테고리 -->
       <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
@@ -186,15 +177,15 @@
           position: relative;
           overflow: hidden;
           width: 180px;
-          height: 600px;
+          height: 690px;
           transform: translateX(-150px);
           top: 0;
         }
         #innerSidepanel{
           position:absolute;
-          background-color: #ffffff;
+          background-color: #fafbfc;
           width: 180px;
-          height: 573px;
+          height: 690px;
           left:100%; top:0; bottom:0; right:-100%;
           transform-origin:50% 50%;
           transition:0.5s;
@@ -207,12 +198,16 @@
           position: sticky;
           top: 50px;
         }
+        input[type=checkbox] {
+          zoom: 1.5;
+        }
+
       </style>
       <div id="stickypanel">
         <div id="mySidepanel" class="sidepanel">
           <div id="innerSidepanel">
           <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
-          <div class="flex-shrink-0 p-3" style="width: 180px;">
+          <div class="flex-shrink-0 p-3" style="width: 180px; height: 690px;">
             <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
               <span class="fs-5 fw-semibold">Category</span>
             </a>
@@ -229,52 +224,52 @@
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <div class="checkli">
                         <li><input type="checkbox" id="press1" name="press" value="32"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press1">경향신문</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press1" class="llabel">경향신문</label></li>
                         <li><input type="checkbox" id="press2" name="press" value="5"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press2">국민일보</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press2" class="llabel">국민일보</label></li>
                         <li><input type="checkbox" id="press3" name="press" value="20"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press3">동아일보</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press3" class="llabel">동아일보</label></li>
                         <li><input type="checkbox" id="press4" name="press" value="21"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press4">문화일보</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press4" class="llabel">문화일보</label></li>
                         <li><input type="checkbox" id="press5" name="press" value="81"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press5">서울신문</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press5" class="llabel">서울신문</label></li>
                         <li><input type="checkbox" id="press6" name="press" value="22"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press6">세계일보</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press6" class="llabel">세계일보</label></li>
                         <li><input type="checkbox" id="press7" name="press" value="23"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press7">조선일보</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press7" class="llabel">조선일보</label></li>
                         <li><input type="checkbox" id="press8" name="press" value="25"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press8">중앙일보</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press8" class="llabel">중앙일보</label></li>
                         <li><input type="checkbox" id="press9" name="press" value="28"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9">한겨례</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press9" class="llabel">한겨례</label></li>
                         <li><input type="checkbox" id="press10" name="press" value="469"
-                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10">한국일보</label></li>
+                            class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="press10" class="llabel">한국일보</label></li>
                         </div>
                       </ul>
                     </div>
                   </li>
                   <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                      data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
+                      data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true" type="button">
                       분야 선택
                     </button>
-                    <div class="collapse" id="dashboard-collapse" style="margin-top:5px;">
+                    <div class="collapse show" id="dashboard-collapse" style="margin-top:5px;">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <div class="checkli">
                         <li><input
                               type="checkbox" id="section1" name="section" value="100"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section1">정치</label> </li>
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section1" class="llabel">정치</label> </li>
                         <li><input
                               type="checkbox"id="section2"  name="section" value="101"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section2">경제</label></li>
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section2" class="llabel">경제</label></li>
                         <li><input
                               type="checkbox" id="section3" name="section" value="102"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section3">사회</label></li>
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section3" class="llabel">사회</label></li>
                         <li><input
                               type="checkbox" id="section4" name="section" value="104"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section4">세계</label></li>
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section4" class="llabel">세계</label></li>
                         <li><input
                               type="checkbox" id="section5" name="section" value="105"
-                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section5">IT</label></li>
+                              class="link-body-emphasis d-inline-flex text-decoration-none rounded"><label for="section5" class="llabel">IT</label></li>
                         </div>
                       </ul>
                     </div>
@@ -321,6 +316,11 @@
         
       </style>
       <div id="summary_col" class="col-9">
+        {% if q %}
+          {% if articles_count == 0 %}
+            <b>입력한 검색어 "{{q}}"(와)과 일치하는 결과가 없습니다.</b>
+          {% endif %}
+        {% endif %}
         <div class="summary">
           <ul id="ul1" style="max-width: 85%;">
             <!-- <div id="searchwrap">
@@ -356,7 +356,7 @@
                   </tr> -->
                   {% for centence in article.centence_split %}
                   <tr>
-                    <td colspan="3" style="padding-top: 10px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{centence}}.</div></a></td>
+                    <td colspan="3" style="padding-top: 10px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">&nbsp; {{centence}}.</div></a></td>
                   </tr>
                   {% endfor %}
                 </table>
@@ -434,36 +434,37 @@
     var isEnd = false
     
     // 무한 스크롤로 구현
-    // $(window).scroll(function(){
-    //   var scrollHeight = $(window).scrollTop() + $(window).height();
-    //   var documentHeight = $(document).height();
-    //         if (!isEnd){
-    //           loadmore.classList.add('disabled');
-    //           loadmore.setAttribute('disabled', false)
-    //           if (scrollHeight + 300 >= documentHeight){
-    //             var press_list = "{{press_list|join:' '}}"
-    //             var section_list = "{{section_list|join:' '}}"
-    //             var page = $("#page").val();
-    //             callMorePostAjax(page, press_list, section_list);
-    //             $("#page").val(parseInt(page)+1);
-    //           }
-    //         }
-    //     });
+    $(window).scroll(function(){
+      var scrollHeight = $(window).scrollTop() + $(window).height();
+      var documentHeight = $(document).height();
+            if (!isEnd){
+              loadmore.classList.add('disabled');
+              loadmore.setAttribute('disabled', false)
+              if (scrollHeight + 300 >= documentHeight){
+                var q = "{{q}}"
+                var press_list = $("#press").val();
+                var section_list = $("#section").val();
+                var page = $("#page").val();
+                callMorePostAjax(page, press_list, section_list, q);
+                $("#page").val(parseInt(page)+1);
+              }
+            }
+        });
 
     // load more 버튼으로 구현
-    function click_load_more(){
-      if(!isEnd){
-        var q = "{{q}}"
-        var press_list = $("#press").val();
-        var section_list = $("#section").val();
-        var page = $("#page").val();
-        callMorePostAjax(page, press_list, section_list, q);
-        $("#page").val(parseInt(page)+1);
-      }else{
-        loadmore.innerText='No Data';
-        loadmore.setAttribute('disabled', false);
-      }
-    }
+    // function click_load_more(){
+    //   if(!isEnd){
+    //     var q = "{{q}}"
+    //     var press_list = $("#press").val();
+    //     var section_list = $("#section").val();
+    //     var page = $("#page").val();
+    //     callMorePostAjax(page, press_list, section_list, q);
+    //     $("#page").val(parseInt(page)+1);
+    //   }else{
+    //     loadmore.innerText='No Data';
+    //     loadmore.setAttribute('disabled', false);
+    //   }
+    // }
     
     // 요약기사 더 요청(ajax)
     function callMorePostAjax(page, press_list, section_list,q) {

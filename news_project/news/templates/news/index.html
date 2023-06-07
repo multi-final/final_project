@@ -4,17 +4,6 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
-    #header {
-        text-align: center;
-    }
-
-    #main {
-        border: 1px solid red;
-        display: flex;
-        /* flex-direction: column; */
-        text-align: center;
-        width: 100%;
-    }
 
     #row {
         width: 1200px;
@@ -24,57 +13,14 @@
         justify-content: space-between;
     }
 
-    #wordwrap {
-        display: flex;
-        flex-direction: row;
-        margin: 0 auto;
-    }
-
-    #westwrap {
-        display: flex;
-        flex-direction: column;
-    }
-
-    #wordcloud {
-        border: 1px solid black;
-        width: 800px;
-        height: 300px;
-    }
-
-    #weather {
-        border: 1px solid black;
-        width: 200px;
-        height: 150px;
-    }
-
-    #stock {
-        border: 1px solid black;
-        width: 200px;
-        height: 150px;
-    }
-
-    #intro {
-        border: 1px solid black;
-        width: 100px;
-        height: 100px;
-        margin: 0 auto;
-    }
     #index{
         width: 100%;
         height: 1080px;
     }
-    #container {
-        width: 1200px;
-        height: 500px;
-        margin: 0 auto;
-        margin-top: 40px;
-        border: 1px solid black;
-        border-radius: 15px;
-        padding: 20px;
-    }
+    
     #sectioncont{
         visibility: hidden;
-        border: 1px solid rgb(80, 80, 80);
+        border: 1px solid #d9e1e5;
         border-radius: 10px;
         position: relative;
     }
@@ -97,13 +43,13 @@
     .sectionid{
         width: 116px;
         height: 30px;
-        border-left: 1px solid black;
-        border-top: 1px solid black;
+        border-left: 1px solid #d9e1e5;
+        border-top: 1px solid #d9e1e5;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: 0.5s;
+        transition: 0.2s;
     }
     .slick-prev{
         position: absolute;
@@ -130,7 +76,7 @@
         color: white;
         width: 580px;
         height: 32px;
-        background-color: rgba(80, 80, 80);
+        background-color: #808080;
         font-size: 1em;
         display: flex;
         align-items: center;
@@ -142,10 +88,47 @@
     #btn0{
         border-left: 0px;
         border-bottom-left-radius: 10px;
-        background-color: rgba(80, 80, 80); color:white;
     }
     #btn4{
         border-bottom-right-radius: 10px;
+    }
+    .active{
+        background-color: #808080;
+        color:white;
+        box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);
+    }
+    #container {
+        width: 1200px;
+        height: 500px;
+        padding: 10px;
+    }
+    #cloudwrap{
+        width: 1200px;
+        height: 500px;
+        margin: 0 auto;
+        position: relative;
+        margin-top: 40px;
+        border: 1px solid #d9e1e5;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    #cloudtitle{
+        position: absolute;
+        color: white;
+        text-align: center;
+        background-color: #808080;
+        width: 1200px;
+        height: 32px;
+        z-index: 4;
+        padding-top: 3px;
+    }
+    #keywordtooltip{
+        background-color: white;
+        position: absolute;
+        right: 10px;
+        z-index: 4;
+        font-size: 11px;
+        bottom: 10px;
     }
 </style>
 <script>
@@ -173,8 +156,10 @@
         });
 
         $('#sectionwrap').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-            document.querySelector("#btn"+currentSlide).style="background-color: rgba(255, 255, 255); color:black;"
-            document.querySelector("#btn"+nextSlide).style="background-color: rgba(80, 80, 80); color:white;"
+            // document.querySelector("#btn"+currentSlide).style="background-color: rgba(255, 255, 255); color:black; box-shadow: none;"
+            // document.querySelector("#btn"+nextSlide).style="background-color: #808080; color:white; box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);"
+            document.querySelector("#btn"+currentSlide).classList.remove('active')
+            document.querySelector("#btn"+nextSlide).classList.add('active')
         });
 
         $(function(){
@@ -202,7 +187,13 @@
 <script type='text/javascript' src='https://www.weatherapi.com/weather/widget.ashx?loc=1377353&wid=4&tu=1&div=weatherapi-weather-widget-4' async></script>
 
 <div id="index">
-    <div id="container"></div>
+
+    <div id="cloudwrap">
+        <div id="cloudtitle">전체 키워드 빈도</div>
+        <div id="container"></div>
+        <div id="keywordtooltip">키워드를 클릭하면 해당 키워드 검색 페이지로 이동합니다</div>
+    </div>
+
     <div id="row">
         <div style="width:580px;" id="weatherapi-weather-widget-4"></div>
         <div id="sectioncont">
@@ -214,7 +205,7 @@
                 <div id="section5" class="section"><div id="tag5" class="sectiontag">IT</div></div>
             </div>
             <div id="menuwrap">
-                <div id="btn0" class="sectionid" style="border-left: 0px">정치</div>
+                <div id="btn0" class="sectionid active">정치</div>
                 <div id="btn1" class="sectionid">경제</div>
                 <div id="btn2" class="sectionid">사회</div>
                 <div id="btn3" class="sectionid">세계</div>
@@ -222,6 +213,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script>

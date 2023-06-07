@@ -115,10 +115,18 @@
       background: #c34a4a;
       color: #ffffff;
     }
+
     .errorlist{
       padding: 0;
       text-align: left;
       list-style: none;
+      color: #c34a4a;
+      font-size: 12px;
+    }
+
+    p{
+      padding: 0;
+      text-align: left;
       color: #c34a4a;
       font-size: 12px;
     }
@@ -151,7 +159,7 @@
     const password = document.querySelector('#password1').value;
     if (password.length < 8) {
       document.getElementById('return1').innerHTML = '비밀번호번호는 8글자 이상이어야합니다.';
-      document.getElementById('return1').style.color = '#fa4b4b';
+      document.getElementById('return1').style.color = '#c34a4a';
     }
     else {
       document.getElementById('return1').innerHTML = ''
@@ -162,13 +170,14 @@
     const password1 = document.querySelector('#password1').value;
     const password2 = document.querySelector('#password2').value;
     if (password1 != '' && document.password2 != '') {
-      if (password1 == password2) {
-        document.getElementById('return2').innerHTML = '비밀번호가 일치합니다.';
-        document.getElementById('return2').style.color = '#5887f7';
+      if (password1 != password2) {
+        document.getElementById('return2').innerHTML = '비밀번호가 일치하지 않습니다.';
+        document.getElementById('return2').style.color = '#c34a4a';
       }
       else {
-        document.getElementById('return2').innerHTML = '비밀번호가 일치하지 않습니다.';
-        document.getElementById('return2').style.color = '#fa4b4b';
+        document.getElementById('return2').innerHTML = '';
+        // document.getElementById('return2').innerHTML = '비밀번호가 일치합니다.';
+        // document.getElementById('return2').style.color = '#5887f7';
       }
     }
   }
@@ -234,7 +243,7 @@
       <div class="line-box">
         <div class="line"></div>
       </div>
-      <p id="return2"> </p>
+      <p id="return2"></p>
       {% if form.password2.errors %}
         <span>{{ form.password2.errors }}</span>
       {% endif %}

@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<h2 style="text-align: center; margin-top: 50px;">메인 화면</h2>
+<div style="border: 1px solid black; width: 80%; margin-top: 50px; margin-bottom: 50px; text-align: center; margin-left: 10%;">
+    <img src="{% static 'news/Main.svg' %}" alt="">
+</div>
+<h2 style="text-align: center;">본문 화면</h2>
+<div style="border: 1px solid black; width: 80%; margin-top: 50px; margin-bottom: 50px; text-align: center; margin-left: 10%;">
+    <img src="{% static 'news/Article.svg' %}" alt="">
+</div>
+<h2 style="text-align: center;">스크랩 화면</h2>
+<div style="border: 1px solid black; width: 80%; margin-top: 50px; margin-bottom: 50px; text-align: center; margin-left: 10%;">
+    <img src="{% static 'news/Scrap.svg' %}" alt="">
+</div>
+{% endblock %}

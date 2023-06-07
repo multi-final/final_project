@@ -52,19 +52,19 @@ import json
 
 
 
-def signup(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
+def signup(req):
+    if req.method == "POST":
+        form = UserForm(req.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)  # 사용자 인증
-            login(request, user)  # 로그인
+            login(req, user)  # 로그인
             return redirect('/')
     else:
         form = UserForm()
-    return render(request, 'users/signup.html', {'form': form})
+    return render(req, 'users/signup.html', {'form': form})
 
 
 
@@ -133,8 +133,8 @@ def password(req):
     return render(req, 'users/password.html')
 
 
-def delete(request):
-    if request.user.is_authenticated:
-        request.user.delete()
-        logout(request)
+def delete(req):
+    if req.user.is_authenticated:
+        req.user.delete()
+        logout(req)
     return redirect('/')

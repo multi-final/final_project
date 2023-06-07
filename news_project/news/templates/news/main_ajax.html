@@ -3,7 +3,7 @@
   {% for article in articles %}
   <li>
     <div id="div{{article.id}}">
-      <table width="100%">
+      <!-- <table width="100%">
         <tr style="text-align: center;">
           <td style="text-align: left;"><b style="font-size: 12px;"><a href="{{article.url}}" target='_blank'>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</a></b></td>
           <td width="150px"><b style="text-align: right; margin-bottom: 0px; font-size: 0.8em;">{{article.created_date}}</b></td>
@@ -19,6 +19,29 @@
         <tr>
           <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.content}}</div></a></td>
         </tr>
+      </table> -->
+      <table id="startsc" width="100%">
+        <tr style="text-align: center;">
+          <td style="text-align: left; padding-bottom: 15px;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.press.name}}, {{article.section.name}}]  {{article.headline}}</b></a></td>
+          <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.created_date.year}}년 {{article.created_date.month}}월 {{article.created_date.day}}일</td>
+          <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.writer}}</td>
+          <td rowspan="4" width="50px">
+            {% if request.user.is_authenticated %}
+            <!-- <i class="fa-solid fa-bookmark fa-lg" style="color: #000000;"></i> -->
+            <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
+            {% else %}
+            <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
+            {% endif %}
+          </td>
+        </tr>
+        <!-- <tr>
+          <td colspan="3" style="padding-top: 10px; padding-bottom: 20px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.content}}</div></a></td>
+        </tr> -->
+        {% for centence in article.centence_split %}
+        <tr>
+          <td colspan="3" style="padding-top: 10px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{centence}}.</div></a></td>
+        </tr>
+        {% endfor %}
       </table>
       <hr>
     </div>

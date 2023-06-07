@@ -176,15 +176,15 @@
           position: relative;
           overflow: hidden;
           width: 180px;
-          height: 600px;
+          height: 690px;
           transform: translateX(-150px);
           top: 0;
         }
         #innerSidepanel{
           position:absolute;
-          background-color: #ffffff;
+          background-color: #fafbfc;
           width: 180px;
-          height: 573px;
+          height: 690px;
           left:100%; top:0; bottom:0; right:-100%;
           transform-origin:50% 50%;
           transition:0.5s;
@@ -197,12 +197,15 @@
           position: sticky;
           top: 50px;
         }
+        input[type=checkbox] {
+          zoom: 1.5;
+        }
       </style>
       <div id="stickypanel">
         <div id="mySidepanel" class="sidepanel">
           <div id="innerSidepanel">
           <div class="closebbtn"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
-          <div class="flex-shrink-0 p-3" style="width: 180px;">
+          <div class="flex-shrink-0 p-3" style="width: 180px; height: 690px;">
             <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
               <span class="fs-5 fw-semibold">Category</span>
             </a>
@@ -244,10 +247,10 @@
                   </li>
                   <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                      data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false" type="button">
+                      data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true" type="button">
                       분야 선택
                     </button>
-                    <div class="collapse" id="dashboard-collapse" style="margin-top:5px;">
+                    <div class="collapse show" id="dashboard-collapse" style="margin-top:5px;">
                       <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <div class="checkli">
                         <li><input
@@ -309,6 +312,11 @@
       </style>
       <div id="summary_col" class="col-1">
         <div class="summary">
+          {% if q %}
+            {% if articles_count == 0 %}
+              <b>입력한 검색어 "{{q}}"(와)과 일치하는 결과가 없습니다.</b>
+            {% endif %}
+          {% endif %}
           <ul id="ul1">
             <li class="scrap">
               <button id="test" onclick="rresize()"
@@ -321,17 +329,19 @@
                   {% for article in dbarticles_today %}
                   <li>
                   <div id="div{{article.id}}" style="width: 1100px;">
-                      <table width="100%">
-                        <tr style="text-align: center;">
-                          <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
-                          <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
-                          <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
-                          <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
-                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                    <table width="100%">
+                      <tr style="text-align: center;">
+                        <td style="text-align: left; padding-bottom: 15px;"><a href="{{article.article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                        <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
+                        <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
+                        <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                          onclick="delete_scrap('{{article.id}}')">X</button></td>
                         </tr>
+                        {% for centence in article.article.centence_split %}
                         <tr>
-                          <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
+                          <td colspan="3" style="padding-top: 10px;"><a href="{{article.article.url}}" target='_blank' style="margin: 0; padding: 0;"><div class="contentwrap">&nbsp; {{centence}}.</div></a></td>
                         </tr>
+                        {% endfor %}
                       </table>
                       <hr>
                     </div>
@@ -354,15 +364,17 @@
                     <div id="div{{article.id}}" style="width: 1100px;">
                         <table width="100%">
                           <tr style="text-align: center;">
-                            <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                            <td style="text-align: left; padding-bottom: 15px;"><a href="{{article.article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
                             <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
                             <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
                             <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
                               onclick="delete_scrap('{{article.id}}')">X</button></td>
                           </tr>
+                          {% for centence in article.article.centence_split %}
                           <tr>
-                            <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
+                            <td colspan="3" style="padding-top: 10px;"><a href="{{article.article.url}}" target='_blank' style="margin: 0; padding: 0;"><div class="contentwrap">&nbsp; {{centence}}.</div></a></td>
                           </tr>
+                          {% endfor %}
                         </table>
                         <hr>
                       </div>
@@ -382,21 +394,23 @@
                   {% for article in dbarticles_last_week %}
                   <li>
                     <div id="div{{article.id}}" style="width: 1100px;">
-                        <table width="100%">
-                          <tr style="text-align: center;">
-                            <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
-                            <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
-                            <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
-                            <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
-                              onclick="delete_scrap('{{article.id}}')">X</button></td>
-                          </tr>
-                          <tr>
-                            <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
-                          </tr>
-                        </table>
-                        <hr>
-                      </div>
-                    </li>
+                      <table width="100%">
+                        <tr style="text-align: center;">
+                          <td style="text-align: left; padding-bottom: 15px;"><a href="{{article.article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                          <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
+                          <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
+                          <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                        </tr>
+                        {% for centence in article.article.centence_split %}
+                        <tr>
+                          <td colspan="3" style="padding-top: 10px;"><a href="{{article.article.url}}" target='_blank' style="margin: 0; padding: 0;"><div class="contentwrap">&nbsp; {{centence}}.</div></a></td>
+                        </tr>
+                        {% endfor %}
+                      </table>
+                      <hr>
+                    </div>
+                  </li>
                   {% endfor %}
                 </ul>
               </div>
@@ -412,18 +426,32 @@
                   {% for article in dbarticles_long_ago %}
                   <li>
                     <div id="div{{article.id}}" style="width: 1100px;">
-                        <table width="100%">
+                      <table width="100%">
+                        <tr style="text-align: center;">
+                          <td style="text-align: left; padding-bottom: 15px;"><a href="{{article.article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                          <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
+                          <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
+                          <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
+                            onclick="delete_scrap('{{article.id}}')">X</button></td>
+                          </tr>
+                          {% for centence in article.article.centence_split %}
+                          <tr>
+                            <td colspan="3" style="padding-top: 10px;"><a href="{{article.article.url}}" target='_blank' style="margin: 0; padding: 0;"><div class="contentwrap">&nbsp; {{centence}}.</div></a></td>
+                          </tr>
+                          {% endfor %}
+                        </table>
+                        <!-- <table width="100%">
                           <tr style="text-align: center;">
-                            <td style="text-align: left;"><a href="{{article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
+                            <td style="text-align: left;"><a href="{{article.article.url}}" target='_blank' style="font-size: 15px;"><b>[{{article.article.press.name}}, {{article.article.section.name}}]  {{article.article.headline}}</b></a></td>
                             <td width="150px" style="text-align: right; margin-bottom: 0px; font-size: 12px;">{{article.article.created_date.year}}년 {{article.article.created_date.month}}월 {{article.article.created_date.day}}일</td>
                             <td style="text-align: right; margin-right: 0px; font-size: 12px; padding-right: 15px; width: 85px;">{{article.article.writer}}</td>
                             <td rowspan="2" width="50px"><button class="btn btn-danger" style="width: 49px" value="{{article.id}}"
                               onclick="delete_scrap('{{article.id}}')">X</button></td>
                           </tr>
                           <tr>
-                            <td colspan="3"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
+                            <td colspan="3"><a href="{{article.article.url}}" target='_blank'><div class="contentwrap">{{article.article.content}}</div></a></td>
                           </tr>
-                        </table>
+                        </table> -->
                         <hr>
                       </div>
                     </li>
