@@ -95,7 +95,7 @@
 }
 /* 프로필 아이콘 클릭시 드롭다운 제공 */
 #dropdown_menu{
-  z-index: 1;
+  z-index: 99;
   position: absolute;
   background-color: white;
   border: 1px solid #c7c7c7;
@@ -187,10 +187,14 @@
 .checkli li{
     list-style: none;
     margin-left: 28px;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
+    position: relative;
 }
 .checkli label{
   margin-left: 5px;
+  font-size: 15px;
+  top: 0;
+  position: absolute;
 }
 /* 검색창 */
 #search{
@@ -273,6 +277,9 @@
         #navintr{
           border: 1px solid black;
         }
+        #profil{
+          z-index: 99;
+        }
       </style>
       <div class="px-3 py-1 text-bg-white p-3 bg-body" style="box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); margin-bottom: 5px;">
         <div class="container">
@@ -286,7 +293,16 @@
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li>
                 <div id="toolwrap">
-                  <a href="/" class="nav-link text-dark">
+                  <a href="/introduction" class="nav-link text-dark">
+                    <i class="fa-solid fa-circle-info fa-lg" style="color: #808080;"></i>
+                  </a>
+                  <p id="tooltip" style="width: 85px;"><span style="position: absolute; margin-left: 3px;">Introduction</span></p>
+                </div>
+              </li>
+              <li>
+              <li>
+                <div id="toolwrap">
+                  <a href="/how" class="nav-link text-dark">
                     <i class="fa-solid fa-lightbulb fa-lg" style="color: #808080;"></i>
                   </a>
                   <p id="tooltip"><span style="position: absolute; margin-left: 3px;">How</span></p>

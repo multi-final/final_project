@@ -45,7 +45,8 @@ def index(req):
     #         {"x":"one", "value":12}]
     # keywords_json = json.dumps(keywords)
 
-    today = dt.today()
+    # today = dt.today()
+    today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 위의 것 사용
     start_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day) ,'%Y %m %d')
     end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
     keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
@@ -84,9 +85,9 @@ def main(req):
             articles = paginator.page(paginator.num_pages)
         
         if scrap:
-            return render(req, 'news/main.html', {'articles':articles, 'scrap':scrap , "articles_value":articles_count})
+            return render(req, 'news/main.html', {'articles':articles, 'scrap':scrap , "articles_count":articles_count})
         else:
-            return render(req, 'news/main.html', {'articles':articles, "articles_value":articles_count})
+            return render(req, 'news/main.html', {'articles':articles, "articles_count":articles_count})
     # 카테고리 선택 시
     else:
         scrap = {}
@@ -133,7 +134,7 @@ def main(req):
         
         if scrap:
             scrap = scrap.order_by('-article__created_date')
-            return render(req, 'news/main.html', {'articles':articles, "press_list":press_form, "section_list":section_form, "scrap":scrap, "articles_value":articles_count})
+            return render(req, 'news/main.html', {'articles':articles, "press_list":press_form, "section_list":section_form, "scrap":scrap, "articles_count":articles_count})
         
         else:
             return render(req, 'news/main.html', {'articles':articles, "press_list":press_form, "section_list":section_form, 'articles_count':articles_count})
@@ -232,10 +233,10 @@ def search(req):
 
         if scrap:
             scrap = scrap.order_by('-article__created_date')
-            return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "scrap":scrap, "q":search, "articles_value":articles_count})
+            return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "scrap":scrap, "q":search, "articles_count":articles_count})
             
         else:
-            return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "q":search, "articles_value":articles_count})
+            return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "q":search, "articles_count":articles_count})
     else:
         scrap={}
         if req.user.is_authenticated:
@@ -285,3 +286,9 @@ def search(req):
             
         else:
             return render(req, 'news/main.html', {'articles':post_list, "press_list":press, "section_list":section, "q":search, 'articles_count':articles_count})
+
+def intro(req):
+    return render(req, 'news/intro.html')
+
+def how(req):
+    return render(req, 'news/how.html')

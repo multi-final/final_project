@@ -115,10 +115,18 @@
       background: #c34a4a;
       color: #ffffff;
     }
+
     .errorlist{
       padding: 0;
       text-align: left;
       list-style: none;
+      color: #c34a4a;
+      font-size: 12px;
+    }
+
+    p{
+      padding: 0;
+      text-align: left;
       color: #c34a4a;
       font-size: 12px;
     }
@@ -146,6 +154,33 @@
     });
 
   });
+
+  function isShort() {
+    const password = document.querySelector('#password1').value;
+    if (password.length < 8) {
+      document.getElementById('return1').innerHTML = '비밀번호번호는 8글자 이상이어야합니다.';
+      document.getElementById('return1').style.color = '#c34a4a';
+    }
+    else {
+      document.getElementById('return1').innerHTML = ''
+    }
+  }
+
+  function isSame() {
+    const password1 = document.querySelector('#password1').value;
+    const password2 = document.querySelector('#password2').value;
+    if (password1 != '' && document.password2 != '') {
+      if (password1 != password2) {
+        document.getElementById('return2').innerHTML = '비밀번호가 일치하지 않습니다.';
+        document.getElementById('return2').style.color = '#c34a4a';
+      }
+      else {
+        document.getElementById('return2').innerHTML = '';
+        // document.getElementById('return2').innerHTML = '비밀번호가 일치합니다.';
+        // document.getElementById('return2').style.color = '#5887f7';
+      }
+    }
+  }
 </script>
 
 <body>
@@ -180,7 +215,7 @@
     {% endfor %} -->
     <label>
       <p class="label-txt">ENTER USERNAME</p>
-      <input type="text" class="input" name="username" required id="username"
+      <input type="text" class="input" name="username" id="username"
       value="{{ form.username.value|default_if_none:'' }}">
       <div class="line-box">
         <div class="line"></div>
@@ -191,23 +226,24 @@
     </label>
     <label>
       <p class="label-txt">ENTER PASSWORD</p>
-      <input type="password" class="input" name="password1" id="password1" required
+      <input type="password" class="input" name="password1" id="password1" onkeyup="isShort()"
         value="{{ form.password1.value|default_if_none:'' }}">
         <div class="line-box">
         <div class="line"></div>
       </div>
+      <p id="return1"></p>
       {% if form.password1.errors %}
         <span>{{ form.password1.errors }}</span>
       {% endif %}
     </label>
     <label>
       <p class="label-txt">CONFIRM PASSWORD</p>
-      <input type="password" class="input" name="password2" id="password2" required
+      <input type="password" class="input" name="password2" id="password2" onkeyup="isSame()"
         value="{{ form.password2.value|default_if_none:'' }}">
       <div class="line-box">
         <div class="line"></div>
       </div>
-      <p id="return"> </p>
+      <p id="return2"></p>
       {% if form.password2.errors %}
         <span>{{ form.password2.errors }}</span>
       {% endif %}

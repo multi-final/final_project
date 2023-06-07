@@ -99,7 +99,7 @@ def search(req):
             articles = user_article.filter(Q(article__press__in=press)&Q(article__section__in=section)).select_related()
 
         articles = articles.filter(Q(article__headline__contains=search)|Q(article__content__contains=search)).select_related()
-
+        articles_count=articles.count()
         now = datetime.datetime.now()
         # 유저가 스크랩 한 기사 필터링
         # 설정한 기간별로 기사 나누기
@@ -113,7 +113,8 @@ def search(req):
             'dbarticles_this_week':dbarticles_this_week,
             'dbarticles_last_week':dbarticles_last_week,
             'dbarticles_long_ago':dbarticles_long_ago,
-            "q":search
+            "q":search,
+            'articles_count':articles_count
         }
 
         return render(req, 'scrap/scrap.html', context)
@@ -136,7 +137,7 @@ def search(req):
             articles = user_article.filter(Q(article__press__in=press_form)&Q(article__section__in=section_form)).select_related()
         
         articles = articles.filter(Q(article__headline__contains=search)|Q(article__content__contains=search)).select_related()
-        
+        articles_count=articles.count()
         now = datetime.datetime.now()
         dbarticles_today = articles.filter(created_date__gte = (now-datetime.timedelta(1)))
         dbarticles_this_week = articles.filter(created_date__range = (now-datetime.timedelta(8), now-datetime.timedelta(1)))
@@ -149,7 +150,8 @@ def search(req):
             'dbarticles_this_week':dbarticles_this_week,
             'dbarticles_last_week':dbarticles_last_week,
             'dbarticles_long_ago':dbarticles_long_ago,
-            "q":search
+            "q":search,
+            'articles_count':articles_count
 
             }
         return render(req, 'scrap/scrap.html', context)
