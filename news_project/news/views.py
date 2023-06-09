@@ -7,8 +7,8 @@ import json
 from datetime import datetime as dt
 
 def index(req):
-    today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 아래의 것 사용
-    # today = dt.today()
+    # today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 아래의 것 사용
+    today = dt.today()
     start_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day) ,'%Y %m %d')
     end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
     keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
