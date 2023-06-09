@@ -7,14 +7,11 @@ import json
 from datetime import datetime as dt
 
 def index(req):
+    # today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 아래의 것 사용
     today = dt.today()
-    # today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 위의 것 사용
     start_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day) ,'%Y %m %d')
     end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
     keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
-
-    # 테스트 시 상기한 4줄 주석 처리한 뒤에 아래 주석 풀고 사용
-    # keywords = Keyword.objects.all().select_related().order_by('count')
 
     # 키워드를 영역별로 추출하고 json형식으로 바꾼 뒤에 json파일로 dump -> context로 생성
     context = {
