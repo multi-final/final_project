@@ -30,18 +30,18 @@
             <!-- <i class="fa-solid fa-bookmark fa-lg" style="color: #000000;"></i> -->
             <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
             {% else %}
-            <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
+            <button class="btn btn-warning" onclick="alt()">scrap</button>
             {% endif %}
           </td>
         </tr>
-        <!-- <tr>
+        <tr>
           <td colspan="3" style="padding-top: 10px; padding-bottom: 20px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.content}}</div></a></td>
-        </tr> -->
-        {% for centence in article.centence_split %}
+        </tr>
+        <!-- {% for centence in article.centence_split %}
         <tr>
           <td colspan="3" style="padding-top: 10px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">&nbsp; {{centence}}다.</div></a></td>
         </tr>
-        {% endfor %}
+        {% endfor %} -->
       </table>
       <hr>
     </div>

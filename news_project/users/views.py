@@ -11,47 +11,6 @@ from .models import User
 from .forms import UserForm, customUserCreationForm
 import json
 
-# def signup(req):
-#     if req.method == 'GET':
-#         form = customUserCreationForm()
-#         return render(req,'users/signup.html', {'form':form})
-    
-#     else:
-#         form = customUserCreationForm(req.POST)
-#         # 형식에 맞으면
-#         if form.is_valid():
-#             user = form.save()
-#             auth_login(req, user, backend='django.contrib.auth.backends.ModelBackend')
-#             return redirect('/')
-#         else:
-#             form = customUserCreationForm()
-#             return render(req,'users/signup.html', {'form':form})
-
-# def signup(req):
-#     if req.method == 'GET':
-#         form = UserForm()
-#         return render(req,'users/signup.html', {'form':form})
-    
-#     else:
-#         # fields = ("username", "password1", "password2", "email")
-#         form = UserForm(req.POST)
-#         # 형식에 맞으면
-#         if form.is_valid():
-#             form.save()
-#             new_user = User.objects.create_user(
-#                 username=form.cleaned_data['username'],
-#                 email=form.cleaned_data['email'],
-#                 password=form.cleaned_data['password1']
-#             )
-#             login(req,new_user)
-#             return redirect('/')
-#         else:
-#             form = UserForm()
-#             return render(req,'users/signup.html', {'form':form})
-        
-
-
-
 def signup(req):
     if req.method == "POST":
         form = UserForm(req.POST)

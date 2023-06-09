@@ -7,15 +7,11 @@
     function openNav() {
       let sidepanel = document.getElementById('innerSidepanel');
       sidepanel.classList.add('openn')
-      // document.getElementById("mySidepanel").style.width = "180px";
-      // document.getElementById("mySidepanel").style.height = "573px";
     }
   
     function closeNav() {
       let sidepanel = document.getElementById('innerSidepanel');
       sidepanel.classList.remove('openn')
-      // document.getElementById("mySidepanel").style.width = "0";
-      // document.getElementById("mySidepanel").style.height = "0";
     }
   
     // 카테고리 패널 외 클릭 시 패널 닫기
@@ -169,9 +165,6 @@
     <div class="row">
       <!-- 카테고리 -->
       <div id="button_col" class="col-1" style="padding: 0; width:32px; margin-left: 80px;">
-        <!-- <button class="openbtn" onclick="openNav()" style="margin-top: 22.06px;"><i class="fa-solid fa-bars"></i></button> -->
-      <!-- </div>
-    <div class="row"> -->
       <style>
         .sidepanel{
           position: relative;
@@ -323,16 +316,7 @@
         {% endif %}
         <div class="summary">
           <ul id="ul1" style="max-width: 85%;">
-            <!-- <div id="searchwrap">
-              <form id="search" action="/search/" style="margin-bottom: 8px;">
-                <div id="search_icon"><i class="fa-solid fa-magnifying-glass fa-xs" style="color: #808080;"></i></div>
-                <input id="search_box" type="search" name="search" placeholder="검색">
-                <input type="hidden" value="{{press_list}}" name="press">
-                <input type="hidden" value="{{section_list}}" name="section">
-              </form>
-              <i class="fa-regular fa-clock" style="color: #808080;"></i>
-              <div id="count">{{articles_count}}</div>
-            </div> -->
+
             {% for article in articles %}
             <!-- <div>{{article.since_time}}</div> -->
             <li>
@@ -347,18 +331,18 @@
                       <!-- <i class="fa-solid fa-bookmark fa-lg" style="color: #000000;"></i> -->
                       <button class="btn btn-warning" onclick='sendID(this)' value="{{article.id}}">scrap</button>
                       {% else %}
-                      <a href="/users/login/"><button class="btn btn-warning">scrap</button></a>
+                      <button onclick="alt()" class="btn btn-warning">scrap</button>
                       {% endif %}
                     </td>
                   </tr>
-                  <!-- <tr>
+                  <tr>
                     <td colspan="3" style="padding-top: 10px; padding-bottom: 20px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">{{article.content}}</div></a></td>
-                  </tr> -->
-                  {% for centence in article.centence_split %}
+                  </tr>
+                  <!-- {% for centence in article.centence_split %}
                   <tr>
                     <td colspan="3" style="padding-top: 10px;"><a href="{{article.url}}" target='_blank'><div class="contentwrap">&nbsp; {{centence}}다.</div></a></td>
                   </tr>
-                  {% endfor %}
+                  {% endfor %} -->
                 </table>
                 <hr>
               </div>
@@ -466,7 +450,7 @@
     //   }
     // }
     
-    // 요약기사 더 요청(ajax)
+    // 요약기사 추가 요청(ajax)
     function callMorePostAjax(page, press_list, section_list,q) {
         $.ajax( {
         type : 'POST',

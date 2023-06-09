@@ -6,20 +6,17 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
 from datetime import datetime as dt
 
-
-# Keyword model 예상
-# id = char
-# section = Foreignkey
-# created_date = DateTime
-# counts = int
-# word = char
-
 def index(req):
     today = dt.today()
     # today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 위의 것 사용
     start_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day) ,'%Y %m %d')
     end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
     keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
+
+    # 테스트 시 상기한 4줄 주석 처리한 뒤에 아래 주석 풀고 사용
+    # keywords = Keyword.objects.all().select_related().order_by('count')
+
+    # 키워드를 영역별로 추출하고 json형식으로 바꾼 뒤에 json파일로 dump -> context로 생성
     context = {
         'keywords':json.dumps([keyword.to_json() for keyword in keywords.filter(section='000')]),
         'keywords_politics':json.dumps([keyword.to_json() for keyword in keywords.filter(section='100')]),
@@ -30,7 +27,7 @@ def index(req):
         }
     
 
-    return render(req, 'news/index.html', context)   # {'keywords':keywords}...
+    return render(req, 'news/index.html', context)
 
 def main(req):
     # 카테고리 미선택 시
