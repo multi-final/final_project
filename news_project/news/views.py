@@ -15,38 +15,8 @@ from datetime import datetime as dt
 # word = char
 
 def index(req):
-    # 보내주는 키워드 갯수 설정 필요
-    # keywords = Keyword.objects.all.select_related().filter(created_date__gte = (now-datetime.timedelta(1)))
-    # keywords_js = json.dumps([keyword.to_json for keyword in keywords])
-    # keywords_politics = keywords.filter(press='100')
-    # keywords_economics = keywords.filter(press='101')
-    # keywords_social = keywords.filter(press='102')
-    # keywords_world = keywords.filter(press='104')
-    # keywords_IT = keywords.filter(press='105')
-    # keywords = [{"x":"한글", "value":80},
-    #         {"x":"통신", "value":56},
-    #         {"x":"lists", "value":44},
-    #         {"x":"meaning", "value":40},
-    #         {"x":"useful", "value":36},
-    #         {"x":"different", "value":32},
-    #         {"x":"grammar", "value":28},
-    #         {"x":"teaching", "value":24},
-    #         {"x":"example", "value":20},
-    #         {"x":"thing", "value":12},
-    #         {"x":"riding", "value":80},
-    #         {"x":"increse", "value":56},
-    #         {"x":"titles", "value":44},
-    #         {"x":"understand", "value":40},
-    #         {"x":"useless", "value":36},
-    #         {"x":"difficult", "value":32},
-    #         {"x":"verb", "value":28},
-    #         {"x":"studing", "value":24},
-    #         {"x":"test", "value":20},
-    #         {"x":"one", "value":12}]
-    # keywords_json = json.dumps(keywords)
-
-    # today = dt.today()
-    today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 위의 것 사용
+    today = dt.today()
+    # today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 위의 것 사용
     start_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day) ,'%Y %m %d')
     end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
     keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
