@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -77,30 +77,30 @@ WSGI_APPLICATION = 'news_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
+        # 사용자 속성과 비슷한가
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-        # 사용자 속성과 비슷한가
     },
+        # 비밀번호 최소길이
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        # 비밀번호 최소길이
     },
+        # 흔한 비밀번호인가
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-        # 흔한 비밀번호인가
     },
+        # 비밀번호 전체가 숫자인가 아닌가
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-        # 비밀번호 전체가 숫자인가 아닌가
     },
 ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 

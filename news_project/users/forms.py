@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
-
+# 현재 사용중인 form
 class UserForm(UserCreationForm):
     email = forms.EmailField(label="email")
 

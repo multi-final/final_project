@@ -6,50 +6,17 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
 from datetime import datetime as dt
 
-
-# Keyword model 예상
-# id = char
-# section = Foreignkey
-# created_date = DateTime
-# counts = int
-# word = char
-
 def index(req):
-    # 보내주는 키워드 갯수 설정 필요
-    # keywords = Keyword.objects.all.select_related().filter(created_date__gte = (now-datetime.timedelta(1)))
-    # keywords_js = json.dumps([keyword.to_json for keyword in keywords])
-    # keywords_politics = keywords.filter(press='100')
-    # keywords_economics = keywords.filter(press='101')
-    # keywords_social = keywords.filter(press='102')
-    # keywords_world = keywords.filter(press='104')
-    # keywords_IT = keywords.filter(press='105')
-    # keywords = [{"x":"한글", "value":80},
-    #         {"x":"통신", "value":56},
-    #         {"x":"lists", "value":44},
-    #         {"x":"meaning", "value":40},
-    #         {"x":"useful", "value":36},
-    #         {"x":"different", "value":32},
-    #         {"x":"grammar", "value":28},
-    #         {"x":"teaching", "value":24},
-    #         {"x":"example", "value":20},
-    #         {"x":"thing", "value":12},
-    #         {"x":"riding", "value":80},
-    #         {"x":"increse", "value":56},
-    #         {"x":"titles", "value":44},
-    #         {"x":"understand", "value":40},
-    #         {"x":"useless", "value":36},
-    #         {"x":"difficult", "value":32},
-    #         {"x":"verb", "value":28},
-    #         {"x":"studing", "value":24},
-    #         {"x":"test", "value":20},
-    #         {"x":"one", "value":12}]
-    # keywords_json = json.dumps(keywords)
-
-    # today = dt.today()
-    today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 위의 것 사용
+    # 오늘 날짜의 키워드만 추출
+    today = dt.today()
     start_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day) ,'%Y %m %d')
     end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
     keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
+
+    # 테스트 시 상기한 4줄 주석 처리한 뒤에 아래 주석 풀고 사용
+    # keywords = Keyword.objects.all().select_related().order_by('count')
+
+    # 키워드를 영역별로 추출하고 json형식으로 바꾼 뒤에 json파일로 dump -> context로 생성
     context = {
         'keywords':json.dumps([keyword.to_json() for keyword in keywords.filter(section='000')]),
         'keywords_politics':json.dumps([keyword.to_json() for keyword in keywords.filter(section='100')]),
@@ -60,7 +27,7 @@ def index(req):
         }
     
 
-    return render(req, 'news/index.html', context)   # {'keywords':keywords}...
+    return render(req, 'news/index.html', context)
 
 def main(req):
     # 카테고리 미선택 시
