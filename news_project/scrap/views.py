@@ -9,6 +9,9 @@ import datetime
 
 def scrap(request):
     if request.method=='GET':
+        # 로그인 하지 않은 상태로 url로 직접 접근 시 홈화면으로 이동
+        if request.user.is_anonymous:
+            return redirect('/')
         now = datetime.datetime.now()
         # 유저가 스크랩 한 기사 필터링
         articles = Scrap.objects.filter(user = request.user).select_related().order_by('-created_date')

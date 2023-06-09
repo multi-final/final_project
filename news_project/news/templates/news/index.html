@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
-
+    
     #row {
         width: 1200px;
         display: flex;
@@ -189,7 +189,7 @@
 <div id="index">
 
     <div id="cloudwrap">
-        <div id="cloudtitle">전체 키워드 빈도</div>
+        <div id="cloudtitle">오늘의 키워드</div>
         <div id="container"></div>
         <div id="keywordtooltip">키워드를 클릭하면 해당 키워드 검색 페이지로 이동합니다</div>
     </div>
@@ -218,57 +218,7 @@
 
 <script>
     anychart.onDocumentReady(function () {
-        var sectionData = [
-            { x: "정치섹션", value: 80 },
-            { x: "includes", value: 56 },
-            { x: "lists", value: 44 },
-            { x: "meaning", value: 40 },
-            { x: "useful", value: 36 },
-            { x: "different", value: 32 },
-            { x: "grammar", value: 28 },
-            { x: "teaching", value: 24 },
-            { x: "example", value: 20 },
-            { x: "thing", value: 12 },
-            { x: "riding", value: 80 },
-            { x: "increse", value: 56 },
-            { x: "titles", value: 44 },
-            { x: "understand", value: 40 },
-            { x: "useless", value: 36 },
-            { x: "difficult", value: 32 },
-            { x: "verb", value: 28 },
-            { x: "studing", value: 24 },
-            { x: "test", value: 20 },
-            { x: "one", value: 12 },
-        ];
-        // for(var i=1; i<6; i++){
-        //     var sectionChart = anychart.tagCloud(sectionData);
-        //     sectionChart.container("section"+i);
-        //     sectionChart.draw();
-        // }
-        // create data   
-        var data = [
-            { x: "비상경보", value: 80 },
-            { x: "includes", value: 56 },
-            { x: "lists", value: 44 },
-            { x: "meaning", value: 40 },
-            { x: "useful", value: 36 },
-            { x: "different", value: 32 },
-            { x: "grammar", value: 28 },
-            { x: "teaching", value: 24 },
-            { x: "example", value: 20 },
-            { x: "thing", value: 12 },
-            { x: "riding", value: 80 },
-            { x: "increse", value: 56 },
-            { x: "titles", value: 44 },
-            { x: "understand", value: 40 },
-            { x: "useless", value: 36 },
-            { x: "difficult", value: 32 },
-            { x: "verb", value: 28 },
-            { x: "studing", value: 24 },
-            { x: "test", value: 20 },
-            { x: "one", value: 12 },
-        ];
-
+       
         var test = []
         let posts = JSON.parse("{{ keywords | escapejs }}")
         let politics = JSON.parse("{{ keywords_politics | escapejs }}")
@@ -277,8 +227,6 @@
         let world = JSON.parse("{{ keywords_world | escapejs }}")
         let IT = JSON.parse("{{ keywords_IT | escapejs }}")
         
-        console.log(posts)
-
         // create a chart and set the data
         var chart = anychart.tagCloud(posts);
         var politics_chart = anychart.tagCloud(politics)
@@ -314,7 +262,6 @@
         // chart.mode("spiral"); // or "rect"
 
         // add an event listener to open a url on click
-        console.log(chart)
         chart.listen("pointClick", function (e) {
             var url = "/search/?search=" + e.point.get("x")+"&press=&section=";
             window.location.href = url

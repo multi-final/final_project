@@ -118,6 +118,7 @@
 
     .errorlist{
       padding: 0;
+      margin-bottom: 0;
       text-align: left;
       list-style: none;
       color: #c34a4a;
@@ -126,10 +127,23 @@
 
     p{
       padding: 0;
+      margin-bottom: 0;
       text-align: left;
       color: #c34a4a;
       font-size: 12px;
     }
+    .helptext ul{
+      padding: 0;
+      text-align: left;
+      list-style: none;
+      color: #4a76c3;
+      font-size: 12px;
+    }
+    .hidden{
+      /* visibility: hidden !important; */
+      display: none;
+    }
+    
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -154,22 +168,25 @@
     });
 
   });
-
+  // 비밀번호 8글자 이상 확인
   function isShort() {
     const password = document.querySelector('#password1').value;
+    const helptext = document.querySelector('.helptext')
     if (password.length < 8) {
-      document.getElementById('return1').innerHTML = '비밀번호번호는 8글자 이상이어야합니다.';
+      document.getElementById('return1').innerHTML = '영문/숫자 포함 8글자 이상 입력하세요.';
       document.getElementById('return1').style.color = '#c34a4a';
+      helptext.classList.remove('hidden')
     }
     else {
       document.getElementById('return1').innerHTML = ''
+      helptext.classList.add('hidden')
     }
   }
-
+  // 비밀번호 확인란 확인
   function isSame() {
     const password1 = document.querySelector('#password1').value;
     const password2 = document.querySelector('#password2').value;
-    if (password1 != '' && document.password2 != '') {
+    if (password1 != '' && document.password2 != '') {  
       if (password1 != password2) {
         document.getElementById('return2').innerHTML = '비밀번호가 일치하지 않습니다.';
         document.getElementById('return2').style.color = '#c34a4a';
@@ -184,35 +201,9 @@
 </script>
 
 <body>
-
   <form method="post" action="{% url 'users:signup' %}">
     {% csrf_token %}
-    <!-- {% if form.errors %}
-      {% for field in form %}
-        {% for error in field.errors %}
-          <div class="alert alert-danger" style="font-size: small;">
-            <strong style="font-size: small;">{{ field.label }}</strong>
-            {{ field.errors }}
-          </div>
-        {% endfor %}
-      {% endfor %}
-      {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-          <strong>{{ error }}</strong>
-        </div>
-      {% endfor %}
-    {% endif %} -->
 
-    <!-- {% for field in form %}
-      <label>
-        <p class="label-txt">ENTER</p>
-        {{ field }}
-        <div class="line-box"><div class="line"></div>
-      </label>
-      {% if field.errors %}
-        <span>{{ field.errors }}</span>
-      {% endif %}
-    {% endfor %} -->
     <label>
       <p class="label-txt">ENTER USERNAME</p>
       <input type="text" class="input" name="username" id="username"
@@ -232,6 +223,8 @@
         <div class="line"></div>
       </div>
       <p id="return1"></p>
+      <!-- 비밀번호 유효성 확인 조건 안내 -->
+      <span class="helptext">{{form.password1.help_text}}</span>
       {% if form.password1.errors %}
         <span>{{ form.password1.errors }}</span>
       {% endif %}
@@ -259,7 +252,7 @@
       {% endif %}
     </label>
     <button type="submit">가입</button>
-    <input type="button" id="prev" onclick="location.href='javascript:window.history.back()'" value="뒤로가기"></input>
+    <input type="button" id="prev" onclick="location.href='/users/login'" value="뒤로가기"></input>
   </form>
 </body>
 
