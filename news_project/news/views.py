@@ -13,6 +13,9 @@ def index(req):
     end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
     keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
 
+    # 테스트 시 아래 17번 라인 주석 풀고 사용
+    # keywords = Keyword.objects.all().select_related().order_by('count')
+
     # 키워드를 영역별로 추출하고 json형식으로 바꾼 뒤에 json파일로 dump -> context로 생성
     context = {
         'keywords':json.dumps([keyword.to_json() for keyword in keywords.filter(section='000')]),

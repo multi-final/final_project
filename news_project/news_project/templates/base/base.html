@@ -22,16 +22,22 @@
 <link rel="shortcut icon" href="{% static 'news/logo.ico' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/7156905f88.js" crossorigin="anonymous"></script>
 
 <!-- font -->
-<script src="https://kit.fontawesome.com/7156905f88.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<!-- 나눔글꼴 적용 시험/기본 폰트랑 차이 없음 -->
+<link href='http://www.openhiun.com/hangul/nanumbarungothic.css' rel='stylesheet' type='text/css'>
+
 
 {% block header %}
 {% endblock %}
 
 <style>
   /* 전체 css */
+  body{
+    font-family: 'Nanum Barun Gothic', sans-serif;
+  }
   li{
     list-style: none;
   }
@@ -303,7 +309,7 @@
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
               <li>
                 <!-- 헤더 오른쪽에 있는 아이콘 -->
-                <!-- 아이콘 추가할 떄 폰트어썸 사용했으면 fa-lg 옵션 부여해야 됩니다. -->
+                <!-- 아이콘 추가할 때 폰트어썸 사용했으면 fa-lg 옵션 부여해야 됩니다. -->
                 <div id="toolwrap">
                   <a href="/introduction" class="nav-link text-dark">
                     <i class="fa-solid fa-circle-info fa-lg" style="color: #808080;"></i>
@@ -322,10 +328,13 @@
               </li>
               <li>
                 <div id="toolwrap">
-                  <a href="/index" class="nav-link text-dark">
-                    <i class="fa-solid fa-star fa-lg" style="color: #808080;"></i>
+                  <!-- <a href="/index" class="nav-link text-dark">
+                    <i class="fa-solid fa-star fa-lg" style="color: #808080;"></i> -->
+                    <a href="/main" class="nav-link text-dark">
+                      <i class="fa-solid fa-list fa-lg" style="color: #808080;"></i>
                   </a>
-                  <p id="tooltip"><span style="position: absolute; margin-left: -6px;">Keyword</span></p>
+                  <p id="tooltip"><span style="position: absolute; margin-left: -3px;">Articles</span></p>
+                  <!-- <p id="tooltip"><span style="position: absolute; margin-left: -6px;">Keyword</span></p> -->
                 </div>
               </li>
               <li>
