@@ -65,7 +65,6 @@ def main(req):
             articles = Article.objects.all().select_related()
 
         elif press_form and not section_form:
-            press_form=list(map(int,press_form))
             articles = Article.objects.filter(press__in=press_form).select_related()
             if scrap:
                 scrap = scrap.filter(article__press__in=press_form).select_related()
