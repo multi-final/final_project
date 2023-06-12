@@ -199,13 +199,14 @@
         }
         #intro{
             width: 1200px;
-            height: 130px;
+            height: 180px;
             position: relative;
             background-color: #f8f8f7;
             /* background-color: white; */
             border-radius: 15px;
             display: flex;
-            flex-direction: row;
+            /* flex-direction: row; */
+            flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             /* border: 3px solid #B4B4B4; */
@@ -240,12 +241,12 @@
             /* height: 32px; */
             font-size: 15px;
             position: absolute;
-            bottom: 10px;
+            bottom: -40px;
             right: 0;
             /* background-color: #fafafa; */
             background-color: white;
             /* background: linear-gradient(#ffffff 0%, #fafafa 20%,  #ececec 100%); */
-            margin-top: 10px;
+            margin-top: 50px;
             /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
         }
         #btna{
@@ -294,16 +295,39 @@
             window.location.href = url
         }
     </script>
-    <div id="introwrap">
-        <div id="intro">
-            <img src="{% static 'news/logo.ico' %}" id="icon" alt="메추리_icon" width="200px" height="198px">
-            <div id="announce">오간뉴는 바쁜 현대인들을 위한 <strong id="HL">주요 뉴스 요약 서비스</strong>를 제공합니다</div>
-            <!-- <button id="btnh" onmousedown="mousedown()" onmouseup="mouseup()" onclick="location.href='/'"><i class="fa-solid fa-right-to-bracket" style="color: rgb(123, 123, 123);"></i></button> -->
-        </div>
-        <button id="btnh" onclick="location.href='/main'">기사 전체보기  <i class="fa-solid fa-chevron-right" style="color: #5e5e5e;"></i></button>
+<div id="introwrap">
+    <div id="intro">
+        <table>
+            <tr>
+                <td rowspan="2">
+                    <img src="{% static 'news/logo.ico' %}" id="icon" alt="메추리_icon" width="200px" height="198px">
+                </td>
+                <td style="align-items: center;">
+                    <div id="announce" style="text-align: center; justify-content: center;">
+                        {% if request.user.is_authenticated %}
+                        <span>안녕하세요 {{request.user}}님</span>
+                        {% endif %}
+                        <span>현재 날씨는 </span>
+                        {% if wether %}
+                        <span>
+                            {{wether.current.condition.text}}
+                        </span>
+                        {% endif %}
+                        <span>이며 오늘의 키워드는 <span id="most" onclick="move(this)"></span> 입니다.</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; justify-content: center;">
+                    <div id="announce">오간뉴는 바쁜 현대인들을 위한 <strong id="HL">주요 뉴스 요약 서비스</strong>를 제공합니다</div>
+                </td>
+            </tr>
+        </table>
+        <button id="btnh" onclick="location.href='/main'">기사 보러가기  <i class="fa-solid fa-chevron-right" style="color: #5e5e5e;"></i></button>
     </div>
+</div>
 
-    <div id="announce" style="text-align: center;">
+    <!-- <div id="announce" style="text-align: center;">
         {% if request.user.is_authenticated %}
         <span>안녕하세요 {{request.user}}님</span>
         {% endif %}
@@ -315,6 +339,14 @@
         {% endif %}
         <span>이며 오늘의 키워드는 <span id="most" onclick="move(this)"></span> 입니다.</span>
     </div>
+    <div id="introwrap">
+        <div id="intro">
+            <img src="{% static 'news/logo.ico' %}" id="icon" alt="메추리_icon" width="200px" height="198px">
+            <div id="announce">오간뉴는 바쁜 현대인들을 위한 <strong id="HL">주요 뉴스 요약 서비스</strong>를 제공합니다</div>
+        </div>
+        <button id="btnh" onclick="location.href='/main'">기사 보러가기  <i class="fa-solid fa-chevron-right" style="color: #5e5e5e;"></i></button>
+    </div> -->
+
     
 
     <div id="cloudwrap">
