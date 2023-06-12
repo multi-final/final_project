@@ -264,9 +264,17 @@
             bottom: 10px;
             left: auto;
         }
+
+        #most{
+            color: #808080;
+            border-bottom-style: solid;
+        }
+
+        #most:hover{
+            color: #E9d259;
+        }
     </style>
     <script>
-
         document.addEventListener('mouseup', function (e) {
             var btn = document.getElementById('btnh')
             btn.classList.remove('clk');
@@ -280,6 +288,11 @@
             var btn = document.getElementById('btnh')
             btn.classList.remove('clk')
         }
+
+        function move(to){
+            var url = "/search/?search=" + to.innerHTML + "&press=&section=%5B100%5D";
+            window.location.href = url
+        }
     </script>
     <div id="introwrap">
         <div id="intro">
@@ -289,6 +302,20 @@
         </div>
         <button id="btnh" onclick="location.href='/main'">기사 전체보기  <i class="fa-solid fa-chevron-right" style="color: #5e5e5e;"></i></button>
     </div>
+
+    <div id="announce" style="text-align: center;">
+        {% if request.user.is_authenticated %}
+        <span>안녕하세요 {{request.user}}님</span>
+        {% endif %}
+        <span>현재 날씨는 </span>
+        {% if wether %}
+        <span>
+            {{wether.current.condition.text}}
+        </span>
+        {% endif %}
+        <span>이며 오늘의 키워드는 <span id="most" onclick="move(this)"></span> 입니다.</span>
+    </div>
+    
 
     <div id="cloudwrap">
         <div id="cloudtitle">오늘의 키워드</div>
@@ -328,6 +355,9 @@
         let social = JSON.parse("{{ keywords_social | escapejs }}")
         let world = JSON.parse("{{ keywords_world | escapejs }}")
         let IT = JSON.parse("{{ keywords_IT | escapejs }}")
+        const most = posts[0].x
+        const mostDiv = document.querySelector('#most')
+        mostDiv.innerHTML = most
         
         // create a chart and set the data
         var chart = anychart.tagCloud(posts);
