@@ -5,13 +5,17 @@ from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
 from datetime import datetime as dt
+import requests
 
 def index(req):
+    url = 'http://api.weatherapi.com/v1/current.json?key=c6f3478bf44748f7bef42030231206&q=Seoul&aqi=yes'
+    wether = requests.get(url).json()
+
     # today = dt(2023, 6, 5)   # 확인용 / 실제 사용시 아래의 것 사용
     today = dt.today()
     start_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day) ,'%Y %m %d')
     end_date = dt.strptime(str(today.year)+" "+str(today.month)+" "+str(today.day)+" 23:59", '%Y %m %d %H:%M')
-    keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('count')
+    keywords = Keyword.objects.filter(date__range=[start_date, end_date]).select_related().order_by('-count')
 
     # 테스트 시 아래 17번 라인 주석 풀고 사용
     # keywords = Keyword.objects.all().select_related().order_by('count')
@@ -24,6 +28,7 @@ def index(req):
         'keywords_social':json.dumps([keyword.to_json() for keyword in keywords.filter(section='102')]),
         'keywords_world':json.dumps([keyword.to_json() for keyword in keywords.filter(section='104')]),
         'keywords_IT':json.dumps([keyword.to_json() for keyword in keywords.filter(section='105')]),
+        'wether':wether
         }
     
 
