@@ -1,0 +1,662 @@
+[
+    {
+        "model": "news.keyword",
+        "pk": 1,
+        "fields": {
+            "id": 1,
+            "word": "대통령",
+            "count": 80,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 2,
+        "fields": {
+            "id": 2,
+            "word": "미국",
+            "count": 73,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 3,
+        "fields": {
+            "id": 3,
+            "word": "결과",
+            "count": 62,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 4,
+        "fields": {
+            "id": 4,
+            "word": "가운데",
+            "count": 61,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 5,
+        "fields": {
+            "id": 5,
+            "word": "정부",
+            "count": 59,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 6,
+        "fields": {
+            "id": 6,
+            "word": "민주당",
+            "count": 58,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 7,
+        "fields": {
+            "id": 7,
+            "word": "한국",
+            "count": 55,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 8,
+        "fields": {
+            "id": 8,
+            "word": "국민",
+            "count": 54,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 9,
+        "fields": {
+            "id": 9,
+            "word": "회의",
+            "count": 53,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 10,
+        "fields": {
+            "id": 10,
+            "word": "지난해",
+            "count": 53,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "000"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 11,
+        "fields": {
+            "id": 11,
+            "word": "정부",
+            "count": 28,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 12,
+        "fields": {
+            "id": 12,
+            "word": "부정",
+            "count": 30,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 13,
+        "fields": {
+            "id": 13,
+            "word": "위원장",
+            "count": 34,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 14,
+        "fields": {
+            "id": 14,
+            "word": "보조금",
+            "count": 35,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 15,
+        "fields": {
+            "id": 15,
+            "word": "결과",
+            "count": 36,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 16,
+        "fields": {
+            "id": 16,
+            "word": "회의",
+            "count": 30,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 17,
+        "fields": {
+            "id": 17,
+            "word": "감사",
+            "count": 43,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 18,
+        "fields": {
+            "id": 18,
+            "word": "국민",
+            "count": 45,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 19,
+        "fields": {
+            "id": 19,
+            "word": "민주당",
+            "count": 51,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 20,
+        "fields": {
+            "id": 20,
+            "word": "대통령",
+            "count": 56,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "100"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 21,
+        "fields": {
+            "id": 21,
+            "word": "대출",
+            "count": 13,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 22,
+        "fields": {
+            "id": 22,
+            "word": "시장",
+            "count": 16,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 23,
+        "fields": {
+            "id": 23,
+            "word": "은행",
+            "count": 16,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 24,
+        "fields": {
+            "id": 24,
+            "word": "올해",
+            "count": 19,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 25,
+        "fields": {
+            "id": 25,
+            "word": "금융",
+            "count": 16,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 26,
+        "fields": {
+            "id": 26,
+            "word": "국내",
+            "count": 14,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 27,
+        "fields": {
+            "id": 27,
+            "word": "금리",
+            "count": 14,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 28,
+        "fields": {
+            "id": 28,
+            "word": "한국",
+            "count": 14,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 29,
+        "fields": {
+            "id": 29,
+            "word": "가운데",
+            "count": 14,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 30,
+        "fields": {
+            "id": 30,
+            "word": "지난해",
+            "count": 25,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "101"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 31,
+        "fields": {
+            "id": 31,
+            "word": "서울",
+            "count": 24,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 32,
+        "fields": {
+            "id": 32,
+            "word": "혐의",
+            "count": 37,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 33,
+        "fields": {
+            "id": 33,
+            "word": "위반",
+            "count": 20,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 34,
+        "fields": {
+            "id": 34,
+            "word": "판사",
+            "count": 15,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 35,
+        "fields": {
+            "id": 35,
+            "word": "여성",
+            "count": 15,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 36,
+        "fields": {
+            "id": 36,
+            "word": "기소",
+            "count": 15,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 37,
+        "fields": {
+            "id": 37,
+            "word": "징역",
+            "count": 26,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 38,
+        "fields": {
+            "id": 38,
+            "word": "선고",
+            "count": 28,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 39,
+        "fields": {
+            "id": 39,
+            "word": "조사",
+            "count": 18,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 40,
+        "fields": {
+            "id": 40,
+            "word": "지법",
+            "count": 17,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "102"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 41,
+        "fields": {
+            "id": 41,
+            "word": "작전",
+            "count": 16,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 42,
+        "fields": {
+            "id": 42,
+            "word": "발생",
+            "count": 21,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 43,
+        "fields": {
+            "id": 43,
+            "word": "충돌",
+            "count": 20,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 44,
+        "fields": {
+            "id": 44,
+            "word": "미국",
+            "count": 43,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 45,
+        "fields": {
+            "id": 45,
+            "word": "회의",
+            "count": 18,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 46,
+        "fields": {
+            "id": 46,
+            "word": "대통령",
+            "count": 20,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 47,
+        "fields": {
+            "id": 47,
+            "word": "중국",
+            "count": 33,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 48,
+        "fields": {
+            "id": 48,
+            "word": "가운데",
+            "count": 20,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 49,
+        "fields": {
+            "id": 49,
+            "word": "보도",
+            "count": 16,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 50,
+        "fields": {
+            "id": 50,
+            "word": "러시아",
+            "count": 25,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "104"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 51,
+        "fields": {
+            "id": 51,
+            "word": "우주",
+            "count": 14,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 52,
+        "fields": {
+            "id": 52,
+            "word": "공개",
+            "count": 14,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 53,
+        "fields": {
+            "id": 53,
+            "word": "네이버",
+            "count": 16,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 54,
+        "fields": {
+            "id": 54,
+            "word": "미국",
+            "count": 13,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 55,
+        "fields": {
+            "id": 55,
+            "word": "기술",
+            "count": 20,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 56,
+        "fields": {
+            "id": 56,
+            "word": "통신",
+            "count": 15,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 57,
+        "fields": {
+            "id": 57,
+            "word": "정보",
+            "count": 19,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 58,
+        "fields": {
+            "id": 58,
+            "word": "발사",
+            "count": 18,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 59,
+        "fields": {
+            "id": 59,
+            "word": "한국",
+            "count": 22,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    },
+    {
+        "model": "news.keyword",
+        "pk": 60,
+        "fields": {
+            "id": 60,
+            "word": "누리",
+            "count": 13,
+            "date": "2023-06-05 00:00:00.000000",
+            "section_id": "105"
+        }
+    }
+]

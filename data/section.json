@@ -1,0 +1,50 @@
+[
+    {
+        "model": "news.section",
+        "pk": 1,
+        "fields": {
+            "id": "000",
+            "name": "정치"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 2,
+        "fields": {
+            "id": "100",
+            "name": "정치"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 3,
+        "fields": {
+            "id": "101",
+            "name": "경제"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 4,
+        "fields": {
+            "id": "102",
+            "name": "사회"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 5,
+        "fields": {
+            "id": "104",
+            "name": "세계"
+        }
+    },
+    {
+        "model": "news.section",
+        "pk": 6,
+        "fields": {
+            "id": "105",
+            "name": "it"
+        }
+    }
+]

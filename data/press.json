@@ -1,0 +1,82 @@
+[
+    {
+        "model": "news.press",
+        "pk": 1,
+        "fields": {
+            "id": "032",
+            "name": "경향신문"
+        }
+    },
+    {
+        "model": "news.press",
+        "pk": 2,
+        "fields": {
+            "id": "005",
+            "name": "국민일보"
+        }
+    },
+        {
+        "model": "news.press",
+        "pk": 3,
+        "fields": {
+            "id": "020",
+            "name": "동아일보"
+        }
+    },
+        {
+        "model": "news.press",
+        "pk": 4,
+        "fields": {
+            "id": "021",
+            "name": "문화일보"
+        }
+    },
+        {
+        "model": "news.press",
+        "pk": 5,
+        "fields": {
+            "id": "081",
+            "name": "서울신문"
+        }
+    },
+        {
+        "model": "news.press",
+        "pk": 6,
+        "fields": {
+            "id": "022",
+            "name": "세계일보"
+        }
+    },
+        {
+        "model": "news.press",
+        "pk": 7,
+        "fields": {
+            "id": "023",
+            "name": "조선일보"
+        }
+    },
+        {
+        "model": "news.press",
+        "pk": 8,
+        "fields": {
+            "id": "025",
+            "name": "중앙일보"
+        }
+    },
+    {
+        "model": "news.press",
+        "pk": 9,
+        "fields": {
+            "id": "028",
+            "name": "한겨례"
+        }
+    },
+    {
+        "model": "news.press",
+        "pk": 10,
+        "fields": {
+            "id": "469",
+            "name": "한국일보"
+        }
+    }
+]
